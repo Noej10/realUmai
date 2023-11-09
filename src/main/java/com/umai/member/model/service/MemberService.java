@@ -1,5 +1,10 @@
 package com.umai.member.model.service;
 
-public interface MemberService {
+import com.umai.member.model.vo.Member;
 
+public interface MemberService {
+	
+	Member loginMember(Member m);  
+	
+	Member findId(Member m);
 }
