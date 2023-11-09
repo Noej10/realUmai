@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="announceMapper" >
+  
+  	<resultMap type="Announce" id="announceResult">
+  		<result column="ANN_NUM" property="annNum"/>
+  		<result column="TITLE" property="title"/>
+  		<result column="DETAIL" property="detail"/>
+  		<result column="ANN_WRITE" property="annWrite"/>
+  	</resultMap>
+  	
+  	<select id="selectListCount" resultType="_int">
+  	SELECT COUNT(*)
+  	FROM ANNOUNCE
+  	WHERE STATUS = 'Y'
+  	</select>
+  	
+  	<select id="selectList" resultMap="announceResult">
+  	SELECT ANN_NUM, TITLE
+  	FROM ANNOUNCE
+  	WHERE STATUS = 'Y'
+  	ORDER BY ANN_NUM DESC
+  	</select>
+  	
+  	<insert id="insertAnnounce">
+  	INSERT INTO ANNOUNCE(ANN_NUM, TITLE, DETAIL)
+  	VALUES(SEQ_ACNO.NEXTVAL, #{title}, #{detail})
+  	</insert>
+  	
+  </mapper>

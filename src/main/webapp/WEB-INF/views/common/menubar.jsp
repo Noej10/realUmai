@@ -109,7 +109,7 @@
             </form>    
         </div>
         <div class="noticeFaq">
-            <a href="">공지사항</a>
+            <a href="announceList.an?cPage=1">공지사항</a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="">FAQ</a>
         </div>

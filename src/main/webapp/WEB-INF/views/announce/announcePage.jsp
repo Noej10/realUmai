@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,64 +138,27 @@ button {
 	 
     <div id="outer">
     <h1>공지사항</h1>
-    <form action="">
-        
-        <ul>
-            <li class="ann-list">
-    <a href="" class="ann-link">
-    <div class="ann-link-num" style="text-decoration: none;">1</div>
-    <div class="ann-link-desc">
-        <div>
-            <h4 class="tit">공지사항입니다.<br>
-                환영합니다</h4>
-        </div>
-        <div>
-            <img src="resources/images/arrow-icon.png">
-        </div>
-        
-        <p class="desc"></p>
-    </div>
-    </a>
-    </li>
-        </ul>
-
-        <ul>
-            <li class="ann-list">
-    <a href="" class="ann-link">
-    <div class="ann-link-num" style="text-decoration: none;">2</div>
-    <div class="ann-link-desc">
-        <div>
-            <h4 class="tit">공지사항입니다.<br>
-                환영합니다</h4>
-        </div>
-        <div>
-            <img src="">
-        </div>
-        
-        <p class="desc"></p>
-    </div>
-    </a>
-    </li>
-        </ul>
-
-        <ul>
-            <li class="ann-list">
-    <a href="" class="ann-link">
-    <div class="ann-link-num" style="text-decoration: none;">3</div>
-    <div class="ann-link-desc">
-        <div>
-            <h4 class="tit">공지사항입니다.<br>
-                환영합니다</h4>
-        </div>
-        <div>
-            <img src="">
-        </div>
-        
-        <p class="desc"></p>
-    </div>
-    </a>
-    </li>
-        </ul>
+    <form action="announceEnroll.re">
+    <c:forEach var="l" items="${list }">    
+		<ul>
+			<li class="ann-list">
+	   			<a href="" class="ann-link">
+		    		<div class="ann-link-num" style="text-decoration: none;">${l.annNum }</div>
+		    		<div class="ann-link-desc">
+			        	<div>
+			            	<h4 class="tit">${l.title }</h4>
+			        	</div>
+			        	<div>
+			            <img src="WEB-INF/resources/images/arrow_down.png">
+			        	</div>
+		        
+		        		<p class="desc"></p>
+		    		</div>
+	    		</a>
+	    	</li>
+		</ul>
+	</c:forEach>
+  
         
          <div class="ann-enroll">
             <button type="submit" id="ann-btn">공지사항 등록</button>
@@ -202,12 +166,15 @@ button {
          
          <div class="page_wrap">
             <div class="page_nation">
-               <a class="arrow prev" href="#"></a>
-               <a href="#" class="active">1</a>
-               <a href="#">2</a>
-               <a href="#">3</a>
-               <a href="#">4</a>
-               <a class="arrow next" href="#"></a>
+            	<c:if test="${pi.currentPage ne 1 }">
+					<a class="arrow prev" href="announceList.an?cPage=${pi.currentPage-1}"></a>
+	            </c:if>
+	            <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+					<a href="announceList.an?cPage=${p}" class="active">${p}</a>
+				</c:forEach>	
+				<c:if test="${pi.maxPage ne pi.currentPage }">
+					<a class="arrow next" href="announceList.an?cPage=${pi.currentPage+1}"></a>
+				</c:if>
             </div>
          </div>
         
