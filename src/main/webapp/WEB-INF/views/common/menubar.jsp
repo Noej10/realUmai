@@ -117,7 +117,7 @@
             <img src="/Umai/WEB-INF/resources/images/memberImage.png" alt="userIcon" onclick="openMemberMenu()">
         </div>
         <div id="memberMenu" class="memberMenu">
-            <a href="">회원정보 수정</a>
+            <a href="update.me">회원정보 수정</a>
             <a href="">로그아웃</a>
             <a href="">회원탈퇴</a>
         </div>

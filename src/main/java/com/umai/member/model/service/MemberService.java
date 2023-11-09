@@ -4,7 +4,17 @@ import com.umai.member.model.vo.Member;
 
 public interface MemberService {
 	
+
+	int updateEmailMember(Member m);
+	
+	int updateNickMember(Member m);
+	
+	int updatePhoneMember(Member m);
+	
+	int updatePwdMember(Member m);
+
 	Member loginMember(Member m);  
 	
 	Member findId(Member m);
+
 }
