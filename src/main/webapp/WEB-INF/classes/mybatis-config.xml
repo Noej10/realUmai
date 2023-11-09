@@ -13,6 +13,7 @@
   	
   	<!-- typeAlias : VO/DTO 클래스들의 풀클래스명을 단순한 클래스명으로 사용하기위한 별칭을 등록할 수 있는 영역 -->
   	<typeAliases>
+		<typeAlias type="com.umai.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.umai.announce.model.vo.Announce" alias="Announce"/>
   	</typeAliases>
   	
