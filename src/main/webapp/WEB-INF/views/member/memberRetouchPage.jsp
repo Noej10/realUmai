@@ -69,6 +69,7 @@ td{
     <%@ include file="../common/menubar.jsp" %>
   
     <div align="center" id="outer">
+     
         <table>
             <tr>
                 <td>ID</td>
@@ -99,6 +100,10 @@ td{
             </button>
 
         </div>
+        <!-- value안에 값이 로그인한 유저의 정보로 들어가야 함 -->
+        <form action="" method="post" id="updateForm">
+        	<input type="hidden" name="nick" value="">
+        </form>
            
     <!-- The Modal -->
 <div class="modal" id="myModal">
@@ -133,7 +138,6 @@ td{
   
       </div>
     </div>
-  </div> 
-   
+  </div>  
 </body>
 </html>

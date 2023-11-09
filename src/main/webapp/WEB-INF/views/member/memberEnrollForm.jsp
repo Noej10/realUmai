@@ -107,9 +107,6 @@ html,
     
 }
 
-    
-
-
 </style>
 
     <!-- BootStrap CSS -->
