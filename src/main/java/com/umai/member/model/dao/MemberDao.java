@@ -6,6 +6,7 @@ import com.umai.member.model.vo.Member;
 
 public class MemberDao {
 
+
 	public int updateEmailMember(SqlSession sqlSession, Member m) {
 		
 		int result = sqlSession.update("memberMapper.updateEmailMember", m);
@@ -29,4 +30,16 @@ public class MemberDao {
 		int result = sqlSession.update("memberMapper.updatePwdMember", m);
 		return result;
 	}
+
+	public static Member loginMember(SqlSession sqlSession, Member m) {
+		
+		return sqlSession.selectOne("memberMapper.loginMember", m);
+
+	}
+
+	public static Member findId(SqlSession sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.findId", m);
+	}
+
+
 }

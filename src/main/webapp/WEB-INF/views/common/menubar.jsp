@@ -109,7 +109,7 @@
             </form>    
         </div>
         <div class="noticeFaq">
-            <a href="">공지사항</a>
+            <a href="announceList.an?cPage=1">공지사항</a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="">FAQ</a>
         </div>
@@ -135,5 +135,50 @@
         }
 
     </script>
+
+        <div class="modal" id="findId">
+            <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- ID 찾기 모달 헤더 -->
+                <div class="modal-header"  style="background: #fc765d;">
+                <h4 class="modal-title" style="color: white;">탈퇴 후 복구가 어렵습니다 <br> 정말로 탈퇴하시겠습니까?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- ID 찾기 모달 바디 -->
+                <div class="modal-body" style="background-color: rgb(255, 210, 210);;">
+                    <b>회원 탈퇴를 원하실 경우 아래의<br>  문구와 비밀번호를 입력하세요</b>
+                    <br> <br>
+                    <b>회원 탈퇴시 계정 복구가 불가한 점에 동의합니다</b>
+                    <form action="">
+                        <div>
+                            <input type="text" size="50">
+                        </div>
+                        <br><br>
+                        <div>
+                            비밀번호 입력
+                            <br>
+                            <input type="text" size="50">
+                        </div>
+                    
+                </div>
+
+                <!-- ID 찾기 모달 푸터 -->
+                <div class="modal-footer" style="background: #fc765d;">
+                    <input type="button" data-bs-dismiss="modal" class="btn btn-sm" style="color: white;" value="취소">
+                    <button type="submit" class="btn btn-sm btn-danger">회원탈퇴</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+        <script>
+        const withdrawalBtn = document.querySelector('#memberMenu a:nth-child(3)');
+
+        withdrawalBtn.setAttribute("data-bs-toggle", "modal");
+        withdrawalBtn.setAttribute("data-bs-target", "#findId");
+
+        </script>
 </body>
 </html>
