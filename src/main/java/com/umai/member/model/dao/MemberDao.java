@@ -1,5 +1,15 @@
 package com.umai.member.model.dao;
 
-public class MemberDao {
+import org.apache.ibatis.session.SqlSession;
 
+import com.umai.member.model.vo.Member;
+
+public class MemberDao {
+	
+	public int insertMember(SqlSession sqlSession, Member m) {
+		
+		int result = sqlSession.insert("memberMapper.insertMember", m);
+		
+		return result;
+	}
 }

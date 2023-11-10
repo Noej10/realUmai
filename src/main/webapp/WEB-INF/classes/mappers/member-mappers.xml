@@ -5,8 +5,41 @@
   
 <!-- namespace: 해당 mapper파일의 고유한 별칭 -->
 <mapper namespace="memberMapper">
-
+	<resultMap type="Member" id="memberResult">
+		<result column="USER_NUM" property="userNum"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="PASSWORD" property="password"/>
+		<result column="NICKNAME" property="nickName"/>
+		<result column="NAME" property="name"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PHONE" property="phone"/>
+		<result column="MANAGER" property="manager"/>
+		<result column="SECESSION" property="secession"/>
+		<result column="JOINDATE" property="joinDate"/>
+		<result column="CORRECTION" property="Correction"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
 	
-	
+	<insert id="insertMember">
+		INSERT INTO MEMBER(
+			USER_NUM,
+			USER_ID,
+			PASSWORD,
+			NICKNAME,
+			NAME,
+			PHONE,
+			EMAIL
+			)
+			VALUES
+			(
+			SEQ_UNO.NEXTVAL,
+			#{userId},
+			#{password},
+			#{nickname},
+			#{name},
+			#{phone},
+			#{email}
+			)
+	</insert>
 	
 </mapper>

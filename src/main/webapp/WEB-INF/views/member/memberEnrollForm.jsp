@@ -108,8 +108,6 @@ html,
 }
 
     
-
-
 </style>
 
     <!-- BootStrap CSS -->
@@ -132,6 +130,7 @@ html,
         <h1 align="center" style="color: #fc765d;">회원가입</h1>
 		<br>
         <div class="input-area">
+        
         <form action="insert.me" method="post">
         <table align="center">
             <div align="right">ID
@@ -182,7 +181,16 @@ html,
           <h4 class="modal-title">사용 가능한/불가능한 아이디입니다.</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-  
+        
+        <script>
+	        $.ajax({
+	        	url: "enroll.me",
+	        	data: {
+	        		userId: $('')
+	        	}
+	        	
+	        })
+  		</script>
         
   
         <!-- Modal footer -->

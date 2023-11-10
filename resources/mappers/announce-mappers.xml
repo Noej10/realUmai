@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="announceMapper" >
+  
+  	<resultMap id="announceResult" type="announce" >
+  		<result column="ANN_NUM" property="annNum" />
+  		<result column="TITLE" property="title" />
+  		<result column="DETAIL" property="detail" />
+  		<result column="ANN_WRITE" property="annWrite" />
+  	</resultMap>
+  	
+  	<select id="selectAnnounce">
+  		SELECT TITLE,
+  			   DETAIL
+  		FROM ANNOUNCE
+  		 WHERE ANN_NUM = #{annNum}
+  	</select>
+  	
+  </mapper>
+  
