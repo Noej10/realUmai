@@ -96,7 +96,7 @@
 
     <div class="header">
         <div>
-            <img id="logo" src="/Umai/WEB-INF/resources/images/mainLogoWhiteFinal.png" alt="umaiLogo">
+            <img id="logo" src="/Umai/resources/images/mainLogoWhiteFinal.png" alt="umaiLogo">
         </div>
         <div align="center" style="color: white;">
             <form action="">
@@ -114,7 +114,7 @@
             <a href="">FAQ</a>
         </div>
         <div class="memberInfo">
-            <img src="/Umai/WEB-INF/resources/images/memberImage.png" alt="userIcon" onclick="openMemberMenu()">
+            <img src="/Umai/resources/images/memberImage.png" alt="userIcon" onclick="openMemberMenu()">
         </div>
         <div id="memberMenu" class="memberMenu">
             <a href="">회원정보 수정</a>

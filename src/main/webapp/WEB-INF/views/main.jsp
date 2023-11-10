@@ -124,7 +124,7 @@
 <body class="main">
         <div class="plate1" align="center">
             <div class="plate2">
-                <img src="resources/images/mainLogo.png" alt="logo">
+                <img src="/Umai/resources/images/mainLogo.png" alt="logo">
                 <br><br><br>
                 <div class="loginArea" >
                     <form>
