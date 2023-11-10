@@ -1,5 +1,12 @@
 package com.umai.announce.model.vo;
 
+import java.sql.Date;
+
+	
+
+
+
+
 public class Announce {
 	private int annNum;
 	private String title;
@@ -21,6 +28,9 @@ public class Announce {
 		this.annWrite = annWrite;
 		this.status = status;
 	}
+
+
+
 	
 	// 게터, 세터
 	public int getAnnNum() {
@@ -47,11 +57,14 @@ public class Announce {
 		this.detail = detail;
 	}
 
+
+
 	public String getAnnWrite() {
 		return annWrite;
 	}
 
 	public void setAnnWrite(String annWrite) {
+
 		this.annWrite = annWrite;
 	}
 
@@ -63,6 +76,7 @@ public class Announce {
 		this.status = status;
 	}
 
+
 	
 	// toString
 	@Override
@@ -72,8 +86,7 @@ public class Announce {
 	}
 	
 	
-	
-	
+
 }
 
 

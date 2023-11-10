@@ -165,7 +165,7 @@
                      <div id="sub-menu">
                     
                     <!-- 회원 가입창으로 이동-->
-                    <button onclick="location.href=''" style="border: none; background: white; font-size: 13px;" type="button">
+                    <button onclick="location.href='EnrollForm.me'" style="border: none; background: white; font-size: 13px;" type="button">
                         회원가입
                     </button>    
 

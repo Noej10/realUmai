@@ -11,6 +11,8 @@ import com.umai.common.template.Template;
 
 public class AnnounceServiceImple implements AnnounceService{
 
+	private AnnounceDao aDao = new AnnounceDao();
+
 	@Override
 	public int selectListCount() {
 		
@@ -52,5 +54,17 @@ public class AnnounceServiceImple implements AnnounceService{
 		
 		return list;
 	}
+
+		@Override
+	public Announce selectAnnounce(int annNum) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		Announce a = aDao.selectAnnounce(sqlSession, annNum);
+		
+		sqlSession.close();
+		
+		return a;
+	}
+
 
 }

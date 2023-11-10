@@ -5,7 +5,7 @@
   
 <!-- namespace: 해당 mapper파일의 고유한 별칭 -->
 <mapper namespace="memberMapper">
-	
+
 	<resultMap type="Member" id="memberResultSet">
 		<result column="USER_NUM" property="userNum"/>
 		<result column="USER_ID" property="userId"/>
@@ -16,9 +16,9 @@
 		<result column="PHONE" property="phone"/>
 		<result column="MANAGER" property="manager"/>
 		<result column="SECESSION" property="secession"/>
-		<result column="JOIN_DATE" property="joinDate"/>
-		<result column="CORRECTION" property="correction"/>
-		<result column="STATUS" property="status"/>		
+		<result column="JOINDATE" property="joinDate"/>
+		<result column="CORRECTION" property="Correction"/>
+		<result column="STATUS" property="status"/>
 	</resultMap>
 	
 	<update id="updateEmailMember">
@@ -26,6 +26,7 @@
 			SET EMAIL = #{email}
 		WHERE USER_ID = #{userId}
 	</update>
+
 	<update id="updateNiceMember">
 		UPDATE MEMBER
 			SET NICKNAME = #{nickname}
@@ -44,10 +45,27 @@
 
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 	SELECT  USER_NUM,
+>>>>>>> f43ab83c99db9300b20a187bf55101aeb72edc14
 			USER_ID,
 			PASSWORD,
 			NICKNAME,
 			NAME,
+<<<<<<< HEAD
+			PHONE,
+			EMAIL
+			)
+			VALUES
+			(
+			SEQ_UNO.NEXTVAL,
+			#{userId},
+			#{password},
+			#{nickname},
+			#{name},
+			#{phone},
+			#{email}
+			)
+	</insert>
+=======
 			EMAIL,
 			PHONE,
 			MANAGER,
@@ -66,5 +84,7 @@
 		FROM MEMBER
 		WHERE NAME = #{name} AND EMAIL = #{email}
 	</select>
+
+>>>>>>> f43ab83c99db9300b20a187bf55101aeb72edc14
 	
 </mapper>
