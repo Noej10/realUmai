@@ -33,5 +33,10 @@ public class AnnounceDao {
 		RowBounds rBounds = new RowBounds(offset, limit);
 		
 		return (ArrayList)sqlSession.selectList("announceMapper.selectList", null, rBounds);
+
 	}
+
+	public Announce selectAnnounce(SqlSession sqlSession, int annNum) {
+		return sqlSession.selectOne("announceMapper.selectAnnounce", annNum);
+		}
 }

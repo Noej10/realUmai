@@ -14,8 +14,9 @@ public class Restaurant {
 	private String address;
 	private String region;
 	private String status;
-
+	
 	public Restaurant() {
+		super();
 	}
 
 	public Restaurant(int restNum, String restName, int suggestion, int restCheck, String original, String restDelete,
@@ -36,124 +37,145 @@ public class Restaurant {
 		this.status = status;
 	}
 
+
 	public int getRestNum() {
 		return restNum;
 	}
+
 
 	public void setRestNum(int restNum) {
 		this.restNum = restNum;
 	}
 
+
 	public String getRestName() {
 		return restName;
 	}
+
 
 	public void setRestName(String restName) {
 		this.restName = restName;
 	}
 
+
 	public int getSuggestion() {
 		return suggestion;
 	}
+
 
 	public void setSuggestion(int suggestion) {
 		this.suggestion = suggestion;
 	}
 
+
 	public int getRestCheck() {
 		return restCheck;
 	}
+
 
 	public void setRestCheck(int restCheck) {
 		this.restCheck = restCheck;
 	}
 
+
 	public String getOriginal() {
 		return original;
 	}
+
 
 	public void setOriginal(String original) {
 		this.original = original;
 	}
 
+
 	public String getRestDelete() {
 		return restDelete;
 	}
+
 
 	public void setRestDelete(String restDelete) {
 		this.restDelete = restDelete;
 	}
 
+
 	public String getDuction() {
 		return duction;
 	}
+
 
 	public void setDuction(String duction) {
 		this.duction = duction;
 	}
 
+
 	public int getGrade() {
 		return grade;
 	}
+
 
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
 
+
 	public String getMenu() {
 		return menu;
 	}
+
 
 	public void setMenu(String menu) {
 		this.menu = menu;
 	}
 
+
 	public String getOpening() {
 		return opening;
 	}
+
 
 	public void setOpening(String opening) {
 		this.opening = opening;
 	}
 
+
 	public String getAddress() {
 		return address;
 	}
+
 
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
+
 	public String getRegion() {
 		return region;
 	}
+
 
 	public void setRegion(String region) {
 		this.region = region;
 	}
 
+
 	public String getStatus() {
 		return status;
 	}
 
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 
 	@Override
 	public String toString() {
 		return "Restaurant [restNum=" + restNum + ", restName=" + restName + ", suggestion=" + suggestion
 				+ ", restCheck=" + restCheck + ", original=" + original + ", restDelete=" + restDelete + ", duction="
 				+ duction + ", grade=" + grade + ", menu=" + menu + ", opening=" + opening + ", address=" + address
-				+ ", region=" + region + ", status=" + status + ", getRestNum()=" + getRestNum() + ", getRestName()="
-				+ getRestName() + ", getSuggestion()=" + getSuggestion() + ", getRestCheck()=" + getRestCheck()
-				+ ", getOriginal()=" + getOriginal() + ", getRestDelete()=" + getRestDelete() + ", getDuction()="
-				+ getDuction() + ", getGrade()=" + getGrade() + ", getMenu()=" + getMenu() + ", getOpening()="
-				+ getOpening() + ", getAddress()=" + getAddress() + ", getRegion()=" + getRegion() + ", getStatus()="
-				+ getStatus() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-				+ super.toString() + "]";
+				+ ", region=" + region + ", status=" + status + "]";
 	}
 	
 	
-
+	
 }

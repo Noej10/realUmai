@@ -11,4 +11,7 @@ public interface AnnounceService {
 	public ArrayList<Announce> selectList(PageInfo pi);
 	
 	public int insertAnnounce(Announce ann);
+
+	public Announce selectAnnounce(int annNum);
+
 }
