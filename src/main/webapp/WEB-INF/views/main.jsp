@@ -153,7 +153,7 @@
                         </div>
                         <div id="input-pw">
                             <strong>PW</strong>
-                            <input type="password" name="userPwd">
+                            <input type="password" name="password">
                         </div>
                         <div >
                             <button id="loginBtn" type="submit" class="btn btn-sm btn-primary">

@@ -1,4 +1,4 @@
-package com.umai.member.controller;
+package com.umai.review.contorller;
 
 import java.io.IOException;
 
@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.umai.member.model.service.MemberServiceImple;
-import com.umai.member.model.vo.Member;
+import com.umai.announce.model.service.AnnounceServiceImple;
+import com.umai.review.model.vo.Review;
 
 /**
- * Servlet implementation class memberUpdatePhoneController
+ * Servlet implementation class ReviewEnrollForm
  */
-@WebServlet("/updatePho.me")
-public class memberUpdatePhoneController extends HttpServlet {
+@WebServlet("/review")
+public class ReviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public memberUpdatePhoneController() {
+    public ReviewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,19 +33,13 @@ public class memberUpdatePhoneController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String userId = request.getParameter("userId");
-		String phone = request.getParameter("phone");
+		Review re = new Review();
+		re.setCommentNum(request.getParameter("commentNum"));
+		re.setCommentContents(request.getParameter("commentContents"));
 		
-		Member m = new Member();
-		m.setUserId(request.getParameter(userId));
-		m.setPhone(request.getParameter(phone));
-		int result = new MemberServiceImple().updatePhoneMember(m);
-		
-		if (result > 0) {
-			
-		}
+		int result = new AnnounceServiceImple().insertReview(re);
 	}
-
+ 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
