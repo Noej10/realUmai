@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.umai.announce.model.service.AnnounceServiceImple;
+import com.umai.review.model.service.ReviewServiceImple;
 import com.umai.review.model.vo.Review;
 
 /**
@@ -34,10 +34,15 @@ public class ReviewController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		Review re = new Review();
-		re.setCommentNum(request.getParameter("commentNum"));
 		re.setCommentContents(request.getParameter("commentContents"));
 		
-		int result = new AnnounceServiceImple().insertReview(re);
+		int result = new ReviewServiceImple().insertReview(re);
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath()+"WEB-INF/views/board/boardPage.jsp");
+		}else {
+			
+		}
+		
 	}
  
 	/**

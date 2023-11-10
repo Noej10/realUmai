@@ -1,16 +1,19 @@
 package com.umai.restaurant.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.oreilly.servlet.MultipartRequest;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.oreilly.servlet.MultipartRequest;
 import com.umai.common.MyFileRenamePolicy;
+import com.umai.common.model.vo.Attachment;
 
 /**
  * Servlet implementation class RestaurantInsert

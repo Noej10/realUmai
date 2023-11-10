@@ -28,7 +28,6 @@
 			PASSWORD,
 			NICKNAME,
 			NAME,
-
 			PHONE,
 			EMAIL
 			)

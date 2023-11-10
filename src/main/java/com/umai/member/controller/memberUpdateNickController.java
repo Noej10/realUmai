@@ -41,7 +41,7 @@ public class memberUpdateNickController extends HttpServlet {
 		m.setNickname(request.getParameter(nickname));
 		int result = new MemberServiceImple().updateNickMember(m);
 		
-		if(result > 0) {
+		if(result == 0) {
 			
 		}
 	}
