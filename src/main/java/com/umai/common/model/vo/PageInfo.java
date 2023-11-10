@@ -1,16 +1,19 @@
 package com.umai.common.model.vo;
 
 public class PageInfo {
-	private int listCount; // 현재 총 게시글 수
-	private int currentPage; //현재 페이지(즉, 사용자가 요청한 페이지)
-	private int pageLimit; // 페이지 하단에 보여질 페이징바의 페이지 최대의 개수
-	private int boardLimit; // 한 페이지내에 보여질 게시글 최대갯수
-	// 위 4개의 값을 기준으로 아래 3개의 값을 구할 것이다.
-	private int maxPage; // 가장 마지막페이지(총 페이지의 수)
-	private int startPage; // 페이징바의 시작수
-	private int endPage; //페이징바의 끝수
 	
-	public PageInfo() {}
+	private int listCount;
+	private int currentPage;
+	private int pageLimit;
+	private int boardLimit;
+	
+	private int maxPage;
+	private int startPage;
+	private int endPage;
+	
+	public PageInfo() {
+		super();
+	}
 
 	public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage,
 			int endPage) {
@@ -88,4 +91,8 @@ public class PageInfo {
 	}
 	
 	
+
+
+	
 }
+

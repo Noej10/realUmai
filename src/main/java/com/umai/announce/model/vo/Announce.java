@@ -2,16 +2,25 @@ package com.umai.announce.model.vo;
 
 import java.sql.Date;
 
+	
+
+
+
+
 public class Announce {
 	private int annNum;
 	private String title;
 	private String detail;
-	private Date annWrite;
+	private String annWrite;
 	private String status;
 	
-	public Announce() {}
+	// 빈 생성자
+	public Announce() {
+		super();
+	}
 
-	public Announce(int annNum, String title, String detail, Date annWrite, String status) {
+	// 모든 필드 생성자
+	public Announce(int annNum, String title, String detail, String annWrite, String status) {
 		super();
 		this.annNum = annNum;
 		this.title = title;
@@ -20,6 +29,10 @@ public class Announce {
 		this.status = status;
 	}
 
+
+
+	
+	// 게터, 세터
 	public int getAnnNum() {
 		return annNum;
 	}
@@ -44,11 +57,14 @@ public class Announce {
 		this.detail = detail;
 	}
 
-	public Date getAnnWrite() {
+
+
+	public String getAnnWrite() {
 		return annWrite;
 	}
 
-	public void setAnnWrite(Date annWrite) {
+	public void setAnnWrite(String annWrite) {
+
 		this.annWrite = annWrite;
 	}
 
@@ -60,9 +76,17 @@ public class Announce {
 		this.status = status;
 	}
 
+
+	
+	// toString
 	@Override
 	public String toString() {
 		return "Announce [annNum=" + annNum + ", title=" + title + ", detail=" + detail + ", annWrite=" + annWrite
 				+ ", status=" + status + "]";
 	}
+	
+	
+
 }
+
+

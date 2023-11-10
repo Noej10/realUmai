@@ -4,20 +4,38 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="announceMapper" >
-  
-  	<resultMap id="announceResult" type="announce" >
-  		<result column="ANN_NUM" property="annNum" />
-  		<result column="TITLE" property="title" />
-  		<result column="DETAIL" property="detail" />
-  		<result column="ANN_WRITE" property="annWrite" />
+
+
+  	<resultMap type="Announce" id="announceResult">
+  		<result column="ANN_NUM" property="annNum"/>
+  		<result column="TITLE" property="title"/>
+  		<result column="DETAIL" property="detail"/>
+  		<result column="ANN_WRITE" property="annWrite"/>
   	</resultMap>
   	
-  	<select id="selectAnnounce">
-  		SELECT TITLE,
-  			   DETAIL
-  		FROM ANNOUNCE
-  		 WHERE ANN_NUM = #{annNum}
+  	<select id="selectListCount" resultType="_int">
+  	SELECT COUNT(*)
+  	FROM ANNOUNCE
+  	WHERE STATUS = 'Y'
   	</select>
   	
+  	<select id="selectList" resultMap="announceResult">
+  	SELECT ANN_NUM, TITLE
+  	FROM ANNOUNCE
+  	WHERE STATUS = 'Y'
+  	ORDER BY ANN_NUM DESC
+  	</select>
+  	
+  	<insert id="insertAnnounce">
+  	INSERT INTO ANNOUNCE(ANN_NUM, TITLE, DETAIL)
+  	VALUES(SEQ_ACNO.NEXTVAL, #{title}, #{detail})
+  	</insert>
+
+	<select id="selectAnnounce">
+		SELECT TITLE,
+			DETAIL
+		FROM ANNOUNCE
+		WHERE ANN_NUM = #{annNum}
+  	</select>
   </mapper>
-  
+

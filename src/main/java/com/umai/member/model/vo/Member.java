@@ -5,46 +5,34 @@ import java.sql.Date;
 public class Member {
 	private int userNum;
 	private String userId;
-	private String passWord;
-	private String nickName;
+	private String password;
+	private String nickname;
 	private String name;
 	private String email;
 	private String phone;
 	private String manager;
 	private String secession;
 	private Date joinDate;
-	private Date Correction;
+	private String correction;
 	private String status;
 	
 	public Member() {}
 
-	public Member(int userNum, String userId, String passWord, String nickName, String name, String email, String phone,
-			String manager, String secession, Date joinDate, Date correction, String status) {
+	public Member(int userNum, String userId, String password, String nickname, String name, String email, String phone,
+			String manager, String secession, Date joinDate, String correction, String status) {
 		super();
 		this.userNum = userNum;
 		this.userId = userId;
-		this.passWord = passWord;
-		this.nickName = nickName;
+		this.password = password;
+		this.nickname = nickname;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.manager = manager;
 		this.secession = secession;
 		this.joinDate = joinDate;
-		Correction = correction;
+		this.correction = correction;
 		this.status = status;
-	}
-	
-	
-	//회원가입을 위한 생성자
-	public Member(String userId, String passWord, String nickName, String name, String email, String phone) {
-		super();
-		this.userId = userId;
-		this.passWord = passWord;
-		this.nickName = nickName;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
 	}
 
 	public int getUserNum() {
@@ -64,19 +52,19 @@ public class Member {
 	}
 
 	public String getPassword() {
-		return passWord;
+		return password;
 	}
 
-	public void setPassword(String passWord) {
-		this.passWord = passWord;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getName() {
@@ -127,12 +115,12 @@ public class Member {
 		this.joinDate = joinDate;
 	}
 
-	public Date getCorrection() {
-		return Correction;
+	public String getCorrection() {
+		return correction;
 	}
 
-	public void setCorrection(Date correction) {
-		Correction = correction;
+	public void setCorrection(String correction) {
+		this.correction = correction;
 	}
 
 	public String getStatus() {
@@ -145,9 +133,10 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [userNum=" + userNum + ", userId=" + userId + ", passWord=" + passWord + ", nickName=" + nickName
+		return "Member [userNum=" + userNum + ", userId=" + userId + ", password=" + password + ", nickname=" + nickname
 				+ ", name=" + name + ", email=" + email + ", phone=" + phone + ", manager=" + manager + ", secession="
-				+ secession + ", joinDate=" + joinDate + ", Correction=" + Correction + ", status=" + status + "]";
+				+ secession + ", joinDate=" + joinDate + ", correction=" + correction + ", status=" + status + "]";
 	}
-
+	
+	
 }

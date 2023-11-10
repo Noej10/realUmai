@@ -1,8 +1,17 @@
 package com.umai.announce.model.service;
 
+import java.util.ArrayList;
+
 import com.umai.announce.model.vo.Announce;
+import com.umai.common.model.vo.PageInfo;
 
 public interface AnnounceService {
+	public int selectListCount();
 	
-	Announce selectAnnounce(int annNum);
+	public ArrayList<Announce> selectList(PageInfo pi);
+	
+	public int insertAnnounce(Announce ann);
+
+	public Announce selectAnnounce(int annNum);
+
 }

@@ -45,13 +45,13 @@
 
         <div><p style="font-size: 50px; margin-bottom: 4rem;">공지사항 등록</p></div>
 
-        <form action="" method="post">
+        <form action="announceInsert.an" method="post">
             <div>
-                <input type="text" id="input" size="99" placeholder="제목을 입력해주세요">
+                <input type="text" id="input" size="99" placeholder="제목을 입력해주세요" name="title">
             </div>
 
             <div>
-                <textarea cols="100" rows="20"></textarea>
+                <textarea cols="100" rows="20" name="detail"></textarea>
             </div>
 
             <div>
