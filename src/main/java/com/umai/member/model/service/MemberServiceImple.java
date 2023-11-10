@@ -97,6 +97,21 @@ public class MemberServiceImple implements MemberService{
 		return result;
 	}
 
+	@Override
+	public int updateEmailMember(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = mDao.updateEmailMember(sqlSession, m);
+		
+		if(result > 0) {
+			sqlSession.commit();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
 
 
 
