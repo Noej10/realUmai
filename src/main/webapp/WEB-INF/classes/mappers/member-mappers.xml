@@ -6,7 +6,85 @@
 <!-- namespace: 해당 mapper파일의 고유한 별칭 -->
 <mapper namespace="memberMapper">
 
+	<resultMap type="Member" id="memberResultSet">
+		<result column="USER_NUM" property="userNum"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="PASSWORD" property="userPwd"/>
+		<result column="NICKNAME" property="nickName"/>
+		<result column="NAME" property="name"/>
+		<result column="EMAIL" property="email"/>
+		<result column="PHONE" property="phone"/>
+		<result column="MANAGER" property="manager"/>
+		<result column="SECESSION" property="secession"/>
+		<result column="JOINDATE" property="joinDate"/>
+		<result column="CORRECTION" property="Correction"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
 	
+	<update id="updateEmailMember">
+		UPDATE MEMBER
+			SET EMAIL = #{email}
+		WHERE USER_ID = #{userId}
+	</update>
+
+	<update id="updateNiceMember">
+		UPDATE MEMBER
+			SET NICKNAME = #{nickname}
+		WHERE USER_ID = {userId}
+	</update>
+	<update id="updatePhoneMember">
+		UPDATE MEMBER
+			SET PHONE = #{phone}
+		WHERE USER_ID = #{userId}
+	</update>
+	<update id="updatePwdMember">
+		UPDATE MEMBER
+			SET PASSWORD = #{password}
+		WHERE USER_ID = #{userId}
+	</update>
+
+	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+	SELECT  USER_NUM,
+>>>>>>> f43ab83c99db9300b20a187bf55101aeb72edc14
+			USER_ID,
+			PASSWORD,
+			NICKNAME,
+			NAME,
+<<<<<<< HEAD
+			PHONE,
+			EMAIL
+			)
+			VALUES
+			(
+			SEQ_UNO.NEXTVAL,
+			#{userId},
+			#{password},
+			#{nickname},
+			#{name},
+			#{phone},
+			#{email}
+			)
+	</insert>
+=======
+			EMAIL,
+			PHONE,
+			MANAGER,
+			SECESSION,
+			JOIN_DATE,
+			CORRECTION,
+			STATUS
+	FROM MEMBER
+	WHERE USER_ID = #{userId}
+	AND PASSWORD = #{userPwd}
+	AND STATUS = 'Y'
+	</select>
 	
+	<select id="findId" parameterType="Member" resultMap="memberResultSet">
+		SELECT USER_ID 
+		FROM MEMBER
+		WHERE NAME = #{name} AND EMAIL = #{email}
+	</select>
+
+>>>>>>> f43ab83c99db9300b20a187bf55101aeb72edc14
 	
 </mapper>

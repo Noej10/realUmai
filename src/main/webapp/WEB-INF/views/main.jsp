@@ -1,5 +1,17 @@
+<%@page import="com.umai.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	String contextPath = request.getContextPath();
+    
+    	Member loginUser = (Member)session.getAttribute("loginUser");
+    //로그인 시도 전 menubar.jsp 로딩시 해당객체 : null
+    //로그인 성공 후 menubar.jsp 로딩시 해당객체 : 로그인에 성공한 회원의 정보
+    
+    	String alertMsg = (String)session.getAttribute("alertMsg");
+    // 서비스 요청 전 menubar.jsp로딩시 : null
+    // 서비스 요청 후 menubar.jsp로딩시 : alert로 띄워줄 메세지 존재
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -121,30 +133,39 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 </head>
+
 <body class="main">
+	<%if(alertMsg != null){ %>
+		<script>
+			alert("<%=alertMsg%>");
+		</script>
+		<%session.removeAttribute("alertMsg"); %>
+	<%} %>
         <div class="plate1" align="center">
             <div class="plate2">
                 <img src="/Umai/resources/images/mainLogo.png" alt="logo">
                 <br><br><br>
                 <div class="loginArea" >
-                    <form>
+                    <form action="login.me" method="post">
                         <div id="input-id" >
                             <strong>&nbsp;ID</strong>
-                            <input type="text"   style="margin-left: 3px;">
+                            <input type="text" style="margin-left: 3px;" name="userId">
                         </div>
                         <div id="input-pw">
                             <strong>PW</strong>
-                            <input type="password">
+                            <input type="password" name="userPwd">
                         </div>
                         <div >
-                            <button id="loginBtn"  type="submit" class="btn btn-sm btn-primary">로그인</button>
+                            <button id="loginBtn" type="submit" class="btn btn-sm btn-primary">
+                               로그인
+                            </button>
                         </div>
 
                     </form>
                      <div id="sub-menu">
                     
                     <!-- 회원 가입창으로 이동-->
-                    <button onclick="location.href=''" style="border: none; background: white; font-size: 13px;" type="button">
+                    <button onclick="location.href='EnrollForm.me'" style="border: none; background: white; font-size: 13px;" type="button">
                         회원가입
                     </button>    
 
@@ -166,26 +187,52 @@
                     
                             <!-- ID 찾기 모달 바디 -->
                             <div class="modal-body">
-                                <b>정보를 입력해주세요.</b>
-                                <form action="">
-                                    <div>
-                                        &nbsp;&nbsp;&nbsp;이름<input type="text">
-                                    </div>
-                                    <div>
-                                        이메일<input type="text">
-                                    </div>
-                                
-                            </div>
-                    
-                            <!-- ID 찾기 모달 푸터 -->
-                            <div class="modal-footer">
-                                <input type="submit" class="btn btn-sm" style="background: #fc765d; color: white; margin-bottom: 10px;" value="아이디 찾기">
-                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">닫기</button>
-                            </div>
-                        </form>
+                                <b>정보를 입력해주세요.</b>            
+                                 <div>
+                                     &nbsp;&nbsp;&nbsp;이름<input type="text" name="userName">
+                                 </div>
+                                 <div>
+                                     이메일<input type="text" name="userEmail">
+                                 </div>
+                             
+                           </div>
+                   
+                           <!-- ID 찾기 모달 푸터 -->
+                           <div class="modal-footer">
+                               <input type="button" class="btn btn-sm" onclick="checkId()" style="background: #fc765d; color: white; margin-bottom: 10px;" value="아이디 찾기">
+                               <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">닫기</button>
+                           </div>
                         </div>
                     </div>
                 </div>
+                <script>
+                	function checkId(){
+                		if (document.querySelector("#findId input[name='userName']")) {
+	                		$.ajax({
+	                        url: "findid.me",
+	                        type: "post",
+	                        data : {
+	                           	userName: document.querySelector("#findId input[name='userName']").value,
+	                           	userEmail: document.querySelector("#findId input[name='userEmail']").value
+	                        },
+	                        success: function(res){ 
+	                        	document.querySelector("#findId .modal-body").innerHTML = "<h3>"+res+"</h3>"
+	                        	        console.log(res)
+	                        	
+	                        },
+	                        error: function(){
+	                        	console.log("댓글 목록 조회 중 ajax통신 실패")
+	                        }
+                		
+                    		})
+                    	
+                		}else{
+                			document.querySelector("#findId .modal-body").innerHTML = '<b>정보를 입력해주세요.</b>'
+                			+ '<div>&nbsp;&nbsp;&nbsp;이름<input type="text" name="userName"></div>'
+                			+ '<div>이메일<input type="text" name="userEmail"></div>'
+                		}
+                	}
+                </script>
                 <!-- PW 찾기 모달 버튼 -->
                 <button style="border: none; background: white; font-size: 13px;" type="button" data-bs-toggle="modal" data-bs-target="#findPw">
                     비밀번호 찾기

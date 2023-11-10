@@ -4,7 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="announceMapper" >
-  
+
+
   	<resultMap type="Announce" id="announceResult">
   		<result column="ANN_NUM" property="annNum"/>
   		<result column="TITLE" property="title"/>
@@ -29,5 +30,12 @@
   	INSERT INTO ANNOUNCE(ANN_NUM, TITLE, DETAIL)
   	VALUES(SEQ_ACNO.NEXTVAL, #{title}, #{detail})
   	</insert>
-  	
+
+	<select id="selectAnnounce">
+		SELECT TITLE,
+			DETAIL
+		FROM ANNOUNCE
+		WHERE ANN_NUM = #{annNum}
+  	</select>
   </mapper>
+

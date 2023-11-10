@@ -42,7 +42,7 @@
         <br>
         <h1 align="center" style="color: #fc765d;">공지사항</h1>
 		
-        <form action="" method="post">
+        <form action="detail.an" method="post">
          <div align="center"> 
             
             <textarea input type="text" style=" resize:none; font-weight: bold; width: 500px; " placeholder="공지사항 제목입니다."></textarea><br>
