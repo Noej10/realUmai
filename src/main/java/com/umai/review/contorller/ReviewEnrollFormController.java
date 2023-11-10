@@ -1,27 +1,23 @@
-package com.umai.member.controller;
+package com.umai.review.contorller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.umai.member.model.service.MemberServiceImple;
-import com.umai.member.model.vo.Member;
-
 /**
- * Servlet implementation class memberUpdatePhoneController
+ * Servlet implementation class ReviewEnrollFormController
  */
-@WebServlet("/updatePho.me")
-public class memberUpdatePhoneController extends HttpServlet {
+@WebServlet("/reviewEnroll.re")
+public class ReviewEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public memberUpdatePhoneController() {
+    public ReviewEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +27,7 @@ public class memberUpdatePhoneController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		
-		String userId = request.getParameter("userId");
-		String phone = request.getParameter("phone");
-		
-		Member m = new Member();
-		m.setUserId(request.getParameter(userId));
-		m.setPhone(request.getParameter(phone));
-		int result = new MemberServiceImple().updatePhoneMember(m);
-		
-		if (result > 0) {
-			
-		}
+		request.getRequestDispatcher("/WEB-INF/views/restaurant/reviewEnrollForm.jsp").forward(request, response);
 	}
 
 	/**

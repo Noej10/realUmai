@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
 		
 		Member m =new Member();
 		m.setUserId(request.getParameter("userId"));
-		m.setUserPwd(request.getParameter("userPwd"));
+		m.setPassword(request.getParameter("password"));
 		
 		Member loginUser = new MemberServiceImple().loginMember(m);
 		

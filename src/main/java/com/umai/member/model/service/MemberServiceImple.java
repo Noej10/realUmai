@@ -6,6 +6,8 @@ import com.umai.member.model.dao.MemberDao;
 import com.umai.member.model.vo.Member;
 
 public class MemberServiceImple implements MemberService{
+
+
 	private MemberDao mDao = new MemberDao();
 
 	@Override
@@ -31,6 +33,9 @@ public class MemberServiceImple implements MemberService{
 		return findId;
 	}
 
+
+	
+
 		@Override
 	public int insertMember(Member m) {
 		
@@ -41,10 +46,58 @@ public class MemberServiceImple implements MemberService{
 		if(result > 0) {
 			sqlSession.commit();
 		}
-			sqlSession.close();
-			
+		
+		sqlSession.close();
+		
 		return result;
 	}
+
+	@Override
+	public int updateNickMember(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = mDao.updateNickMember(sqlSession, m);
+		
+		if(result > 0) {
+			sqlSession.commit();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public int updatePhoneMember(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = mDao.updatePhoneMember(sqlSession, m);
+		
+		if(result > 0) {
+			sqlSession.commit();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public int updatePwdMember(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = mDao.updatePwdMember(sqlSession, m);
+		
+		if(result > 0) {
+			sqlSession.commit();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+
 
 
 }

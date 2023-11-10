@@ -15,11 +15,9 @@ public class Restaurant {
 	private String region;
 	private String status;
 	
-	
 	public Restaurant() {
 		super();
 	}
-
 
 	public Restaurant(int restNum, String restName, int suggestion, int restCheck, String original, String restDelete,
 			String duction, int grade, String menu, String opening, String address, String region, String status) {

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>우리 마음 속 이런 맛집</title>
-<link rel="stylesheet" href="../../resources/css/rate.css">
+<link rel="stylesheet" href="/resources/css/rate.css">
 <style>
 
 
