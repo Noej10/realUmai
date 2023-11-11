@@ -131,22 +131,24 @@ html,
 		<br>
         <div class="input-area">
         
-        <form action="insert.me" method="post">
+        <form action="insert.me" method="post" id="enroll">
         <table align="center">
             <div align="right">ID
                     <input type="text" id="userId" name="userId" required placeholder="아이디를 입력해주세요.">
-                    <button type="button" style="font-size: 15px; border: none; height: 35px; background-color: #fc765d; color: white;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                    <button id="userIdCheck" type="submit" style="font-size: 15px; border: none; height: 35px; background-color: #fc765d; color: white;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
                     중복확인
                   </button>  
             </div> 
             <br>
             <div align="right">비밀번호                
-                <input type="text" name="userPwd" required placeholder="비밀번호를 입력해주세요.">                             
-                
+                <input type="text" oninput="pwdCheck1()" id="userPwd" required placeholder="비밀번호를 입력해주세요."> <br>                            
+          		<span id="pwdInput" style="font-size: 12px"></span>
+                 
             </div>  
             <br>   
             <div align="right" >비밀번호 확인
-                <input type="text" name="userPwdCheck" required placeholder="비밀번호를 확인해주세요">
+                <input type="text" oninput="pwdCheck2()" id="userPwdCheck" required placeholder="비밀번호를 확인해주세요"><br>
+            	 <span id="pwdInputCheck" style="font-size: 12px"></span>
             </div>
             <br>
             <div align="right" >이름
@@ -182,17 +184,7 @@ html,
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         
-        <script>
-	        $.ajax({
-	        	url: "enroll.me",
-	        	data: {
-	        		userId: $('')
-	        	}
-	        	
-	        })
-  		</script>
-        
-  
+      
         <!-- Modal footer -->
         <div class="modal-footer">
           <button style="color: white; background-color: #fc765d;" type="button" class="btn" data-bs-dismiss="modal">OK</button>
@@ -201,6 +193,26 @@ html,
       </div>
     </div>
   </div>
+ 	
+ 	<script>
+        function pwdCheck2(){
+        	 if($('#userPwd').val() == $('#userPwdCheck').val()){
+        	        $('#pwdInputCheck').text('')
+        	    }else{
+        	        $('#pwdInputCheck').text('비밀번호가 틀립니다')
+        	    }
+        }
+        
+        function pwdCheck1() {
+        	if($('#userPwd').length < 8 || $('#userPwd').length > 16) {
+        		$('#pwdInput').text('비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해주세요')
+        	}
+        }
+        
+  </script>
+ 
+  
 </form>
+	
 </body>
 </html>

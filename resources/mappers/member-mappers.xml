@@ -28,8 +28,8 @@
 			PASSWORD,
 			NICKNAME,
 			NAME,
-			PHONE,
 			EMAIL
+			PHONE,
 			)
 			VALUES
 			(
@@ -38,8 +38,8 @@
 			#{password},
 			#{nickname},
 			#{name},
-			#{phone},
-			#{email}
+			#{email},
+			#{phone}
 			)
 	</insert>
 

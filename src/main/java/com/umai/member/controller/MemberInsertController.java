@@ -35,10 +35,10 @@ public class MemberInsertController extends HttpServlet {
 		String passWord = request.getParameter("passWord");
 		String nickName = request.getParameter("nickName");
 		String name = request.getParameter("name");
-		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
 		
-		Member m = new Member(userId, passWord, nickName, name, phone, email);
+		Member m = new Member(userId, passWord, nickName, name, email, phone);
 		
 		int result = new MemberServiceImple().insertMember(m);
 		

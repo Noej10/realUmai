@@ -1,4 +1,4 @@
-package com.umai.member.controller;
+package com.umai.announce.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberEnrollFormController
+ * Servlet implementation class AnnounceRetouchController
  */
-@WebServlet("/EnrollForm.me")
-public class MemberEnrollFormController extends HttpServlet {
+@WebServlet("/announceRetouch.an")
+public class AnnounceRetouchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberEnrollFormController() {
+    public AnnounceRetouchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class MemberEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("WEB-INF/views/member/memberEnrollForm.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/announce/announceRetouchPage.jsp").forward(request, response);
 		
 		
 	}
