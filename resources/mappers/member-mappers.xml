@@ -88,4 +88,12 @@
 
 
 	
+	<select id="findPwd" parameterType="Member" resultMap="memberResultSet">
+		SELECT PASSWORD 
+		FROM MEMBER
+		WHERE NAME = #{name}
+		AND EMAIL = #{email}
+		AND USER_ID = #{userId}
+	</select>
+	
 </mapper>

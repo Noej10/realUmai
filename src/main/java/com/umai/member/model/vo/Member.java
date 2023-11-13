@@ -35,6 +35,22 @@ public class Member {
 		this.status = status;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public int getUserNum() {
 		return userNum;
 	}
@@ -50,6 +66,7 @@ public class Member {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
 
 	public String getPassword() {
 		return password;

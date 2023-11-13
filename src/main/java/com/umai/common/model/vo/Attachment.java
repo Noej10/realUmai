@@ -47,6 +47,7 @@ public class Attachment {
 		this.originName = originName;
 	}
 
+
 	public String getChangeName() {
 		return changeName;
 	}
@@ -54,7 +55,6 @@ public class Attachment {
 	public void setChangeName(String changeName) {
 		this.changeName = changeName;
 	}
-
 	public String getFilePath() {
 		return filePath;
 	}
@@ -81,9 +81,9 @@ public class Attachment {
 
 	@Override
 	public String toString() {
+
 		return "Attachment [fileNo=" + fileNo + ", refBno=" + refBno + ", originName=" + originName + ", changeName="
 				+ changeName + ", filePath=" + filePath + ", fileLevel=" + fileLevel + ", ststus=" + ststus + "]";
 	}
     
-    
-}
+    }
