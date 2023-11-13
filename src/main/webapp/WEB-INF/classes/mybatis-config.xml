@@ -20,6 +20,7 @@
 		<typeAlias type="com.umai.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.umai.restaurant.model.vo.Restaurant" alias="Restaurant"/>
 		<typeAlias type="com.umai.review.model.vo.Review" alias="Review"/>
+
   	</typeAliases>
   	
   	<!-- environment : mybatis에서 연동할 DB전보들을 등록하는 영역이다 -->
@@ -42,8 +43,8 @@
   			<dataSource type="POOLED">
 		        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
 		        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		        <property name="username" value="UMAI"/>
-		        <property name="password" value="UMAI"/>
+		        <property name="username" value="umai"/>
+		        <property name="password" value="umai"/>
 		     </dataSource>
   		</environment>
   	</environments>

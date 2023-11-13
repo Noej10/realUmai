@@ -17,7 +17,7 @@
 		<result column="MANAGER" property="manager"/>
 		<result column="SECESSION" property="secession"/>
 		<result column="JOINDATE" property="joinDate"/>
-		<result column="CORRECTION" property="Correction"/>
+		<result column="CORRECTION" property="correction"/>
 		<result column="STATUS" property="status"/>
 	</resultMap>
 	
