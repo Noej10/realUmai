@@ -42,7 +42,7 @@ public class memberUpdatePwdController extends HttpServlet {
 		m.setPassword(request.getParameter(password));
 		int result = new MemberServiceImple().updatePwdMember(m);
 		
-		if (password == null) {
+		if (result > 0) {
 			request.setAttribute("errorMsg", "비밀번호 수정에 실패하였습니다.");
 			request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
 		} else {
