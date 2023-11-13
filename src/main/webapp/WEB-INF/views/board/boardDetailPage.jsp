@@ -189,7 +189,7 @@
         <div class="review-area">
             <div>리뷰 :</div>
             <div class="star">
-                <i></i>
+                <i style="width: ${r.grade * 20}%;"></i>
                 <button class="detail-button">점수 자세히보기</button>
             </div>
             <div class="nickname">닉네임</div>

@@ -44,7 +44,7 @@ public class Restaurant {
 	}
 
 
-	}
+	
 
 	public int getRestNum() {
 		return restNum;
@@ -189,12 +189,6 @@ public class Restaurant {
 				+ filePath + "]";
 	}
 
-
-
-	
-
-				+ ", region=" + region + ", status=" + status + "]";
-	}
 	
 	
 	
