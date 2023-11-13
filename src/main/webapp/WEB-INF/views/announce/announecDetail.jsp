@@ -52,15 +52,17 @@
 
         </div>
         <div align="center">
-            <button type="button" onclick="insertBtn()" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;" >목록으로</button>
+
+            <button type="button" onclick="announceListBtn()" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;" >목록으로</button>
             
-            <button type="submit" onclick="retouchBtn()" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;"> 수정하기</button>
+            <button type="submit" onclick="annupdateBtn()" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;"> 수정하기</button>
             
         </div>
         
         <br><br>
         
         <script>
+
        	 $(document).ready(function() {
         	  $('#retouchBtn').on('click', function() {
         	    $.ajax({
@@ -82,6 +84,22 @@
         
         	
         </script>
+
+        	function announceListBtn() {
+        		location.href = "announceList.an";
+        	}
+        	
+        	function annupdateBtn() {
+        		if($("#userId").val() == "admin") {
+        			location.href = "announceList.an";
+        		} else {
+        			alert("관리자만 수정가능합니다.");
+        		}
+        		
+        		
+        	}
+        </script>
+       
     </form>
     </div>
 </body>
