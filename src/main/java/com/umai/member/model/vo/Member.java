@@ -46,6 +46,36 @@ public class Member {
 		this.phone = phone;
 		}
 
+	public Member(String userId,String password, String nickname, String name, String phone, String email) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.nickname = nickname;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		
+		
+		
+	}
+	
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public int getUserNum() {
 		return userNum;
 	}
@@ -62,21 +92,6 @@ public class Member {
 		this.userId = userId;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
 
 	public String getName() {
 		return name;

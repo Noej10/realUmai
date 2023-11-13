@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,22 +31,25 @@
 		/* border-top: 1px solid #501a9b; */
 		display: flex;
     	font-size: 0;
-    	flex-wrap: nowrap;
+    	flex-wrap: wrap;
 		background-color: rgb(255, 210, 210);
 		overflow: hidden;
+		
 		/* height: 300px; */
 		height: 100%;
 	}
-	.main-figure{
-    	margin-top: 30px;
-		width: 20%;
-		/* height: 300px; */
-    	/* padding: 0 7px; */
-    	vertical-align: top;
-    	margin-top: 40px;
-		display: inline-block;
-    	margin-bottom: 25px;
-	}
+	.restaurant-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+    }
+
+    .restaurant {
+            flex: 0 0 20%; /* Each restaurant takes 20% width */
+            box-sizing: border-box;
+            padding: 10px;
+            display: none;
+    }
+	
 	.atag{
 		display: block;
     	/* border-bottom: 1px solid #dadada; */
@@ -121,9 +125,10 @@
 		display: inline-block;
     	vertical-align: top;
 		list-style: none;
+		cursor: pointer;
 		
 	}
-	.board-paging li.on > a{
+	.board-paging li.on > span{
 		background-color: #fc765d;
 		border: 1px solid #fc765d;
 		color: #fff;
@@ -167,102 +172,93 @@
 <body>
 	<%@ include file="../common/menubar.jsp" %>
 	<div class="page-title">
-			최근 등록 식당
+			${loginUser.userId }최근 등록 식당
 	</div>
-	<section class="main-section">
-		<figure class="main-figure">
-			<a href="" class="atag">  
-				<p class="thumbnail-area">
-				<img class="image" src="searchResult-image/example-thumbnail.png" />
-				</p>
-				<figcaption class="caption">
-				<p class="title">
-					식당 정보 입니다
-				</p>
-				</figcaption>
-			</a>
-		</figure>
-		<figure class="main-figure">
-			<a href="" class="atag">  
-				<p class="thumbnail-area">
-					<img class="image" src="searchResult-image/example-thumbnail.png" />
-				</p>
-			<figcaption class="caption">
-				<p class="title">
-					식당 정보 입니다
-				</p>
-			</figcaption>
-			</a>
-		</figure>
-		<figure class="main-figure">
-			<a href="" class="atag">  
-				<p class="thumbnail-area">
-					<img class="image" src="searchResult-image/example-thumbnail.png" />
-				</p>
-			<figcaption class="caption">
-				<p class="title">
-					식당 정보 입니다
-				</p>
-			</figcaption>
-			</a>
-		</figure>
-		<figure class="main-figure">
-			<a href="" class="atag">  
-				<p class="thumbnail-area">
-					<img class="image" src="searchResult-image/example-thumbnail.png" />
-				</p>
-			<figcaption class="caption">
-				<p class="title">
-					식당 정보 입니다
-				</p>
-			</figcaption>
-			</a>
-		</figure>
-		<figure class="main-figure">
-			<a href="" class="atag">  
-				<p class="thumbnail-area">
-					<img class="image" src="searchResult-image/example-thumbnail.png" />
-				</p>
-			<figcaption class="caption">
-				<p class="title">
-					식당 정보 입니다
-				</p>
-			</figcaption>
-			</a>
-		</figure>
+	<section class="main-section" id="restaurantContainer">
+		<c:forEach var="r" items="${resList}" varStatus="loop">
+				<div class="restaurant">
+				<figure class="main-figure">
+					<a href="detail.res?rno=${r.restNum }" class="atag">  
+						<p class="thumbnail-area">
+						<img class="image" src="${r.filePath }${r.originName}" />
+						</p>
+						<figcaption class="caption">
+						<p class="title">
+							${r.restName }
+						</p>
+						</figcaption>
+					</a>
+				</figure>
+				</div>
+		</c:forEach>
 	</section>
+	
+	
 	<div class="board-paging">
 		<ol>
-			<li class="on">
-				<a href="">1</a>
+			<li class="on" onclick="showPage(1)">
+			<span id="button1">1</span>
 			</li>
 		</ol>
 		<ol>
-			<li class="on">
-				<a href="">2</a>
+			<li class="on" onclick="showPage(2)">
+				<span id="button2">2</span>
 			</li>
 		</ol>
 		<ol>
-			<li class="on">
-				<a href="">3</a>
+			<li class="on" onclick="showPage(3)">
+				<span id="button3">3</span>
 			</li>
 		</ol>
 		<ol>
-			<li class="on">
-				<a href="">4</a>
+			<li class="on" onclick="showPage(4)">
+				<span id="button4">4</span>
 			</li>
 		</ol>
 		<div class="noResult">
 			찾는 식당이 없으신가요? 그렇다면 등록해 보세요!
 		</div>
-		<button onclick="restaurantEnroll.re" class="insert-btn">
+		<button onclick="location.href='restaurantEnroll.re'" class="insert-btn">
 			<span>식당 등록하기</span>
 		</button>
 	</div>
 	
-	<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#findId">
-		Launch demo modal
-	  </button> -->
+	<script>
+		const restaurantContainer = document.getElementById('restaurantContainer');
+	    const restaurants = restaurantContainer.getElementsByClassName('restaurant');
+	    let currentPage = 1;
+	    const restaurantsPerPage = 5;
+		
+    	function showPage(page) {
+	        const startIndex = (page - 1) * restaurantsPerPage;
+	        const endIndex = startIndex + restaurantsPerPage;
+	
+		        for (let i = 0; i < restaurants.length; i++) {
+		            if (i >= startIndex && i < endIndex) {
+		                restaurants[i].style.display = 'block';
+		            } else {
+		                restaurants[i].style.display = 'none';
+		            }
+	        	}
+	        setActiveButton(page);
+	     }
+    	function setActiveButton(page) {
+    		buttons.forEach(button => {
+                button.classList.remove('on');
+                button.querySelector('span').style.backgroundColor = '#bbb'; // 초기 색상으로 설정
+            });
+
+            const clickedButton = document.getElementById(`button${page}`);
+            clickedButton.parentElement.classList.add('on'); // 부모인 li에 on 클래스 추가
+            clickedButton.style.backgroundColor = '#717171';
+        }
+    	
+    	showPage(1);
+    	
+    	
+    </script>
+    
+
 	
 	
 </body>

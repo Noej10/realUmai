@@ -1,6 +1,7 @@
 package com.umai.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.umai.board.model.vo.Board;
 import com.umai.member.model.service.MemberServiceImple;
 import com.umai.member.model.vo.Member;
+import com.umai.restaurant.model.service.RestaurantServiceImple;
+import com.umai.restaurant.model.vo.Restaurant;
 
 /**
  * Servlet implementation class LoginController
@@ -35,17 +39,23 @@ public class LoginController extends HttpServlet {
 		
 		Member m =new Member();
 		m.setUserId(request.getParameter("userId"));
-		m.setUserPwd(request.getParameter("userPwd"));
+
+		m.setPassword(request.getParameter("password"));
 		
 		Member loginUser = new MemberServiceImple().loginMember(m);
 		
+		ArrayList<Restaurant> resList = new RestaurantServiceImple().selectListMain();
+		
 		if(loginUser == null) {
-			request.setAttribute("errorMsg", "회원가입실패");
+			request.setAttribute("errorMsg", "로그인 실패");
 	    	request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
 
 	    }else {
+	    	request.getSession().setAttribute("resList", resList);
 	    	request.getSession().setAttribute("loginUser", loginUser);
-	    	request.getRequestDispatcher("/WEB-INF/views/board/boardPage.jsp").forward(request, response);
+	    	
+	    	response.sendRedirect("boardpage");
+	    	
 	    	
 	    	
 	    }

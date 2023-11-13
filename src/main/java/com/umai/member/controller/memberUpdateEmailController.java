@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.umai.member.model.service.MemberServiceImpl;
+import com.umai.member.model.service.MemberServiceImple;
 import com.umai.member.model.vo.Member;
 
 /**
  * Servlet implementation class memberUpdateEmailController
  */
-@WebServlet("/memberUpdateEmailController")
+@WebServlet("/updateEmail.me")
 public class memberUpdateEmailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,7 +40,11 @@ public class memberUpdateEmailController extends HttpServlet {
 		m.setUserId(request.getParameter(userId));
 		m.setEmail(request.getParameter(email));
 		
-		int result = new MemberServiceImpl().updateEmailMember(m);
+		int result = new MemberServiceImple().updateEmailMember(m);
+		
+		if (result > 0 ) {
+			
+		}
 		
 		
 	}

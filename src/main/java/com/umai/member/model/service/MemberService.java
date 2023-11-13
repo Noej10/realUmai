@@ -16,6 +16,8 @@ public interface MemberService {
 	Member loginMember(Member m);  
 	
 	Member findId(Member m);
+	
+	Member findPwd(Member m);
 
 	int insertMember(Member m);
 	

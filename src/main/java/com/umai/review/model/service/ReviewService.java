@@ -1,5 +1,8 @@
 package com.umai.review.model.service;
 
-public interface ReviewService {
+import com.umai.review.model.vo.Review;
 
+public interface ReviewService {
+	
+	int insertReview(Review re);
 }

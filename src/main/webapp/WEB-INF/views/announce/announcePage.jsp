@@ -148,9 +148,7 @@ button {
 			        	<div>
 			            	<h4 class="tit">${l.title }</h4>
 			        	</div>
-			        	<div>
-			            <img src="WEB-INF/resources/images/arrow_down.png">
-			        	</div>
+
 		        
 		        		<p class="desc"></p>
 		    		</div>
@@ -167,13 +165,13 @@ button {
          <div class="page_wrap">
             <div class="page_nation">
             	<c:if test="${pi.currentPage ne 1 }">
-					<a class="arrow prev" href="announceList.an?cPage=${pi.currentPage-1}"></a>
+					<a class="arrow prev" href="announceList.an?cPage=${pi.currentPage-1}">&lt;</a>
 	            </c:if>
 	            <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
 					<a href="announceList.an?cPage=${p}" class="active">${p}</a>
 				</c:forEach>	
 				<c:if test="${pi.maxPage ne pi.currentPage }">
-					<a class="arrow next" href="announceList.an?cPage=${pi.currentPage+1}"></a>
+					<a class="arrow next" href="announceList.an?cPage=${pi.currentPage+1}">&gt;</a>
 				</c:if>
             </div>
          </div>
