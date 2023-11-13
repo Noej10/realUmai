@@ -7,14 +7,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.umai.member.model.service.MemberServiceImpl;
+import com.umai.member.model.service.MemberServiceImple;
 import com.umai.member.model.vo.Member;
 
 /**
  * Servlet implementation class memberUpdatePwdController
  */
-@WebServlet("/memberUpdatePwdController")
+@WebServlet("/updatePwd.me")
 public class memberUpdatePwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,7 +40,18 @@ public class memberUpdatePwdController extends HttpServlet {
 		Member m = new Member();
 		m.setUserId(request.getParameter(userId));
 		m.setPassword(request.getParameter(password));
-		int result = new MemberServiceImpl().updateEmailMember(m);
+		int result = new MemberServiceImple().updatePwdMember(m);
+		
+		if (password == null) {
+			request.setAttribute("errorMsg", "비밀번호 수정에 실패하였습니다.");
+			request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
+		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "성공적으로 수정 하였습니다.");
+			session.setAttribute("loginUser", m);
+			
+			response.sendRedirect(request.getContextPath() + "/memberRetouchPage.jsp");
+		}
 	}
 
 	/**
