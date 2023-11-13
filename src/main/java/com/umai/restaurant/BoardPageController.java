@@ -1,4 +1,4 @@
-package com.umai.board.controller;
+package com.umai.restaurant;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Testing
+ * Servlet implementation class BoardPageController
  */
-@WebServlet("/Testing")
-public class Testing extends HttpServlet {
+@WebServlet("/boardpage")
+public class BoardPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Testing() {
+    public BoardPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,9 @@ public class Testing extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/views/board/boardPage.jsp").forward(request, response);
+		
+		
+		request.getRequestDispatcher("/WEB-INF/views/board/boardPage.jsp").forward(request, response);
 	}
 
 	/**

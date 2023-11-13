@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="restaurantMapper" >
+  
+  <resultMap type="Restaurant" id="restaurantResultSet">
+  		<result column="REST_NUM" property="restNum"/>
+  		<result column="REST_NAME" property="restName"/>
+  		<result column="SUGGESTION" property="suggestion"/> <!-- 추천수 -->
+  		<result column="REST_CHECK" property="restCheck"/>	<!-- 조회수 -->
+  		<result column="ORIGINAL" property="original"/>
+  		<result column="REST_DELETE" property="restDelete"/>
+  		<result column="DUCTION" property="duction"/> <!-- 식당소개 -->
+  		<result column="GRADE" property="grade"/>
+  		<result column="MENU" property="menu"/>
+  		<result column="OPENING" property="opening"/>
+  		<result column="ADDRESS" property="address"/>
+  		<result column="REGION" property="region"/>
+  		<result column="STATUS" property="status"/>
+  		<result column="ORIGIN_NAME" property="originName"/>
+  		<result column="FILE_PATH" property="filePath"/>
+  	</resultMap>
+  	
+  	<resultMap type="Attachment" id="attachmentResultSet">
+  		<result column="FILE_NO" property="fileNo"/>
+  		<result column="REF_BNO" property="refBno"/>
+  		<result column="ORIGIN_NAME" property="originName"/>
+  		<result column="FILE_PATH" property="filePath"/>
+  		<result column="FILE_LEVEL" property="fileLevel"/>
+  		<result column="STATUS" property="status"/>
+  	</resultMap>
+  
+  
+  	<select id="selectListMain" parameterType="Restaurant" resultMap="restaurantResultSet">
+  		SELECT REST_NUM, REST_NAME,ORIGIN_NAME,FILE_PATH
+		FROM (
+		    SELECT REST_NUM, REST_NAME,ORIGIN_NAME,FILE_PATH
+		    FROM RESTAURANT
+            JOIN ATTACHMENT ON(REST_NUM=REF_BNO)
+            WHERE FILE_LEVEL = 1
+		    ORDER BY REST_NUM DESC
+		)
+		WHERE ROWNUM &lt;= 20
+  	</select>
+  	
+  	<update id="increaseCount" parameterType="_int">
+  		UPDATE RESTAURANT
+  			SET REST_CHECK = REST_CHECK + 1
+  		WHERE REST_NUM = #{restNo}
+  			AND STATUS = 'Y'
+  	</update>
+  	
+  	<select id="selectRest" resultMap="restaurantResultSet">
+  		SELECT REST_NUM,
+  			REST_NAME,
+  			SUGGESTION,
+  			REST_CHECK,
+  			ORIGINAL,
+  			REST_DELETE,
+  			DUCTION,
+  			GRADE,
+  			MENU,
+  			OPENING,
+  			ADDRESS,
+  			REGION,
+  			RESTAURANT.STATUS,
+  			ORIGIN_NAME,
+  			FILE_PATH
+  		FROM RESTAURANT
+  		JOIN ATTACHMENT ON(REST_NUM=REF_BNO)
+  		WHERE REST_NUM = #{restNo}
+  		AND FILE_LEVEL = 1
+  	</select>
+  	
+  	<select id="selectPhoto" resultMap="attachmentResultSet">
+  		SELECT FILE_NO,
+	        REF_BNO,
+	  		ORIGIN_NAME,
+	        FILE_PATH,
+	        FILE_LEVEL
+	  		FROM ATTACHMENT
+  		WHERE REF_BNO = #{restNo} 
+  		  AND FILE_LEVEL = 2
+  	</select>
+  	
+  </mapper>
+  
+  

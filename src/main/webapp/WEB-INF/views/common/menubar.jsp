@@ -1,5 +1,17 @@
+<%@page import="com.umai.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	String contextPath = request.getContextPath();
+    
+    	Member loginUser = (Member)session.getAttribute("loginUser");
+    //로그인 시도 전 menubar.jsp 로딩시 해당객체 : null
+    //로그인 성공 후 menubar.jsp 로딩시 해당객체 : 로그인에 성공한 회원의 정보
+    
+    	String alertMsg = (String)session.getAttribute("alertMsg");
+    // 서비스 요청 전 menubar.jsp로딩시 : null
+    // 서비스 요청 후 menubar.jsp로딩시 : alert로 띄워줄 메세지 존재
+    %>
 <!DOCTYPE html>
 <html>
 <head>

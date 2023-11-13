@@ -200,7 +200,7 @@
                            <!-- ID 찾기 모달 푸터 -->
                            <div class="modal-footer">
                                <input type="button" class="btn btn-sm" onclick="checkId()" style="background: #fc765d; color: white; margin-bottom: 10px;" value="아이디 찾기">
-                               <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">닫기</button>
+                               <button type="button" class="btn btn-sm btn-danger" onclick="resetmodal()" data-bs-dismiss="modal">닫기</button>
                            </div>
                         </div>
                     </div>
@@ -232,6 +232,12 @@
                 			+ '<div>이메일<input type="text" name="userEmail"></div>'
                 		}
                 	}
+                	
+                	function resetmodal(){
+                		document.querySelector("#findId .modal-body").innerHTML = '<b>정보를 입력해주세요.</b>'
+                			+ '<div>&nbsp;&nbsp;&nbsp;이름<input type="text" name="userName"></div>'
+                			+ '<div>이메일<input type="text" name="userEmail"></div>'
+                	}
                 </script>
                 <!-- PW 찾기 모달 버튼 -->
                 <button style="border: none; background: white; font-size: 13px;" type="button" data-bs-toggle="modal" data-bs-target="#findPw">
@@ -252,24 +258,58 @@
                             <!-- PW 찾기 모달 바디 -->
                             <div class="modal-body">
                                 <b>정보를 입력해주세요.</b>
-                                <form action="">
+                                
                                 <div>
-                                    아이디<input type="text">
+                                    아이디<input type="text" name="PuserId">
                                 </div>
                                 <div>
-                                    &nbsp;&nbsp;&nbsp;이름<input type="text">
+                                    &nbsp;&nbsp;&nbsp;이름<input type="text" name="PuserName">
                                 </div>
                                 <div>
-                                    이메일<input type="text">
+                                    이메일<input type="text" name="PuserEmail">
                                 </div>
                             </div>
                     
                             <!-- PW 찾기 모달 푸터 -->
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-sm" style="background: #fc765d; color: white; margin-bottom: 10px;" value="비밀번호 찾기">
-                                <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal">닫기</button>
+                                <input type="submit" class="btn btn-sm" onclick="checkPwd()" style="background: #fc765d; color: white; margin-bottom: 10px;" value="비밀번호 찾기">
+                                <button type="button" class="btn btn-sm btn-danger" onclick="resetPmodal()" data-bs-dismiss="modal">닫기</button>
                             </div>
-                            </form>
+                            <script>
+                            	function checkPwd(){
+                            		if (document.querySelector("#findPw input[name='PuserId']")) {
+                            		$.ajax({
+            	                        url: "findpwd.me",
+            	                        type: "post",
+            	                        data : {
+            	                        	userId: document.querySelector("#findPw input[name='PuserId']").value,
+            	                           	userName: document.querySelector("#findPw input[name='PuserName']").value,
+            	                           	userEmail: document.querySelector("#findPw input[name='PuserEmail']").value
+            	                        },
+            	                        success: function(res){ 
+            	                        	document.querySelector("#findPw .modal-body").innerHTML = "<h3>"+res+"</h3>"
+            	                        	        console.log(res)
+            	                        	
+            	                        },
+            	                        error: function(){
+            	                        	console.log("댓글 목록 조회 중 ajax통신 실패")
+            	                        }
+                            		
+                                		})
+                            		}else{
+                            			document.querySelector("#findPw .modal-body").innerHTML = '<b>정보를 입력해주세요.</b>'
+                                			+ '<div>아이디<input type="text" name="PuserId"></div>'
+                                			+ '<div>&nbsp;&nbsp;&nbsp;이름<input type="text" name="PuserName"></div>'
+                                			+ '<div>이메일<input type="text" name="PuserEmail"></div>'
+                            		}
+                            	}
+                            	function resetPmodal(){
+                            		document.querySelector("#findId .modal-body").innerHTML = '<b>정보를 입력해주세요.</b>'
+                            			+ '<div>아이디<input type="text" name="PuserId"></div>'
+                            			+ '<div>&nbsp;&nbsp;&nbsp;이름<input type="text" name="PuserName"></div>'
+                            			+ '<div>이메일<input type="text" name="PuserEmail"></div>'
+                            	}
+                            </script>
                         </div>
                     </div>
                 </div>

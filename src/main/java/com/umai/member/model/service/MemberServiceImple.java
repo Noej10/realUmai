@@ -31,4 +31,15 @@ public class MemberServiceImple implements MemberService{
 		return findId;
 	}
 
+	@Override
+	public Member findPwd(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		Member findPwd = MemberDao.findPwd(sqlSession,m);
+		
+		sqlSession.close();
+		
+		return findPwd;
+	}
+
 }

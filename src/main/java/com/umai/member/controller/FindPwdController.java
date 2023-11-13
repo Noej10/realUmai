@@ -1,32 +1,27 @@
 package com.umai.member.controller;
 
+import java.io.Console;
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.umai.board.model.vo.Board;
 import com.umai.member.model.service.MemberServiceImple;
 import com.umai.member.model.vo.Member;
-import com.umai.restaurant.model.service.RestaurantServiceImple;
-import com.umai.restaurant.model.vo.Restaurant;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class FindPwdController
  */
-@WebServlet("/login.me")
-public class LoginController extends HttpServlet {
+@WebServlet("/findpwd.me")
+public class FindPwdController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public FindPwdController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,26 +34,22 @@ public class LoginController extends HttpServlet {
 		
 		Member m =new Member();
 		m.setUserId(request.getParameter("userId"));
-		m.setPassword(request.getParameter("userPwd"));
+		m.setName(request.getParameter("userName"));
+		m.setEmail(request.getParameter("userEmail"));
 		
-		Member loginUser = new MemberServiceImple().loginMember(m);
+		Member findPwd = new MemberServiceImple().findPwd(m);
 		
-		ArrayList<Restaurant> resList = new RestaurantServiceImple().selectListMain();
-		
-		if(loginUser == null) {
-			request.setAttribute("errorMsg", "로그인 실패");
-	    	request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
-
-	    }else {
-	    	request.getSession().setAttribute("resList", resList);
-	    	request.getSession().setAttribute("loginUser", loginUser);
-	    	
-	    	response.sendRedirect("boardpage");
-	    	
-	    	
-	    	
-	    }
-		
+		String message;
+        if (findPwd != null) {
+            // 이름과 이메일이 모두 일치하는 경우
+            message = "비밀번호: " + findPwd.getPassword();
+        } else {
+            // 일치하지 않는 경우
+            message = "이름, 아이디 또는 이메일이 일치하지 않습니다.";
+        }
+        
+        response.setContentType("text/html; charset=UTF-8");
+        response.getWriter().print(message);
 	}
 
 	/**

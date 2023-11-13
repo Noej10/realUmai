@@ -15,6 +15,8 @@
   	<typeAliases>
 		<typeAlias type="com.umai.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.umai.announce.model.vo.Announce" alias="Announce"/>
+		<typeAlias type="com.umai.restaurant.model.vo.Restaurant" alias="Restaurant"/>
+		<typeAlias type="com.umai.common.model.vo.Attachment" alias="Attachment"/>
   	</typeAliases>
   	
   	<!-- environment : mybatis에서 연동할 DB전보들을 등록하는 영역이다 -->
@@ -46,9 +48,9 @@
   	<!-- *mapper : 실행할 sql문들을 기록해둔 mapper 파일들을 등록하는 영역 -->
   	<mappers>
   		<mapper resource="/mappers/member-mappers.xml"/>
-  		<mapper resource="/mappers/board-mappers.xml"/>
+  		<mapper resource="/mappers/restaurant-mappers.xml"/>
   		<mapper resource="/mappers/announce-mappers.xml"/>
-  	</mappers>
+</mappers>
   	
   	
   	

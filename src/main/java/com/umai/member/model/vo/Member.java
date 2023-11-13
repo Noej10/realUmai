@@ -5,8 +5,8 @@ import java.sql.Date;
 public class Member {
 	private int userNum;
 	private String userId;
-	private String userPwd;
-	private String nickName;
+	private String password;
+	private String nickname;
 	private String name;
 	private String email;
 	private String phone;
@@ -23,8 +23,8 @@ public class Member {
 		super();
 		this.userNum = userNum;
 		this.userId = userId;
-		this.userPwd = userPwd;
-		this.nickName = nickName;
+		this.password = userPwd;
+		this.nickname = nickName;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
@@ -33,6 +33,22 @@ public class Member {
 		this.joinDate = joinDate;
 		this.correction = correction;
 		this.status = status;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public int getUserNum() {
@@ -49,22 +65,6 @@ public class Member {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	public String getUserPwd() {
-		return userPwd;
-	}
-
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
-	}
-
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
 	}
 
 	public String getName() {
@@ -133,7 +133,7 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [userNum=" + userNum + ", userId=" + userId + ", userPwd=" + userPwd + ", nickName=" + nickName
+		return "Member [userNum=" + userNum + ", userId=" + userId + ", userPwd=" + password + ", nickName=" + nickname
 				+ ", name=" + name + ", email=" + email + ", phone=" + phone + ", manager=" + manager + ", secession="
 				+ secession + ", joinDate=" + joinDate + ", correction=" + correction + ", status=" + status + "]";
 	} 

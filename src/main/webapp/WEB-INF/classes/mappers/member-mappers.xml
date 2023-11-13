@@ -9,8 +9,8 @@
 	<resultMap type="Member" id="memberResultSet">
 		<result column="USER_NUM" property="userNum"/>
 		<result column="USER_ID" property="userId"/>
-		<result column="PASSWORD" property="userPwd"/>
-		<result column="NICKNAME" property="nickName"/>
+		<result column="PASSWORD" property="password"/>
+		<result column="NICKNAME" property="nickname"/>
 		<result column="NAME" property="name"/>
 		<result column="EMAIL" property="email"/>
 		<result column="PHONE" property="phone"/>
@@ -36,7 +36,7 @@
 			STATUS
 	FROM MEMBER
 	WHERE USER_ID = #{userId}
-	AND PASSWORD = #{userPwd}
+	AND PASSWORD = #{password}
 	AND STATUS = 'Y'
 	</select>
 	
@@ -44,6 +44,14 @@
 		SELECT USER_ID 
 		FROM MEMBER
 		WHERE NAME = #{name} AND EMAIL = #{email}
+	</select>
+	
+	<select id="findPwd" parameterType="Member" resultMap="memberResultSet">
+		SELECT PASSWORD 
+		FROM MEMBER
+		WHERE NAME = #{name}
+		AND EMAIL = #{email}
+		AND USER_ID = #{userId}
 	</select>
 	
 </mapper>
