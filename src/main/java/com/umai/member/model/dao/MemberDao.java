@@ -45,6 +45,12 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	public String selectId(SqlSession sqlSession, String userId) {
+		
+		return sqlSession.selectOne("memberMapper.selectId", userId);
+		
+	}
 
 
 }

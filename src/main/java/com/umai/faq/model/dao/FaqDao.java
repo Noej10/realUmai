@@ -1,5 +1,9 @@
 package com.umai.faq.model.dao;
 
-public class FaqDao {
+import org.apache.ibatis.session.SqlSession;
 
+public class FaqDao {
+	public int faqList(SqlSession sqlSession) {
+		return sqlSession.selectOne("faqMapper.faqList");
+	}
 }

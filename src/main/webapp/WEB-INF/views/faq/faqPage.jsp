@@ -123,7 +123,7 @@
                   FAQ 질문 1 입니다.
                 </div>
                   <img class="recruitRotate2"
-                  src="/Umai/WEB-INF/resources/images/arrow_down.png" alt="화살표"
+                  src="resources/images/arrow_down.png" alt="화살표"
                   style="width:1em; height:auto; position:relative;">
                   
               </div>
@@ -152,7 +152,7 @@
                   FAQ 질문 2 입니다.
                 </div>
                 <img class="recruitRotate2"
-                  src="/Umai/WEB-INF/resources/images/arrow_down.png" alt="화살표"
+                  src="resources/images/arrow_down.png" alt="화살표"
                   style="width:1em; height:auto; position:relative;">
               </div>
             </div>
@@ -180,7 +180,7 @@
                 FAQ 질문 3 입니다.
               </div>
               <img class="recruitRotate2"
-                src="/Umai/WEB-INF/resources/images/arrow_down.png" alt="화살표"
+                src="resources/images/arrow_down.png" alt="화살표"
                 style="width:1em; height:auto; position:relative;">
             </div>
           </div>
@@ -208,7 +208,7 @@
               FAQ 질문 4 입니다.
             </div>
             <img class="recruitRotate2"
-              src="/Umai/WEB-INF/resources/images/arrow_down.png" alt="화살표"
+              src="resources/images/arrow_down.png" alt="화살표"
               style="width:1em; height:auto; position:relative;">
           </div>
         </div>

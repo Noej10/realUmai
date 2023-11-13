@@ -131,22 +131,23 @@ html,
 		<br>
         <div class="input-area">
         
-        <form action="insert.me" method="post">
+        <form action="insert.me" method="post" id="enrollForm">
         <table align="center">
             <div align="right">ID
                     <input type="text" id="userId" name="userId" required placeholder="아이디를 입력해주세요.">
-                    <button type="button" style="font-size: 15px; border: none; height: 35px; background-color: #fc765d; color: white;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                    <button type="button" onclick="idCheck()" style="font-size: 15px; border: none; height: 35px; background-color: #fc765d; color: white;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
                     중복확인
                   </button>  
             </div> 
             <br>
             <div align="right">비밀번호                
-                <input type="text" name="userPwd" required placeholder="비밀번호를 입력해주세요.">                             
-                
+                <input type="text" oninput="pwdCheck()" id="userPwd" required placeholder="비밀번호를 입력해주세요."><br>                           
+                <span id="pwdInput" style="font-size: 12px"></span>
             </div>  
             <br>   
             <div align="right" >비밀번호 확인
-                <input type="text" name="userPwdCheck" required placeholder="비밀번호를 확인해주세요">
+                <input type="text" oninput="pwdCheck()" id="userPwdCheck" required placeholder="비밀번호를 확인해주세요"><br>
+                <span id="pwdInputCheck" style="font-size: 12px"></span>
             </div>
             <br>
             <div align="right" >이름
@@ -178,20 +179,19 @@ html,
   
         <!-- Modal Header -->
         <div class="modal-header" style="color: #fc765d;">
-          <h4 class="modal-title">사용 가능한/불가능한 아이디입니다.</h4>
+          <h4 class="modal-title">아이디 중복확인</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         
-        <script>
-	        $.ajax({
-	        	url: "enroll.me",
-	        	data: {
-	        		userId: $('')
-	        	}
-	        	
-	        })
-  		</script>
-        
+       
+        <!-- Modal body -->
+        <input type="hidden" name="userId" value="${loginUser.userId}">
+         <div class="modal-body">
+            <div align="center">
+				    아이디입니다. <br>
+				   
+            </div>
+            
   
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -201,6 +201,71 @@ html,
       </div>
     </div>
   </div>
+  
+  <script>
+        // function pwdCheck2(){
+        // 	 if($('#userPwd').val() == $('#userPwdCheck').val()){
+        // 	        $('#pwdInputCheck').text('')
+        // 	    }else{
+        // 	        $('#pwdInputCheck').text('비밀번호가 틀립니다')
+        // 	    }
+        // }
+        
+        function pwdCheck() {
+        	if($('#userPwd').length < 8 || $('#userPwd').length > 16) {
+        		$('#pwdInput').text('비밀번호는 8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해주세요')
+        	} else {
+        		$('#pwdInput').text('')
+        	}
+        }
+
+        function pwdCheck(){
+		    var password1 = $("#userPwd").val();
+		    var password2 = $("#userPwdCheck").val();
+		if(password1 != password2){
+			$("#pwdInputCheck").html("비밀번호가 일치하지 않습니다.");
+		} else {
+			$("#pwdInputCheck").html("");
+		}
+	}
+
+        function idCheck() {
+            if($('#userId')) {
+
+            }
+        }
+        
+  </script>
+
+    //       $(document).check(function(){
+	//   	$('#userIdCheck').click(function() {
+	//   		const userId = $('userId').val();
+	  		
+	//   		$.ajax({
+	//   			url: '/EnrollForm.me',
+	//   			type: 'post',
+	//   			data: {
+	//   				userId: userId
+	//   			},
+	//   			success: function(data) {
+	//   				if(data.result == 'success') {
+	//   					$('.modal-title').modal('사용가능한 아이디입니다.')
+	//   				} else {
+	//   					eroor: function(data) {
+	//   						$('.modal-title').modal('사용불가능한 아이디입니다.')
+	//   					}
+	//   				}
+	//   			}
+	//   		});
+	//   	});
+	  	
+	//   });
+
+  
+  
+	  
+ 
+  
 </form>
 </body>
 </html>

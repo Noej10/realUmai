@@ -69,4 +69,57 @@ public class MemberServiceImpl implements MemberService{
 		
 		return result;
 	}
+
+	@Override
+	public Member loginMember(Member m) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		Member loginUser = MemberDao.loginMember(sqlSession,m);
+		
+		sqlSession.close();
+		
+		return loginUser;
+	}
+
+	@Override
+	public Member findId(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		Member findId = MemberDao.findId(sqlSession,m);
+		
+		sqlSession.close();
+		
+		return findId;
+	}
+
+	@Override
+	public int insertMember(Member m) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = mDao.insertMember(sqlSession, m);
+		
+		if(result > 0) {
+			sqlSession.commit();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+	
+	public String selectId(String userId) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		String userIdCheck = mDao.selectId(sqlSession, userId);
+		
+		if(userIdCheck.equals("userId")) {
+			sqlSession.commit();
+		}
+		
+		sqlSession.close();
+		
+		return userIdCheck;
+	}
 }

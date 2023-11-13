@@ -18,4 +18,6 @@ public interface MemberService {
 	Member findId(Member m);
 
 	int insertMember(Member m);
+	
+	String selectId(String userId);
 }

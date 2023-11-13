@@ -87,6 +87,10 @@
 		WHERE NAME = #{name} AND EMAIL = #{email}
 	</select>
 
-
+	<select id="selectId">
+		SELECT USER_ID
+		 FROM MEMBER
+		WHERE USER_ID = #{userId}
+	</select>
 	
 </mapper>
