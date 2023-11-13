@@ -42,38 +42,45 @@
         <br>
         <h1 align="center" style="color: #fc765d;">공지사항</h1>
 		
-        <form action="detail.an" method="post">
+        <form action="retouch.an" method="post">
          <div align="center"> 
             
-            <textarea input type="text" style=" resize:none; font-weight: bold; width: 500px; " placeholder="공지사항 제목입니다."></textarea><br>
-            <textarea input type="text" style=" resize:none; font-weight: bold; width: 500px; height: 250px;" placeholder="공지사항 내용입니다."></textarea>
+            <textarea input type="text" id="title" style=" resize:none; font-weight: bold; width: 500px; " value="${a.title}"></textarea><br>
+            <textarea input type="text" id="detail" style=" resize:none; font-weight: bold; width: 500px; height: 250px;" value="${a.detail}"></textarea>
             
             <br><br>
 
         </div>
         <div align="center">
-            <button type="button" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;" >목록으로</button>
+            <button type="button" onclick="insertBtn()" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;" >목록으로</button>
             
-            <button type="submit" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;"> 수정하기</button>
+            <button type="submit" onclick="retouchBtn()" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;"> 수정하기</button>
             
         </div>
         
         <br><br>
         
         <script>
-        	function announceListBtn() {
-        		location.href = "announceList.an";
-        	}
+       	 $(document).ready(function() {
+        	  $('#retouchBtn').on('click', function() {
+        	    $.ajax({
+        	      url: '/retouch.an' + $(this).data('userId'),
+        	      data: {
+        	    	title: $('#title').val()
+        	        detail: $('#detail').val()
+        	      },
+        	      success: function(data) {
+        	    	$('#title').html(data);
+        	        $('#detail').html(data);
+        	      },
+        	      error: function() {
+        	        alert('ajax통신 실패');
+        	      }
+        	    });
+        	  });
+        	});
+        
         	
-        	function annupdateBtn() {
-        		if($("#userId").val() == "admin") {
-        			location.href = "announceList.an";
-        		} else {
-        			alert("관리자만 수정가능합니다.");
-        		}
-        		
-        		
-        	}
         </script>
     </form>
     </div>

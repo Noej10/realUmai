@@ -121,6 +121,12 @@ public class MemberServiceImple implements MemberService{
 		return result;
 	}
 
+	@Override
+	public String selectId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 
