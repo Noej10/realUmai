@@ -13,18 +13,18 @@ public class Member {
 	private String manager;
 	private String secession;
 	private Date joinDate;
-	private Date correction;
+	private String correction;
 	private String status;
 	
 	public Member() {}
-	
-	public Member(int userNum, String userId, String userPwd, String nickName, String name, String email, String phone,
-			String manager, String secession, Date joinDate, Date correction, String status) {
+
+	public Member(int userNum, String userId, String password, String nickname, String name, String email, String phone,
+			String manager, String secession, Date joinDate, String correction, String status) {
 		super();
 		this.userNum = userNum;
 		this.userId = userId;
-		this.password = userPwd;
-		this.nickname = nickName;
+		this.password = password;
+		this.nickname = nickname;
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
@@ -65,6 +65,23 @@ public class Member {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getName() {
@@ -115,11 +132,11 @@ public class Member {
 		this.joinDate = joinDate;
 	}
 
-	public Date getCorrection() {
+	public String getCorrection() {
 		return correction;
 	}
 
-	public void setCorrection(Date correction) {
+	public void setCorrection(String correction) {
 		this.correction = correction;
 	}
 
@@ -133,12 +150,10 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [userNum=" + userNum + ", userId=" + userId + ", userPwd=" + password + ", nickName=" + nickname
+		return "Member [userNum=" + userNum + ", userId=" + userId + ", password=" + password + ", nickname=" + nickname
 				+ ", name=" + name + ", email=" + email + ", phone=" + phone + ", manager=" + manager + ", secession="
 				+ secession + ", joinDate=" + joinDate + ", correction=" + correction + ", status=" + status + "]";
-	} 
+	}
 	
 	
-	
-
 }

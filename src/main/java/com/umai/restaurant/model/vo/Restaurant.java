@@ -24,6 +24,7 @@ public class Restaurant {
 	public Restaurant(int restNum, String restName, int suggestion, int restCheck, String original, String restDelete,
 			String duction, int grade, String menu, String opening, String address, String region, String status,
 			String originName, String filePath) {
+
 		super();
 		this.restNum = restNum;
 		this.restName = restName;
@@ -43,6 +44,7 @@ public class Restaurant {
 	}
 
 
+	}
 
 	public int getRestNum() {
 		return restNum;
@@ -71,7 +73,6 @@ public class Restaurant {
 	public int getRestCheck() {
 		return restCheck;
 	}
-
 	public void setRestCheck(int restCheck) {
 		this.restCheck = restCheck;
 	}
@@ -92,9 +93,11 @@ public class Restaurant {
 		this.restDelete = restDelete;
 	}
 
+
 	public String getDuction() {
 		return duction;
 	}
+
 
 	public void setDuction(String duction) {
 		this.duction = duction;
@@ -140,10 +143,10 @@ public class Restaurant {
 		this.status = status;
 	}
 
-	
 	public String getOpening() {
 		return opening;
 	}
+
 
 	public void setOpening(String opening) {
 		this.opening = opening;
@@ -174,6 +177,9 @@ public class Restaurant {
 
 
 
+
+
+
 	@Override
 	public String toString() {
 		return "Restaurant [restNum=" + restNum + ", restName=" + restName + ", suggestion=" + suggestion
@@ -187,6 +193,8 @@ public class Restaurant {
 
 	
 
+				+ ", region=" + region + ", status=" + status + "]";
+	}
 	
 	
 	

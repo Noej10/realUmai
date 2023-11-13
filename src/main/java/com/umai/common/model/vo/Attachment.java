@@ -2,22 +2,25 @@ package com.umai.common.model.vo;
 
 public class Attachment {
 	private int fileNo;
-	private int refBno;
-	private String originName;
-	private String filePath;
-	private int fileLevel;
-	private String status;
-	
-	public Attachment() {}
+    private int refBno;
+    private String originName;
+    private String changeName;
+    private String filePath;
+    private String fileLevel;
+    private String ststus;
+    
+    public Attachment() {}
 
-	public Attachment(int fileNo, int refBno, String originName, String filePath, int fileLevel, String ststus) {
+	public Attachment(int fileNo, int refBno, String originName, String changeName, String filePath, String fileLevel,
+			String ststus) {
 		super();
 		this.fileNo = fileNo;
 		this.refBno = refBno;
 		this.originName = originName;
+		this.changeName = changeName;
 		this.filePath = filePath;
 		this.fileLevel = fileLevel;
-		this.status = ststus;
+		this.ststus = ststus;
 	}
 
 	public int getFileNo() {
@@ -44,6 +47,14 @@ public class Attachment {
 		this.originName = originName;
 	}
 
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
 	public String getFilePath() {
 		return filePath;
 	}
@@ -52,27 +63,27 @@ public class Attachment {
 		this.filePath = filePath;
 	}
 
-	public int getFileLevel() {
+	public String getFileLevel() {
 		return fileLevel;
 	}
 
-	public void setFileLevel(int fileLevel) {
+	public void setFileLevel(String fileLevel) {
 		this.fileLevel = fileLevel;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getStstus() {
+		return ststus;
 	}
 
-	public void setStatus(String ststus) {
-		this.status = ststus;
+	public void setStstus(String ststus) {
+		this.ststus = ststus;
 	}
 
 	@Override
 	public String toString() {
-		return "Attachment [fileNo=" + fileNo + ", refBno=" + refBno + ", originName=" + originName + ", filePath="
-				+ filePath + ", fileLevel=" + fileLevel + ", status=" + status + "]";
+
+		return "Attachment [fileNo=" + fileNo + ", refBno=" + refBno + ", originName=" + originName + ", changeName="
+				+ changeName + ", filePath=" + filePath + ", fileLevel=" + fileLevel + ", ststus=" + ststus + "]";
 	}
-	
-	
-}
+    
+    }

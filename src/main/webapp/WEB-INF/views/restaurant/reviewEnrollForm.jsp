@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>우리 마음 속 이런 맛집</title>
-<link rel="stylesheet" href="../../resources/css/rate.css">
+<link rel="stylesheet" href="/resources/css/rate.css">
 <style>
 
 
@@ -48,9 +48,9 @@
     <jsp:include page="../common/menubar.jsp"></jsp:include>
     <div class="outer">
         <div style="width: 28%;">
-        <form>
+        
         </div>
-                
+                <form action="reviewEnroll.re" method="post">
                 <div class="rate-body">
                     <br>
                     <div class="img-name" width="500">
@@ -154,17 +154,13 @@
                         </fieldset>
                     </div>
                     <div style="width: 100%;">
-                        <textarea style="width: 170%; display: inline-block;height: 180px;border: none;border-radius: 10px;resize: none;;"></textarea>
+                        <textarea style="width: 170%; display: inline-block;height: 180px;border: none;border-radius: 10px;resize: none;">${re.commentContents}</textarea>
                     </div>
                     <div align="right" style="width: 170%;">
                         <input type="submit" class="btn btn-primary" style="border: none; background: #fc765d;" value="등록하기">
-
                     </div>
-                
                 </div>
-        
-            </div>
-        </form>
-    </div>
+        	</form>
+         </div>
 </body>
 </html>
