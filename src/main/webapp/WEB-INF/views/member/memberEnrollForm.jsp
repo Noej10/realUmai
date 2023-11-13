@@ -188,7 +188,7 @@ html,
         <input type="hidden" name="userId" value="${loginUser.userId}">
          <div class="modal-body">
             <div align="center">
-				    아이디입니다. <br>
+				    아이디입니다요. <br>
 				   
             </div>
             
