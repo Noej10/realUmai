@@ -28,6 +28,10 @@
 			PASSWORD,
 			NICKNAME,
 			NAME,
+<<<<<<< HEAD
+
+=======
+>>>>>>> 012a903884b39ce425f7304f54d01b1a5a3f45b0
 			PHONE,
 			EMAIL
 			)
@@ -87,6 +91,8 @@
 	</select>
 
 
+<<<<<<< HEAD
+=======
 	
 	<select id="findPwd" parameterType="Member" resultMap="memberResultSet">
 		SELECT PASSWORD 
@@ -95,5 +101,6 @@
 		AND EMAIL = #{email}
 		AND USER_ID = #{userId}
 	</select>
+>>>>>>> 012a903884b39ce425f7304f54d01b1a5a3f45b0
 	
 </mapper>
