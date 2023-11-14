@@ -7,15 +7,12 @@ import com.umai.member.model.vo.Member;
 
 public class MemberServiceImple implements MemberService{
 
-
-	private MemberDao mDao = new MemberDao();
-
 	@Override
 	public Member loginMember(Member m) {
 		
 		SqlSession sqlSession = Template.getSqlSession();
 		
-		Member loginUser = MemberDao.loginMember(sqlSession,m);
+		Member loginUser = new MemberDao().loginMember(sqlSession,m);
 		
 		sqlSession.close();
 		
@@ -26,7 +23,7 @@ public class MemberServiceImple implements MemberService{
 	public Member findId(Member m) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
-		Member findId = MemberDao.findId(sqlSession,m);
+		Member findId = new MemberDao().findId(sqlSession,m);
 		
 		sqlSession.close();
 		
@@ -37,7 +34,7 @@ public class MemberServiceImple implements MemberService{
 	public Member findPwd(Member m) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
-		Member findPwd = MemberDao.findPwd(sqlSession,m);
+		Member findPwd = new MemberDao().findPwd(sqlSession,m);
 		
 		sqlSession.close();
 		
@@ -50,7 +47,7 @@ public class MemberServiceImple implements MemberService{
 		
 		SqlSession sqlSession = Template.getSqlSession();
 		
-		int result = mDao.insertMember(sqlSession, m);
+		int result = new MemberDao().insertMember(sqlSession, m);
 		
 		if(result > 0) {
 			sqlSession.commit();
@@ -65,10 +62,12 @@ public class MemberServiceImple implements MemberService{
 	public int updateNickMember(Member m) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
-		int result = mDao.updateNickMember(sqlSession, m);
+		int result = new MemberDao().updateNickMember(sqlSession, m);
 		
 		if(result > 0) {
 			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
 		}
 		
 		sqlSession.close();
@@ -80,10 +79,12 @@ public class MemberServiceImple implements MemberService{
 	public int updatePhoneMember(Member m) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
-		int result = mDao.updatePhoneMember(sqlSession, m);
+		int result = new MemberDao().updatePhoneMember(sqlSession, m);
 		
 		if(result > 0) {
 			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
 		}
 		
 		sqlSession.close();
@@ -95,10 +96,12 @@ public class MemberServiceImple implements MemberService{
 	public int updatePwdMember(Member m) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
-		int result = mDao.updatePwdMember(sqlSession, m);
+		int result = new MemberDao().updatePwdMember(sqlSession, m);
 		
 		if(result > 0) {
 			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
 		}
 		
 		sqlSession.close();
@@ -110,10 +113,12 @@ public class MemberServiceImple implements MemberService{
 	public int updateEmailMember(Member m) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
-		int result = mDao.updateEmailMember(sqlSession, m);
+		int result = new MemberDao().updateEmailMember(sqlSession, m);
 		
 		if(result > 0) {
 			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
 		}
 		
 		sqlSession.close();

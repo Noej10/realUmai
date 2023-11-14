@@ -36,18 +36,18 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+//		System.out.println("ascjkashc");
 		Member m =new Member();
 		m.setUserId(request.getParameter("userId"));
 
 		m.setPassword(request.getParameter("password"));
-		
+//		System.out.println(m);
 		Member loginUser = new MemberServiceImple().loginMember(m);
-		
+//		System.out.println(loginUser);
 		ArrayList<Restaurant> resList = new RestaurantServiceImple().selectListMain();
-		
+//		System.out.println(resList);
 		if(loginUser == null) {
-			request.setAttribute("errorMsg", "로그인 실패다");
+			request.setAttribute("errorMsg", "로그인 실패");
 	    	request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
 
 	    }else {

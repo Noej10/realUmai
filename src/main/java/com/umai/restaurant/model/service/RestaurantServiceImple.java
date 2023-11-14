@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.umai.announce.model.dao.AnnounceDao;
+import com.umai.announce.model.vo.Announce;
 import com.umai.common.model.vo.Attachment;
 import com.umai.common.model.vo.PageInfo;
 import com.umai.common.template.Template;
@@ -61,6 +63,28 @@ public class RestaurantServiceImple implements RestaurantService{
 		sqlSession.close();
 		
 		return subList;
+	}
+
+	@Override
+	public int selectListCount() {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int listCount = new RestaurantDao().selectListCount(sqlSession);
+		
+		sqlSession.close();
+		
+		return listCount;
+	}
+
+	@Override
+	public ArrayList<Restaurant> selectList(PageInfo pi) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		ArrayList<Restaurant> list = new RestaurantDao().selectList(sqlSession, pi);
+		
+		sqlSession.close();
+		
+		return list;
 	}
 
 	
