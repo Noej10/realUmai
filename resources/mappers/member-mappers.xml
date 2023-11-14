@@ -66,19 +66,22 @@
 	</update>
 
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
-	SELECT  USER_NUM,
-			EMAIL,
-			PHONE,
-			MANAGER,
-			SECESSION,
-			JOIN_DATE,
-			CORRECTION,
-			STATUS
-	FROM MEMBER
-	WHERE USER_ID = #{userId}
-	AND PASSWORD = #{password}
-	AND STATUS = 'Y'
-	</select>
+	   SELECT  USER_NUM,
+	         EMAIL,
+	         PHONE,
+	         NICKNAME,
+	         USER_ID,
+	         NAME,
+	         MANAGER,
+	         SECESSION,
+	         JOIN_DATE,
+	         CORRECTION,
+	         STATUS
+	   FROM MEMBER
+	   WHERE USER_ID = #{userId}
+	   AND PASSWORD = #{password}
+	   AND STATUS = 'Y'
+   	</select>
 	
 	<select id="findId" parameterType="Member" resultMap="memberResultSet">
 		SELECT USER_ID 

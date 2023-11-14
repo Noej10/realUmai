@@ -28,10 +28,6 @@
 			PASSWORD,
 			NICKNAME,
 			NAME,
-<<<<<<< HEAD
-
-=======
->>>>>>> 012a903884b39ce425f7304f54d01b1a5a3f45b0
 			PHONE,
 			EMAIL
 			)
@@ -70,19 +66,22 @@
 	</update>
 
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
-	SELECT  USER_NUM,
-			EMAIL,
-			PHONE,
-			MANAGER,
-			SECESSION,
-			JOIN_DATE,
-			CORRECTION,
-			STATUS
-	FROM MEMBER
-	WHERE USER_ID = #{userId}
-	AND PASSWORD = #{password}
-	AND STATUS = 'Y'
-	</select>
+	   SELECT  USER_NUM,
+	         EMAIL,
+	         PHONE,
+	         NICKNAME,
+	         USER_ID,
+	         NAME,
+	         MANAGER,
+	         SECESSION,
+	         JOIN_DATE,
+	         CORRECTION,
+	         STATUS
+	   FROM MEMBER
+	   WHERE USER_ID = #{userId}
+	   AND PASSWORD = #{password}
+	   AND STATUS = 'Y'
+   	</select>
 	
 	<select id="findId" parameterType="Member" resultMap="memberResultSet">
 		SELECT USER_ID 
@@ -91,8 +90,6 @@
 	</select>
 
 
-<<<<<<< HEAD
-=======
 	
 	<select id="findPwd" parameterType="Member" resultMap="memberResultSet">
 		SELECT PASSWORD 
@@ -101,6 +98,5 @@
 		AND EMAIL = #{email}
 		AND USER_ID = #{userId}
 	</select>
->>>>>>> 012a903884b39ce425f7304f54d01b1a5a3f45b0
 	
 </mapper>

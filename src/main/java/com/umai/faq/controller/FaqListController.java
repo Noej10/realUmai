@@ -1,4 +1,4 @@
-package com.umai.announce.controller;
+package com.umai.faq.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,21 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.umai.announce.model.service.AnnounceServiceImple;
-import com.umai.announce.model.vo.Announce;
 import com.umai.common.model.vo.PageInfo;
 import com.umai.common.template.Pagenation;
+import com.umai.faq.model.service.FaqServiceImple;
+import com.umai.faq.model.vo.Faq;
 
 /**
- * Servlet implementation class AnnounceList
+ * Servlet implementation class FaqListController
  */
-@WebServlet("/announceList.an")
-public class AnnounceListController extends HttpServlet {
+@WebServlet("/faqList.faq")
+public class FaqListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AnnounceListController() {
+    public FaqListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +34,17 @@ public class AnnounceListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int currentPage = Integer.parseInt(request.getParameter("cPage"));
-		int listCount = new AnnounceServiceImple().selectListCount();
+		int listCount = new FaqServiceImple().selectListCount();
 		
-//		System.out.println(currentPage);
-//		System.out.println(listCount);
+		PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 5);
+		ArrayList<Faq> list = new FaqServiceImple().selectList(pi);
 		
-		PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 3);
-		
-		ArrayList<Announce> list = new AnnounceServiceImple().selectList(pi); 
-		
-//		System.out.println(list);
 		request.setAttribute("pi", pi);
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("WEB-INF/views/announce/announcePage.jsp").forward(request, response);
+		request.setAttribute("faqList", list);
+//		System.out.println(pi);
+//		System.out.println(list);
+		request.getRequestDispatcher("WEB-INF/views/faq/faqPage.jsp").forward(request, response);
 	}
 
 	/**

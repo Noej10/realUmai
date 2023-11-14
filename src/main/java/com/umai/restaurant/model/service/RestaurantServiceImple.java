@@ -63,6 +63,26 @@ public class RestaurantServiceImple implements RestaurantService{
 		return subList;
 	}
 
+	@Override
+	public int insertRestaurant(Restaurant r, ArrayList<Attachment> list) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result1 = rDao.insertRestaurant(sqlSession, r);
+		
+		int result2 = rDao.insertAttachment(sqlSession, list); 
+		
+		if(result1 > 0 && result2 > 0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result1 * result2;
+	}
+
 	
 
 }

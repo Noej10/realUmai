@@ -37,9 +37,22 @@ public class RestaurantDao {
 		return subList;
 		
 	}
-
 	
+	public int insertRestaurant(SqlSession sqlSession, Restaurant r) {
+		return sqlSession.insert("restaurantMapper.insertRestaurant",r);
+	}
 	
+	public int insertAttachment(SqlSession sqlSession, ArrayList<Attachment> list) {
+		
+		int result = 0;
+		
+		for(Attachment a : list) {
+			result = sqlSession.insert("restaurantMapper.insertAttachment",a);
+		}
+		 
+		
+		return result;
+	}
 	
 
 }
