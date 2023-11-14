@@ -23,24 +23,24 @@
 	
 	<insert id="insertMember">
 		INSERT INTO MEMBER(
-			USER_NUM,
-			USER_ID,
-			PASSWORD,
-			NICKNAME,
-			NAME,
-			EMAIL
-			PHONE,
-			)
+				USER_NUM,
+				USER_ID,
+				PASSWORD,
+				NICKNAME,
+				NAME,
+				EMAIL,
+				PHONE
+				)
 			VALUES
-			(
-			SEQ_UNO.NEXTVAL,
-			#{userId},
-			#{password},
-			#{nickname},
-			#{name},
-			#{email},
-			#{phone}
-			)
+				(
+				SEQ_UNO.NEXTVAL,
+				#{userId},
+				#{password},
+				#{nickname},
+				#{name},
+				#{email},
+				#{phone}
+				)
 	</insert>
 
 	
@@ -86,8 +86,8 @@
 		WHERE NAME = #{name} AND EMAIL = #{email}
 	</select>
 
-	<select id="selectId">
-		SELECT USER_ID
+	<select id="selectId" resultType = "_int">
+		SELECT COUNT(*)
 		 FROM MEMBER
 		WHERE USER_ID = #{userId}
 	</select>

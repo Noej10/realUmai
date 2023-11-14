@@ -21,5 +21,5 @@ public interface MemberService {
 
 	int insertMember(Member m);
 	
-	String selectId(String userId);
+	int selectId(Member m);
 }

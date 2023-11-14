@@ -122,10 +122,19 @@ public class MemberServiceImple implements MemberService{
 	}
 
 	@Override
-	public String selectId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public int selectId(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int selectId = MemberDao.selectId(sqlSession,m);
+		
+		sqlSession.close();
+		
+		return selectId;
 	}
+
+	
+
+	
 
 
 

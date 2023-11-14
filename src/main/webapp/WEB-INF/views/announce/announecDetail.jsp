@@ -82,9 +82,6 @@
         	  });
         	});
         
-        	
-        </script>
-
         	function announceListBtn() {
         		location.href = "announceList.an";
         	}
@@ -95,7 +92,6 @@
         		} else {
         			alert("관리자만 수정가능합니다.");
         		}
-        		
         		
         	}
         </script>

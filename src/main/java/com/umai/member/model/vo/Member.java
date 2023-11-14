@@ -36,7 +36,6 @@ public class Member {
 	}
 	
 	//회원가입 페이지에 필요한 생성자
-
 	public Member(String userId,String password, String nickname, String name, String phone, String email) {
 		super();
 		this.userId = userId;

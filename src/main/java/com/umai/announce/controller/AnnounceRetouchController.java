@@ -22,6 +22,7 @@ public class AnnounceRetouchController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		request.getRequestDispatcher("WEB-INF/views/announce/announceRetouchPage.jsp").forward(request, response);
 
 	}

@@ -42,7 +42,7 @@
 
         <p style="font-size: 50px; margin-bottom: 4rem;">공지사항 수정</p>
 
-        <form action="" method="post" id="retouchForm">
+        <form action="retouch.an" method="post">
             <div>
                 <input type="text" id="input" size="99" placeholder="제목을 입력해주세요">
             </div>
@@ -54,10 +54,7 @@
             <div>
                 <button type="submit" id="btn">수정하기</button>
             </div>
-                    
         </form>
-        
-  
     </div>
 </body>
 </html>
