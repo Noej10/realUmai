@@ -53,7 +53,6 @@ public class LoginController extends HttpServlet {
 	    }else {
 	    	request.getSession().setAttribute("resList", resList);
 	    	request.getSession().setAttribute("loginUser", loginUser);
-	    	
 	    	response.sendRedirect("boardpage");
 	    	
 	    	

@@ -4,22 +4,23 @@ import java.sql.Date;
 
 public class Review {
 	private int commentNum;
-	   private String commentContents;
-	   private Date revWrite;
-	   private int revRestnum;
-	   private int memberNum;
-	   private int revTaste;
-	   private int revKind;
-	   private int revFacility;
-	   private int revPrice;
-	   private int revMobility;
-	   private int revWaiting;
-	   private int revSpeed;
-	   private int revClean;
-	   private int revRevisit;
-	   private int revAvgscore;
-	   private String status;
-	   private String nickname;
+
+	private String commentContents;
+	private Date revWrite;
+	private int revRestnum;
+	private int memberNum;
+	private int revTaste;
+	private int revKind;
+	private int revFacility;
+	private int revPrice;
+	private int revMobility;
+	private int revWaiting;
+	private int revSpeed;
+	private int revClean;
+	private int revRevisit;
+	private int revAvgscore;
+	private String status;
+	private String nickname;
 	
 	   public Review() {}
 
@@ -44,6 +45,17 @@ public class Review {
 		this.revAvgscore = revAvgscore;
 		this.status = status;
 		this.nickname = nickname;
+
+
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+
 	}
 
 	public int getCommentNum() {
@@ -189,9 +201,8 @@ public class Review {
 				+ revKind + ", revFacility=" + revFacility + ", revPrice=" + revPrice + ", revMobility=" + revMobility
 				+ ", revWaiting=" + revWaiting + ", revSpeed=" + revSpeed + ", revClean=" + revClean + ", revRevisit="
 				+ revRevisit + ", revAvgscore=" + revAvgscore + ", status=" + status + ", nickname=" + nickname + "]";
-	}
-	   
-	   
+	} 
+
 }
 
 

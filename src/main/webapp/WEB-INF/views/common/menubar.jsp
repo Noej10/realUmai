@@ -50,15 +50,15 @@
 }
 .memberInfo{
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: 35px;
+    top: 8px;
 }
 
 .memberInfo img{
     right: -40px;
     top: -55px;
-    width: 100px;
-    height: 200px;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
 }
 
@@ -94,6 +94,9 @@
 
     <!-- Jquery 3.7.1-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	
+	<!-- 폰트어썸 -->
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 </head>
 
@@ -113,8 +116,8 @@
 	<%} %>
     <div class="header">
         <div>
-
-            <img id="logo" src="/Umai/resources/images/mainLogoWhiteFinal.png" alt="umaiLogo">
+			
+            <img id="logo" src="/Umai/resources/images/mainLogoWhiteFinal.png" onclick="tomain()" alt="umaiLogo">
 
         </div>
         <div align="center" style="color: white;">
@@ -132,11 +135,11 @@
         <div class="noticeFaq">
             <a href="announceList.an?cPage=1">공지사항</a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="">FAQ</a>
+            <a href="faqList.faq?cPage=1">FAQ</a>
         </div>
         <div class="memberInfo">
 
-            <img src="/Umai/resources/images/memberImage.png" alt="userIcon" onclick="openMemberMenu()">
+            <img src="/Umai/resources/images/memberIcon.png" alt="userIcon" onclick="openMemberMenu()">
 
 
         </div>
@@ -147,7 +150,9 @@
 	            <input type="hidden" name="userId" value="${m.userId}">
 	            <input type="hidden" name="userName" value="${m.userName}">
             </form>
-            <a href="">로그아웃</a>
+            
+            <a href="logout.me">로그아웃</a>
+
             <a href="">회원탈퇴</a>
         </div>
     </div>
@@ -175,47 +180,63 @@
 
         <div class="modal" id="findId">
             <div class="modal-dialog">
-            <div class="modal-content">
+            	<div class="modal-content">
 
-                <!-- ID 찾기 모달 헤더 -->
-                <div class="modal-header"  style="background: #fc765d;">
-                <h4 class="modal-title" style="color: white;">탈퇴 후 복구가 어렵습니다 <br> 정말로 탈퇴하시겠습니까?</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
+                
+                	<div class="modal-header"  style="background: #fc765d;">
+                		<h4 class="modal-title" style="color: white;">탈퇴 후 복구가 어렵습니다 <br> 정말로 탈퇴하시겠습니까?</h4>
+                		<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                	</div>
 
-                <!-- ID 찾기 모달 바디 -->
+                <form id="delete-mem" action="<%=contextPath %>/delete.me" method="post">
                 <div class="modal-body" style="background-color: rgb(255, 210, 210);;">
                     <b>회원 탈퇴를 원하실 경우 아래의<br>  문구와 비밀번호를 입력하세요</b>
                     <br> <br>
-                    <b>회원 탈퇴시 계정 복구가 불가한 점에 동의합니다</b>
-                    <form action="">
+                    <div id="word">회원 탈퇴시 계정 복구가 불가한 점에 동의합니다</div>
+                    
                         <div>
-                            <input type="text" size="50">
+                            <input type="text" size="50" name="wordCheck">
+                            <span style="background-color: red; border-radius: 10%; color: white; cursor: pointer;" onclick="checkdelete()">확인</span>
                         </div>
                         <br><br>
                         <div>
                             비밀번호 입력
                             <br>
-                            <input type="text" size="50">
+                            <input type="text" size="50" name="passCheck">
+                            <input type="hidden" value="${loginUser.userId}" name="userId">
                         </div>
-                    
-                </div>
-
-                <!-- ID 찾기 모달 푸터 -->
+	                    <script>
+	                    function checkdelete(){
+	                        let sentense = document.querySelector('#word')
+	                        let firstCheck = document.querySelector("#delete-mem input[name=wordCheck]")
+	                        let delbtn = document.querySelector(".modal-footer button[type=submit]")
+	                        if(sentense.innerText !== firstCheck.value){
+	                            alert("비밀번호거 일치하지 않습니다")
+	                        } else{
+	                        	firstCheck.disabled = true;
+	                            delbtn.removeAttribute("disabled");
+	                        }
+	                    }
+	                    </script>
+      			</div>
                 <div class="modal-footer" style="background: #fc765d;">
                     <input type="button" data-bs-dismiss="modal" class="btn btn-sm" style="color: white;" value="취소">
-                    <button type="submit" class="btn btn-sm btn-danger">회원탈퇴</button>
+                    <button type="submit" class="btn btn-sm btn-danger" disabled>회원탈퇴</button>
                 </div>
-            </form>
-            </div>
+            	</form>
         </div>
         </div>
+       </div>
         <script>
         const withdrawalBtn = document.querySelector('#memberMenu a:nth-child(3)');
 
         withdrawalBtn.setAttribute("data-bs-toggle", "modal");
         withdrawalBtn.setAttribute("data-bs-target", "#findId");
 
+        function tomain(){
+            location.href = '<%=contextPath %>/tomain';
+        }
+     
         </script>
 </body>
 </html>

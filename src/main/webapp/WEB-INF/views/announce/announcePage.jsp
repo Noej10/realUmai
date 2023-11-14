@@ -157,11 +157,11 @@ button {
 		</ul>
 	</c:forEach>
   
-        
+        <c:if test="${loginUser.manager eq 'Y' }">
          <div class="ann-enroll">
             <button type="submit" id="ann-btn">공지사항 등록</button>
         </div>
-         
+        </c:if> 
          <div class="page_wrap">
             <div class="page_nation">
             	<c:if test="${pi.currentPage ne 1 }">
@@ -181,6 +181,6 @@ button {
     </form>
 
     </div>
-    
+    <jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -7,7 +7,6 @@
 <title>우리 마음 속 이런 맛집</title>
 
 
-<link rel="stylesheet" href="/main/webapp/resources/css/rate.css">
 <style>
 
 .outer{
@@ -42,6 +41,17 @@
     flex-direction: column;
     align-items: flex-start;
 }
+.rate { display: inline-block;border: 0;margin-right: 15px;}
+.rate > input {display: none;}
+.rate > label {float: right;color: #ddd}
+.rate > label:before {display: inline-block;font-size: 1rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";}
+.rate .half:before {content: "\f089 "; position: absolute;padding-right: 0;}
+.rate input:checked ~ label, 
+.rate label:hover,.rate label:hover ~ label { color: #f73c32 !important;  } 
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,  
+.rate label:hover ~ input:checked ~ label { color: #f73c32 !important;  }
 
 </style>
 </head>
@@ -51,7 +61,7 @@
         <div style="width: 28%;">
         
         </div>
-                <form action="reviewEnroll.re" method="post">
+                <form action="insert." method="post">
                 <div class="rate-body">
                     <br>
                     <div class="img-name" width="500">
@@ -163,5 +173,6 @@
                 </div>
         	</form>
          </div>
+         <jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="reviewMapper" >
+  
+  <resultMap type="Review" id="reviewResultSet">
+  		<result column="COMMENT_NUM" property="commentNum"/> <!--댓글번호  -->
+  		<result column="COMMENT_CONTENTS" property="commentContents"/> <!-- 댓글내용 -->
+  		<result column="REV_WRITE" property="revWrite"/> <!-- 작성일 --> 
+  		<result column="REV_RESTNUM" property="revRestnum"/> <!--식당번호  -->
+  		<result column="STATUS" property="status"/> 
+  		<result column="MEMBER_NUM" property="memberNum"/> 
+  		<result column="REV_TASTE" property="revTaste"/> 
+  		<result column="REV_KIND" property="revKind"/> 
+  		<result column="REV_FACILITY" property="revFacility"/> 
+  		<result column="REV_PRICE" property="revPrice"/> 
+  		<result column="REV_MOBILITY" property="revMobility"/> 
+  		<result column="REV_WAITING" property="revWaiting"/> 
+  		<result column="REV_SPEED" property="revSpeed"/> 
+  		<result column="REV_CLEAN" property="revClean"/> 
+  		<result column="REV_REVISIT" property="revRevisit"/> 
+  		<result column="REV_AVGSCORE" property="revAvgscore"/> 
+		<result column="NICKNAME" property="nickname"/> 
+  	</resultMap>
+
+ 
+  <select id="selectReview" resultType="Review" resultMap="reviewResultSet">
+  	SELECT COMMENT_NUM,
+        COMMENT_CONTENTS,
+        REV_WRITE,
+        REV_RESTNUM,
+        MEMBER_NUM,
+        REV_TASTE,
+        REV_KIND,
+        REV_FACILITY,
+        REV_PRICE,
+        REV_MOBILITY,
+        REV_WAITING,
+        REV_SPEED,
+        REV_CLEAN,
+        REV_REVISIT,
+        NICKNAME
+    FROM REVIEW
+    JOIN MEMBER ON(USER_NUM=MEMBER_NUM)
+    WHERE REV_RESTNUM = #{restNo}
+  </select>
+  
+  
+  </mapper>

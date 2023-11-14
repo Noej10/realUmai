@@ -10,6 +10,7 @@
 <!-- 다음 지도 검색 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+
 <style>
 
     html,body{
@@ -65,6 +66,7 @@
 <body style="margin: 0px; padding: 0px;" >
 	<jsp:include page="../common/menubar.jsp"></jsp:include>
 	 <form action="insertRestaurant.re" method="post" enctype="multipart/form-data">
+	 <input type="hidden" name="userId" value="${loginUser.userId}">
 	<div class="outer">
         <!-- 왼쪽(대표사진, 지도) -->
         <div class="img-map">
@@ -305,6 +307,6 @@
 	    
 
 	</script>
-	
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

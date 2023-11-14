@@ -122,8 +122,7 @@ td{
         	function updateFormSubmit(num){
         		if(num === 1) {
         			document.querySelector("#retouchMember").action = "updateNick.me";
-        			document.querySelector('#upnickname').value = document.querySelector('#nickname').value;
-        			
+        			document.querySelector('#upnickname').value = document.querySelector('#nickname').value;       			
         		//	$("#retouchMember").attr('action', 'updateNick.me');
         		} else if(num === 2){
         			document.querySelector("#retouchMember").action = "updatePho.me";

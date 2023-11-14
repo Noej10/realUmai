@@ -126,6 +126,32 @@ public class MemberServiceImple implements MemberService{
 		return result;
 	}
 
+	@Override
+	public int deleteMember(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = mDao.deleteMember(sqlSession, m);
+		
+		if(result > 0) {
+			sqlSession.commit();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public Member checkPwdMember(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		Member delMember = mDao.checkPwdMember(sqlSession, m);
+		
+		sqlSession.close();
+
+		return delMember;
+	}
+
 
 
 
