@@ -20,4 +20,8 @@ public interface MemberService {
 	Member findPwd(Member m);
 
 	int insertMember(Member m);
+	
+	Member checkPwdMember(Member m);
+	
+	int deleteMember(Member m);
 }

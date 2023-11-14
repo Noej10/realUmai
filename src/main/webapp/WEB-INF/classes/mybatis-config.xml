@@ -55,8 +55,8 @@
   		<mapper resource="/mappers/restaurant-mappers.xml"/>
   		<mapper resource="/mappers/announce-mappers.xml"/>
   		<mapper resource="/mappers/faq-mappers.xml"/>
+		<mapper resource="/mappers/review-mapper.xml"/>
 	</mappers>
-  	
-  	
+
   	
   </configuration>

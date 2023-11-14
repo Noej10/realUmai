@@ -1,7 +1,6 @@
 package com.umai.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +12,16 @@ import com.umai.member.model.service.MemberServiceImple;
 import com.umai.member.model.vo.Member;
 
 /**
- * Servlet implementation class memberUpdateController
+ * Servlet implementation class MemberDeleteController
  */
-@WebServlet("/updateNick.me")
-public class memberUpdateNickController extends HttpServlet {
+@WebServlet("/delete.me")
+public class MemberDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public memberUpdateNickController() {
+    public MemberDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,30 +30,26 @@ public class memberUpdateNickController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("UTF-8");
+
+		Member m =new Member();
+		m.setPassword(request.getParameter("passCheck"));
+		m.setUserId(request.getParameter("userId"));
 		
-		String userId = request.getParameter("userId");
-		String nickname = request.getParameter("nickname");
-		
-		Member m = new Member();
-		m.setUserId(request.getParameter(userId));
-		m.setNickname(request.getParameter(nickname));
-		int result = new MemberServiceImple().updateNickMember(m);
-		
-		if(result > 0) {
-
-			request.setAttribute("errorMsg", "닉네임 변경에 실패하였습니다.");
-			request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
-
-		} else {
-
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "성공적으로 수정 하였습니다.");
-			session.setAttribute("loginUser", m);
-
-			response.sendRedirect(request.getContextPath() + "/memberRetouchPage.jsp");
-
+		Member delMember = new MemberServiceImple().checkPwdMember(m);
+		HttpSession session = request.getSession();
+		if(delMember != null) {
+			
+			int result = new MemberServiceImple().deleteMember(m);
+			
+			if(result>0) {
+				session.setAttribute("alertMsg", "회원탈퇴에 성공했습니다");
+				session.removeAttribute("loginUser");
+				response.sendRedirect(request.getContextPath());
+			}
+		}else {
+			session.setAttribute("alertMsg", "비밀번호가 틀렸습니다");
+			response.sendRedirect(request.getContextPath()+"/boardpage");
 		}
 
 	}

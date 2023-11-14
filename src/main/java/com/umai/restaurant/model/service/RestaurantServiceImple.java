@@ -57,7 +57,6 @@ public class RestaurantServiceImple implements RestaurantService{
 		SqlSession sqlSession = Template.getSqlSession();
 		
 		ArrayList<Attachment> subList = rDao.selectPhoto(sqlSession, restNo);
-		System.out.println("ser"+subList);
 		sqlSession.close();
 		
 		return subList;
@@ -77,10 +76,51 @@ public class RestaurantServiceImple implements RestaurantService{
 		}else {
 			sqlSession.rollback();
 		}
+		sqlSession.close();
+		return result1 * result2;
+	}
+	@Override
+	public int updateLike(int restNum, int userNum) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = rDao.updateLike(sqlSession,restNum,userNum);
+		
+		if(result>0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+
+		return result;
+	}
+
+	@Override
+	public Restaurant selectlike(int restNum, int userNum) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		Restaurant like = rDao.selectLike(sqlSession,restNum,userNum);
 		
 		sqlSession.close();
 		
-		return result1 * result2;
+		return like;
+	}
+
+	@Override
+	public int updateUnlike(int restNum, int userNum) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = rDao.updateUnlike(sqlSession,restNum,userNum);
+		
+		if(result>0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
 	}
 
 	

@@ -66,22 +66,23 @@
 	</update>
 
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
-	   SELECT  USER_NUM,
-	         EMAIL,
-	         PHONE,
-	         NICKNAME,
-	         USER_ID,
-	         NAME,
-	         MANAGER,
-	         SECESSION,
-	         JOIN_DATE,
-	         CORRECTION,
-	         STATUS
-	   FROM MEMBER
-	   WHERE USER_ID = #{userId}
-	   AND PASSWORD = #{password}
-	   AND STATUS = 'Y'
-   	</select>
+	SELECT  USER_NUM,
+			EMAIL,
+			PHONE,
+			NICKNAME,
+			USER_ID,
+			NAME,
+			MANAGER,
+			SECESSION,
+			JOIN_DATE,
+			CORRECTION,
+			STATUS
+	FROM MEMBER
+	WHERE USER_ID = #{userId}
+	AND PASSWORD = #{password}
+	AND STATUS = 'Y'
+	</select>
+
 	
 	<select id="findId" parameterType="Member" resultMap="memberResultSet">
 		SELECT USER_ID 
@@ -98,5 +99,18 @@
 		AND EMAIL = #{email}
 		AND USER_ID = #{userId}
 	</select>
+	
+	<select id="checkPwdMember" parameterType="Member" resultMap="memberResultSet">
+		SELECT * 
+		FROM MEMBER
+		WHERE USER_ID = #{userId}
+		AND PASSWORD = #{password}
+	</select>
+	
+	<update id="deleteMember">
+		UPDATE MEMBER
+			SET STATUS = 'N'
+		WHERE USER_ID = #{userId}
+	</update>
 	
 </mapper>

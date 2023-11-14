@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.umai.member.model.service.MemberServiceImple;
 import com.umai.member.model.vo.Member;
@@ -42,11 +43,21 @@ public class memberUpdateEmailController extends HttpServlet {
 		
 		int result = new MemberServiceImple().updateEmailMember(m);
 		
-		if (result > 0 ) {
-			
+		if(result > 0) {
+
+			request.setAttribute("errorMsg", "이메일 변경에 실패하였습니다.");
+			request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
+
+		} else {
+
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "성공적으로 수정 하였습니다.");
+			session.setAttribute("loginUser", m);
+
+			response.sendRedirect(request.getContextPath() + "/memberRetouchPage.jsp");
+
 		}
-		
-		
+
 	}
 
 	/**

@@ -16,6 +16,7 @@ public class Restaurant {
 	private String status;
 	private String originName;
 	private String filePath;
+	private String good;
 	
 	public Restaurant() {}
 
@@ -23,7 +24,7 @@ public class Restaurant {
 
 	public Restaurant(int restNum, String restName, int suggestion, int restCheck, String original, String restDelete,
 			String duction, int grade, String menu, String opening, String address, String region, String status,
-			String originName, String filePath) {
+			String originName, String filePath, String good) {
 
 		super();
 		this.restNum = restNum;
@@ -41,10 +42,21 @@ public class Restaurant {
 		this.status = status;
 		this.originName = originName;
 		this.filePath = filePath;
+		this.good = good;
 	}
 
 
 	
+
+	public String getGood() {
+		return good;
+	}
+
+
+	public void setGood(String good) {
+		this.good = good;
+	}
+
 
 	public int getRestNum() {
 		return restNum;
@@ -177,17 +189,18 @@ public class Restaurant {
 
 
 
-
-
-
 	@Override
 	public String toString() {
 		return "Restaurant [restNum=" + restNum + ", restName=" + restName + ", suggestion=" + suggestion
 				+ ", restCheck=" + restCheck + ", original=" + original + ", restDelete=" + restDelete + ", duction="
 				+ duction + ", grade=" + grade + ", menu=" + menu + ", opening=" + opening + ", address=" + address
-				+ ", region=" + region + ", status=" + status + ", originName=" + originName + ", filePath="
-				+ filePath + "]";
+				+ ", region=" + region + ", status=" + status + ", originName=" + originName + ", filePath=" + filePath
+				+ ", good=" + good + "]";
 	}
+
+
+	
+
 
 	
 	
