@@ -61,9 +61,22 @@ public class RestaurantDao {
 	    int result = sqlSession.update("restaurantMapper.updateUnlike", params);
 	    return result;
 	}
-
 	
+	public int insertRestaurant(SqlSession sqlSession, Restaurant r) {
+		return sqlSession.insert("restaurantMapper.insertRestaurant",r);
+	}
 	
+	public int insertAttachment(SqlSession sqlSession, ArrayList<Attachment> list) {
+		
+		int result = 0;
+		
+		for(Attachment a : list) {
+			result = sqlSession.insert("restaurantMapper.insertAttachment",a);
+		}
+		 
+		
+		return result;
+	}
 	
 
 }

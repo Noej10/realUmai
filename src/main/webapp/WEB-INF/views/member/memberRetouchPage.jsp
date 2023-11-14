@@ -82,15 +82,15 @@ td{
             </tr>
             <tr>
                 <td>닉네임</td>
-                <td><input type="text" class="input"><button id="btn" onclick="updateForm">수정</button></td>
+                <td><input type="text" class="input"><button id="btn" onclick="updateFormSubmit(1)">수정</button></td>
             </tr>
             <tr>
                 <td>전화번호</td>
-                <td><input type="tel" class="input"><button id="btn" onclick="updateForm">수정</button></td>
+                <td><input type="tel" class="input"><button id="btn" onclick="updateFormSubmit(2)">수정</button></td>
             </tr>
             <tr>
                 <td>이메일</td>
-                <td><input type="email" class="input"><button id="btn" onclick="updateForm">수정</button></td>
+                <td><input type="email" class="input"><button id="btn" onclick="updateFormSubmit(3)">수정</button></td>
             </tr>
         </table>
        
@@ -113,10 +113,11 @@ td{
         		if(num === 1) {
         			$("#updateForm").attr('action', 'updateNick.me');
         		} else if{
-        			$("updateForm").attr('action', 'updatePho.me');
+        			$("#updateForm").attr('action', 'updatePho.me');
         		} else {
-        			$("updateForm").attr('action', 'updateEmail.me');
+        			$("#updateForm").attr('action', 'updateEmail.me');
         		}
+        		
         		$('#updateForm').submit();
         	}
         </script>

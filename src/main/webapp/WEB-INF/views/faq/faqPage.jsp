@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +49,7 @@
     border: none;
     color: white;
     margin-bottom: 5px;
+    border-radius: 7px;
   }
   .recruitRotate2 {
     transform: rotate(0deg);
@@ -83,25 +85,36 @@
     border: none;
     background-color: #fc765d;
     color: white;
+    border-radius: 7px;
   }
-  .footer{
-    width: 100%;
-    display: block;
-    background-color: #fc765d;
-    padding-top: 10px;
-    padding-left: 10px;
-    height: 6rem;
-    margin: 0;
-    /* position : relative; */
-    /* transform : translateY(-100%); */
-  }
-  .footer span{
-    font-size: 13px;
-    display: block;
-    padding-bottom: 7px;
-    font-weight: 300;
-    word-break: keep-all;
-  }
+  .page_wrap {
+	text-align:center;
+	font-size:0;
+ }
+.page_nation {
+	display:inline-block;
+}
+.page_nation .none {
+	display:none;
+}
+.page_nation a {
+	display:block;
+	margin:0 3px;
+	float:left;
+	border:1px solid #e6e6e6;
+	width:28px;
+	height:28px;
+	line-height:28px;
+	text-align:center;
+	background-color:#fff;
+	font-size:13px;
+	color:#999999;
+	text-decoration:none;
+}
+.page_nation .arrow {
+	border:1px solid #ccc;
+}
+
     </style>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
@@ -115,136 +128,70 @@
           <br>
               <h2>자주 묻는 질문</h2>
           </div>
-        
+		<c:forEach var="fList" items="${faqList}">
           <div class="slide">
-              <div id="faqQuestion">
-                <div id="faqName">
-                  <p id="faqCategory">일반</p>
-                  FAQ 질문 1 입니다.
-                </div>
-                  <img class="recruitRotate2"
-                  src="/Umai/WEB-INF/resources/images/arrow_down.png" alt="화살표"
-                  style="width:1em; height:auto; position:relative;">
-                  
-              </div>
-            </div>
-      
-            <div id="content" style="display:none">
-              <div id="faqbox">
-                  <div id="faqboxItem">
-                      안녕하세요1 반갑습니다
-                  </div>
-                  <!--관리자 로그인 시 보이는 곳-->
-                  <div>
-                    <button>수정</button>
-                    <button>삭제</button>
-                  </div>
-              </div>
-          </div>
-          <div style="border-top: 1px solid #aaa"></div>
-          
-          <div class="slide">
-              <div id="faqQuestion">
-                <div id="faqName">
-                  <p id="faqCategory">
-                    일반
-                  </p>
-                  FAQ 질문 2 입니다.
-                </div>
-                <img class="recruitRotate2"
-                  src="/Umai/WEB-INF/resources/images/arrow_down.png" alt="화살표"
-                  style="width:1em; height:auto; position:relative;">
-              </div>
-            </div>
-
-            <div id="content" style="display:none">
-              <div id="faqbox">
-                <div id="faqboxItem">
-                  안녕하세요1 반갑습니다
-                </div>
-              <!--관리자 로그인 시 보이는 곳-->
-                <div>
-                  <button>수정</button>
-                  <button>삭제</button>
-                </div>
-              </div>
-            </div>
-          <div style="border-top: 1px solid #aaa"></div>
-
-          <div class="slide">
-            <div id="faqQuestion">
-              <div id="faqName">
-                <p id="faqCategory">
-                  일반
-                </p>
-                FAQ 질문 3 입니다.
-              </div>
-              <img class="recruitRotate2"
-                src="/Umai/WEB-INF/resources/images/arrow_down.png" alt="화살표"
-                style="width:1em; height:auto; position:relative;">
-            </div>
-          </div>
-
-          <div id="content" style="display:none">
-            <div id="faqbox">
-              <div id="faqboxItem">
-                안녕하세요1 반갑습니다
-              </div>
-            <!--관리자 로그인 시 보이는 곳-->
-              <div>
-                <button>수정</button>
-                <button>삭제</button>
-              </div>
-            </div>
-          </div>
-        <div style="border-top: 1px solid #aaa"></div>
-
-        <div class="slide">
-          <div id="faqQuestion">
-            <div id="faqName">
-              <p id="faqCategory">
-                일반
-              </p>
-              FAQ 질문 4 입니다.
-            </div>
-            <img class="recruitRotate2"
-              src="/Umai/WEB-INF/resources/images/arrow_down.png" alt="화살표"
-              style="width:1em; height:auto; position:relative;">
-          </div>
-        </div>
-
-        <div id="content" style="display:none">
-          <div id="faqbox">
-            <div id="faqboxItem">
-              안녕하세요1 반갑습니다
-            </div>
-          <!--관리자 로그인 시 보이는 곳-->
-            <div>
-              <button>수정</button>
-              <button>삭제</button>
-            </div>
-          </div>
-        </div>
-      <div style="border-top: 1px solid #aaa"></div>
+	              <div id="faqQuestion">
+	                <div id="faqName">
+	                  <p id="faqCategory">
+	                  	<c:choose>
+	                  		<c:when test="${fList.faqKind eq 'nomal' }">
+	                  			일반
+	                  		</c:when>
+                  			<c:when test="${fList.faqKind eq 'restaurant' }">
+	                  			식당
+	                  		</c:when>
+	                  		<c:otherwise>
+	                  			정보
+	                  		</c:otherwise>
+	                  	</c:choose>
+	                  </p>
+	                  ${fList.faqTitle }
+	                </div>
+	                  <img class="recruitRotate2"
+	                  src="/Umai/resources/images/arrow_down.png" alt="화살표"
+	                  style="width:1em; height:auto; position:relative;">
+	                  
+	              </div>
+	            </div>
+	      
+	            <div id="content" style="display:none">
+	              <div id="faqbox">
+	                  <div id="faqboxItem">
+	                      ${fList.faqContent }
+	                  </div>
+	                  <!--관리자 로그인 시 보이는 곳-->
+	                  <c:if test="${loginUser.manager eq 'Y'}">
+	                  <div>
+	                    <button>수정</button>
+	                    <button>삭제</button>
+	                  </div>
+	                  </c:if>
+	              </div>
+	          </div>
+	          <div style="border-top: 1px solid #aaa"></div>
+     	 </c:forEach>    
       </ul>
-
+	<c:if test="${loginUser.manager eq 'Y'}">
         <div class="insertBtn-area">
-          <button class="insertBtn">faq 등록하기</button>
+          <button class="insertBtn" onclick="location.href='faqEnroll.faq'">FAQ 등록하기</button>
         </div>
-      
+    </c:if>
+         <div class="page_wrap">
+            <div class="page_nation">
+            	<c:if test="${pi.currentPage ne 1 }">
+					<a class="arrow prev" href="faqList.faq?cPage=${pi.currentPage-1}">&lt;</a>
+	            </c:if>
+	            <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
+					<a href="faqList.faq?cPage=${p}" class="active">${p}</a>
+				</c:forEach>	
+				<c:if test="${pi.maxPage ne pi.currentPage }">
+					<a class="arrow next" href="faqList.faq?cPage=${pi.currentPage+1}">&gt;</a>
+				</c:if>
+            </div>
+         </div>  
   </div>
 
-  <footer class="footer">
-    
-    <div>
-      <span>주소 : 서울특별시 용산구 원효로90길 11, 더프라임타워<br/>
-        TEL : 02-2038-4792<i></i>FAX: 02-2038-4794<br/>
-        E-mail : ehddls1029@naver.com</span>
-      
-    </div>
-  </footer>
 
-  
 	<script>
  
     $(document).on("click", ".slide", function () {
@@ -260,5 +207,6 @@
     });
 
 	</script>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

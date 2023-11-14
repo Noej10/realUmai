@@ -86,6 +86,16 @@
   		  AND FILE_LEVEL = 2
   	</select>
   	
+  	<insert id="insertRestaurant" parameterType="Restaurant">
+  	INSERT INTO RESTAURANT(REST_NUM, REST_NAME, ORIGINAL, DUCTION, MENU, OPENING, ADDRESS, REGION)
+  	VALUES(SEQ_RNO.NEXTVAL, #{restName}, #{original}, #{duction}, #{menu}, #{opening}, #{address}, #{region})
+  	</insert>
+  	
+  	<insert id="insertAttachment">
+  	INSERT INTO ATTACHMENT(FILE_NO, REF_BNO, ORIGIN_NAME, FILE_PATH, FILE_LEVEL, STATUS)
+  	VALUES(SEQ_ATTNO.NEXTVAL, SEQ_RNO.CURRVAL, #{originName}, #{filePath}, #{fileLevel}, 'Y')
+  	</insert>
+  	
   	<update id="updateLike" parameterType="_int">
   		UPDATE GREAT
 		SET GOOD = 'Y'

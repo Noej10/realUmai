@@ -72,7 +72,7 @@
 			찾는 식당이 없으신가요? 그렇다면 등록해 보세요!
 		</div>
 		<div class="btn-area">
-			<button onclick="restaurantEnroll.re" class="insert-btn">식당 등록하기</button>
+			<button onclick="location.href='restaurantEnroll.re'" class="insert-btn">식당 등록하기</button>
 		</div>
 	</section>
 	

@@ -8,17 +8,20 @@ import com.umai.review.model.vo.Review;
 
 public interface RestaurantService {
 	
-	ArrayList<Restaurant> selectListMain();
+	public ArrayList<Restaurant> selectListMain();
 	
 	public int increaseCount(int restNo);
 	
-	Restaurant selectRest(int restNo);
+	public Restaurant selectRest(int restNo);
 	
-	ArrayList<Attachment> selectPhoto(int restNo);
+	public ArrayList<Attachment> selectPhoto(int restNo);
+	
+	public int insertRestaurant(Restaurant r, ArrayList<Attachment> list);
 	
 	public int updateLike(int restNum, int userNum);
 	
 	public int updateUnlike(int restNum, int userNum);
 	
 	Restaurant selectlike(int restNum, int userNum);
+
 }
