@@ -73,6 +73,9 @@
 	SELECT  USER_NUM,
 			EMAIL,
 			PHONE,
+			NICKNAME,
+			USER_ID,
+			NAME,
 			MANAGER,
 			SECESSION,
 			JOIN_DATE,
@@ -102,5 +105,18 @@
 		AND USER_ID = #{userId}
 	</select>
 >>>>>>> 012a903884b39ce425f7304f54d01b1a5a3f45b0
+	
+	<select id="checkPwdMember" parameterType="Member" resultMap="memberResultSet">
+		SELECT * 
+		FROM MEMBER
+		WHERE USER_ID = #{userId}
+		AND PASSWORD = #{password}
+	</select>
+	
+	<update id="deleteMember">
+		UPDATE MEMBER
+			SET STATUS = 'N'
+		WHERE USER_ID = #{userId}
+	</update>
 	
 </mapper>

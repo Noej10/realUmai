@@ -1,6 +1,8 @@
 package com.umai.restaurant.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -24,7 +26,6 @@ public class RestaurantDao {
 	}
 
 	public Restaurant selectRest(SqlSession sqlSession, int restNo) {
-		System.out.println("daoresNo"+restNo);
 		Restaurant list = sqlSession.selectOne("restaurantMapper.selectRest", restNo);
 		
 		return list;
@@ -32,10 +33,33 @@ public class RestaurantDao {
 
 	public ArrayList<Attachment> selectPhoto(SqlSession sqlSession, int restNo) {
 		ArrayList<Attachment> subList =  (ArrayList)sqlSession.selectList("restaurantMapper.selectPhoto", restNo);
-		System.out.println("daoresNo"+restNo);
-		System.out.println("dao"+subList);
+		
 		return subList;
 		
+	}
+
+	public int updateLike(SqlSession sqlSession, int restNum, int userNum) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("restNum", restNum);
+	    params.put("userNum", userNum);
+	    int result = sqlSession.update("restaurantMapper.updateLike", params);
+	    return result;
+	}
+
+	public Restaurant selectLike(SqlSession sqlSession, int restNum, int userNum) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("restNum", restNum);
+	    params.put("userNum", userNum);
+	    Restaurant like = sqlSession.selectOne("restaurantMapper.selectLike", params);
+		return like;
+	}
+
+	public int updateUnlike(SqlSession sqlSession, int restNum, int userNum) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("restNum", restNum);
+	    params.put("userNum", userNum);
+	    int result = sqlSession.update("restaurantMapper.updateUnlike", params);
+	    return result;
 	}
 
 	

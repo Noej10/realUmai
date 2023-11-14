@@ -1,4 +1,4 @@
-package com.umai.restaurant;
+package com.umai.restaurant.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

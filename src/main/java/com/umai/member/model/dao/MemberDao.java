@@ -51,4 +51,18 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.findPwd", m);
 	}
 
+	public int deleteMember(SqlSession sqlSession, Member m) {
+		
+		int result = sqlSession.update("memberMapper.deleteMember", m);
+		
+		return result;
+	}
+
+	public Member checkPwdMember(SqlSession sqlSession, Member m) {
+		
+		Member delMember = sqlSession.selectOne("memberMapper.checkPwdMember", m);
+		
+		return delMember;
+	}
+
 }

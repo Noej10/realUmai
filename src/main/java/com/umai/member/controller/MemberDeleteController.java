@@ -1,32 +1,27 @@
 package com.umai.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.umai.board.model.vo.Board;
 import com.umai.member.model.service.MemberServiceImple;
 import com.umai.member.model.vo.Member;
-import com.umai.restaurant.model.service.RestaurantServiceImple;
-import com.umai.restaurant.model.vo.Restaurant;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class MemberDeleteController
  */
-@WebServlet("/login.me")
-public class LoginController extends HttpServlet {
+@WebServlet("/delete.me")
+public class MemberDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public MemberDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,29 +31,27 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
+
 		Member m =new Member();
+		m.setPassword(request.getParameter("passCheck"));
 		m.setUserId(request.getParameter("userId"));
+		
+		Member delMember = new MemberServiceImple().checkPwdMember(m);
+		HttpSession session = request.getSession();
+		if(delMember != null) {
+			
+			int result = new MemberServiceImple().deleteMember(m);
+			
+			if(result>0) {
+				session.setAttribute("alertMsg", "회원탈퇴에 성공했습니다");
+				session.removeAttribute("loginUser");
+				response.sendRedirect(request.getContextPath());
+			}
+		}else {
+			session.setAttribute("alertMsg", "비밀번호가 틀렸습니다");
+			response.sendRedirect(request.getContextPath()+"/boardpage");
+		}
 
-		m.setPassword(request.getParameter("password"));
-		
-		Member loginUser = new MemberServiceImple().loginMember(m);
-		
-		ArrayList<Restaurant> resList = new RestaurantServiceImple().selectListMain();
-		
-		if(loginUser == null) {
-			request.setAttribute("errorMsg", "로그인 실패다");
-	    	request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
-
-	    }else {
-	    	request.getSession().setAttribute("resList", resList);
-	    	request.getSession().setAttribute("loginUser", loginUser);
-	    	response.sendRedirect("boardpage");
-	    	
-	    	
-	    	
-	    }
-		
 	}
 
 	/**

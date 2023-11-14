@@ -21,6 +21,7 @@
   		<result column="STATUS" property="status"/>
   		<result column="ORIGIN_NAME" property="originName"/>
   		<result column="FILE_PATH" property="filePath"/>
+  		<result column="GOOD" property="good"/>
   	</resultMap>
   	
   	<resultMap type="Attachment" id="attachmentResultSet">
@@ -85,6 +86,28 @@
   		  AND FILE_LEVEL = 2
   	</select>
   	
+  	<update id="updateLike" parameterType="_int">
+  		UPDATE GREAT
+		SET GOOD = 'Y'
+		WHERE GREAT_RESTNUM IN (SELECT REST_NUM FROM RESTAURANT WHERE REST_NUM = #{restNum})
+		AND GREAT_USERNUM IN (SELECT USER_NUM FROM MEMBER WHERE USER_NUM = #{userNum})
+  	</update>
+  	
+  	<select id="selectLike" resultMap="restaurantResultSet">
+  		SELECT GOOD
+	  		FROM GREAT
+	  		JOIN RESTAURANT ON(REST_NUM=GREAT_RESTNUM)
+	  		JOIN MEMBER ON(USER_NUM=GREAT_USERNUM)
+  		WHERE GREAT_RESTNUM = #{restNum}
+  		  AND GREAT_USERNUM = #{userNum}
+  	</select>
+  	
+  	<update id="updateUnlike" parameterType="_int">
+  		UPDATE GREAT
+		SET GOOD = 'N'
+		WHERE GREAT_RESTNUM IN (SELECT REST_NUM FROM RESTAURANT WHERE REST_NUM = #{restNum})
+		AND GREAT_USERNUM IN (SELECT USER_NUM FROM MEMBER WHERE USER_NUM = #{userNum})
+  	</update>
   </mapper>
   
   
