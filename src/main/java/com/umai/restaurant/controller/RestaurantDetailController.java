@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.umai.common.model.vo.Attachment;
 import com.umai.restaurant.model.service.RestaurantServiceImple;
 import com.umai.restaurant.model.vo.Restaurant;
+import com.umai.review.model.service.ReviewServiceImple;
+import com.umai.review.model.vo.Review;
 
 /**
  * Servlet implementation class RestaurantDetailController
@@ -39,10 +41,14 @@ public class RestaurantDetailController extends HttpServlet {
 		if(result>0) {
 			Restaurant r = new RestaurantServiceImple().selectRest(restNo);
 			ArrayList<Attachment> subList = new RestaurantServiceImple().selectPhoto(restNo);
+			ArrayList<Review> rev = new ReviewServiceImple().selectReview(restNo);
+			Restaurant like = new RestaurantServiceImple().selectlike(restNo, result);
 			
 			request.setAttribute("r", r);
 			request.getSession().setAttribute("subList", subList);
-			System.out.println(subList);
+			request.getSession().setAttribute("rev", rev);
+			request.getSession().setAttribute("like", like);
+			System.out.println(rev);
 			request.getRequestDispatcher("/WEB-INF/views/board/boardDetailPage.jsp").forward(request, response);
 		}else {
 			System.out.println("increase count 실패");
