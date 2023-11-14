@@ -5,13 +5,13 @@ import com.umai.member.model.vo.Member;
 public interface MemberService {
 	
 
-	int updateEmailMember(Member m);
+	public int updateEmailMember(Member m);
 	
-	int updateNickMember(Member m);
+	public int updateNickMember(Member m);
 	
-	int updatePhoneMember(Member m);
+	public int updatePhoneMember(Member m);
 	
-	int updatePwdMember(Member m);
+	public int updatePwdMember(Member m);
 
 	Member loginMember(Member m);  
 	

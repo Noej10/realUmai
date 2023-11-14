@@ -121,15 +121,17 @@
 
         </div>
         <div align="center" style="color: white;">
-            <form action="">
-                <input type="radio" name="searchType" checked>지역별
+            <form action="result.bo" method="get">
+            	<input type="hidden" name="cpage" value="1">
+                <input type="radio" name="searchType"  value="sRegion" checked>지역별
                 &nbsp;&nbsp;&nbsp;
-                <input type="radio" name="searchType">식당별
+                <input type="radio" name="searchType" value="sStore">식당별
                 &nbsp;&nbsp;
-                <input type="text" style="width: 30%; height: 30px;" placeholder="식당 이름이나 지역명으로 검색해보세요.">
-                <input type="submit" class="btn btn-sm btn-primary" value="검색">
+                <input type="text" name="searchInput" style="width: 30%;  height: 30px;" placeholder="식당 이름이나 지역명으로 검색해보세요.">
+                <input type="submit" class="btn btn-sm btn-primary" value="${keyword}">
             </form>    
         </div>
+        
         <div class="noticeFaq">
             <a href="announceList.an?cPage=1">공지사항</a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -142,8 +144,15 @@
 
         </div>
         <div id="memberMenu" class="memberMenu">
-            <a href="update.me">회원정보 수정</a>
+            <button style="border:none; font-size:10px; background:none;" onclick="updateMember(1)">회원정보 수정</button>
+            
+            <form action="" method="post" id="updateForm">
+	            <input type="hidden" name="userId" value="${m.userId}">
+	            <input type="hidden" name="userName" value="${m.userName}">
+            </form>
+            
             <a href="logout.me">로그아웃</a>
+
             <a href="">회원탈퇴</a>
         </div>
     </div>
@@ -158,7 +167,15 @@
                 memberMenu.style.display = "flex";
             }
         }
-
+		
+        function updateMember(num){
+        	if(num === 1) {
+        		$("#updateForm").attr('action', 'update.me');
+        	} else {
+        		$("#updateForm").attr('action', 'update.me');
+        	}
+        	$('#updateForm').submit();
+        }
     </script>
 
         <div class="modal" id="findId">

@@ -34,24 +34,71 @@ public class memberUpdatePwdController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
-		String userId = request.getParameter("userId");
-		String password = request.getParameter("password");
+		String originPwd = request.getParameter("originPwd");
+		String changePwd = request.getParameter("changePwd");
+		String checkPwd = request.getParameter("checkPwd");
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
+//		System.out.println(password);
+//		System.out.println(changePwd);
+//		System.out.println(checkPwd);
+//		System.out.println(loginUser);
 		
-		Member m = new Member();
-		m.setUserId(request.getParameter(userId));
-		m.setPassword(request.getParameter(password));
-		int result = new MemberServiceImple().updatePwdMember(m);
-		
-		if (result > 0) {
-			request.setAttribute("errorMsg", "비밀번호 수정에 실패하였습니다.");
-			request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
-		} else {
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "성공적으로 수정 하였습니다.");
-			session.setAttribute("loginUser", m);
+		// loginUser안에 password랑 originPwd가 같은지 
+		// 같다면 수정한다. 틀리면 error
+		if(loginUser.getPassword().equals(originPwd)) {
+			//성공하면
+			if(changePwd.equals(checkPwd)) {
+				//똑같으면
+				loginUser.setPassword(changePwd);
+				int result = new MemberServiceImple().updatePwdMember(loginUser);
+				
+				if(result>0) {
+					//성공
+				Member updateM = new MemberServiceImple().loginMember(loginUser);
+				session.setAttribute("alertMsg", "비밀번호 변경에 성공했습니다.");
+				session.setAttribute("loginUser", loginUser);
+				
+				response.sendRedirect(request.getContextPath() + "/update.me");
+				}else {
+					loginUser.setPassword(originPwd);
+					session.setAttribute("alertMsg", "비밀번호 변경에 실패했습니다.");
+					session.setAttribute("loginUser", loginUser);
+					
+					response.sendRedirect(request.getContextPath() + "/update.me");
+					
+				}
+				
+			}else {
+				//안똑같으면
+				session.setAttribute("alertMsg", "입력하신 비밀번호가 같지 않습니다.");
+				session.setAttribute("loginUser", loginUser);
+				
+				response.sendRedirect(request.getContextPath() + "/update.me");
+			}
 			
-			response.sendRedirect(request.getContextPath() + "/memberRetouchPage.jsp");
+		}else {
+			//틀리면
+			
+			session.setAttribute("alertMsg", "입력하신 비밀번호가 올바르지 않습니다.");
+			session.setAttribute("loginUser", loginUser);
+			
+			response.sendRedirect(request.getContextPath() + "/update.me");
+			
 		}
+		
+		Member updateM = new MemberServiceImple().loginMember(loginUser);
+		
+//		if (updateM == null) {
+//			request.setAttribute("errorMsg", "비밀번호 수정에 실패하였습니다.");
+//			request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
+//		} else {
+//			HttpSession session = request.getSession();
+//			session.setAttribute("alertMsg", "성공적으로 수정 하였습니다.");
+//			session.setAttribute("loginUser", updateM);
+//			
+//			response.sendRedirect(request.getContextPath() + "/update.me");
+//		}
 	}
 
 	/**

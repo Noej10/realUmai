@@ -1,26 +1,23 @@
-package com.umai.member.controller;
+package com.umai.restaurant.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.umai.member.model.vo.Member;
-
 /**
- * Servlet implementation class MemberUpdateForm
+ * Servlet implementation class NoSearchResultContorller
  */
-@WebServlet("/update.me")
-public class MemberUpdateForm extends HttpServlet {
+@WebServlet("/noresult.bo")
+public class NoSearchResultContorller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateForm() {
+    public NoSearchResultContorller() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,8 +27,7 @@ public class MemberUpdateForm extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		request.getRequestDispatcher("WEB-INF/views/member/memberRetouchPage.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/board/noSearchResultPage.jsp").forward(request, response);
 	}
 
 	/**

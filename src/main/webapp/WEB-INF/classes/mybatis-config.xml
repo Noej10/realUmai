@@ -43,8 +43,8 @@
   			<dataSource type="POOLED">
 		        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
 		        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		        <property name="username" value="umai"/>
-		        <property name="password" value="umai"/>
+		        <property name="username" value="UMAI"/>
+		        <property name="password" value="UMAI"/>
 		     </dataSource>
   		</environment>
   	</environments>
@@ -58,5 +58,7 @@
 		<mapper resource="/mappers/review-mapper.xml"/>
 	</mappers>
 
+  	
+  	
   	
   </configuration>
