@@ -63,6 +63,23 @@ public class RestaurantServiceImple implements RestaurantService{
 	}
 
 	@Override
+	public int insertRestaurant(Restaurant r, ArrayList<Attachment> list) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result1 = rDao.insertRestaurant(sqlSession, r);
+		
+		int result2 = rDao.insertAttachment(sqlSession, list); 
+		
+		if(result1 > 0 && result2 > 0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		return result1 * result2;
+	}
+	@Override
 	public int updateLike(int restNum, int userNum) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -70,10 +87,11 @@ public class RestaurantServiceImple implements RestaurantService{
 		
 		if(result>0) {
 			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
 		}
-		
 		sqlSession.close();
-		
+
 		return result;
 	}
 
@@ -96,6 +114,8 @@ public class RestaurantServiceImple implements RestaurantService{
 		
 		if(result>0) {
 			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
 		}
 		
 		sqlSession.close();

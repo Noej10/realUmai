@@ -50,15 +50,15 @@
 }
 .memberInfo{
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: 35px;
+    top: 8px;
 }
 
 .memberInfo img{
     right: -40px;
     top: -55px;
-    width: 100px;
-    height: 200px;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
 }
 
@@ -94,6 +94,9 @@
 
     <!-- Jquery 3.7.1-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	
+	<!-- 폰트어썸 -->
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 </head>
 
@@ -130,11 +133,11 @@
         <div class="noticeFaq">
             <a href="announceList.an?cPage=1">공지사항</a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="">FAQ</a>
+            <a href="faqList.faq?cPage=1">FAQ</a>
         </div>
         <div class="memberInfo">
 
-            <img src="/Umai/resources/images/memberImage.png" alt="userIcon" onclick="openMemberMenu()">
+            <img src="/Umai/resources/images/memberIcon.png" alt="userIcon" onclick="openMemberMenu()">
 
 
         </div>
