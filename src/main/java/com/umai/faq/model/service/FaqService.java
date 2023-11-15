@@ -12,8 +12,12 @@ public interface FaqService {
 	public ArrayList<Faq> selectList(PageInfo pi);
 	
 	public int selectListCount();
-	
+
 	public int updateFaq(Faq faq);
 	
 	public int deleteFaq(Faq faq);
+
+
+	public int faqList();
+
 }

@@ -42,13 +42,14 @@
 
         <p style="font-size: 50px; margin-bottom: 4rem;">공지사항 수정</p>
 
-        <form action="" method="post">
+        <form action="update.an" method="post">
+        	<input type="hidden" name="annNum" value="${a.annNum }">
             <div>
-                <input type="text" id="input" size="99" placeholder="제목을 입력해주세요">
+                <input type="text" name="title" id="input" size="99" value="${a.title}">
             </div>
 
             <div>
-                <textarea cols="100" rows="20"></textarea>
+                <textarea style="resize:none" name="detail" cols="100" rows="20">${a.detail}</textarea>
             </div>
 
             <div>

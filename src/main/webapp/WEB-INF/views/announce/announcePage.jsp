@@ -142,7 +142,7 @@ button {
     <c:forEach var="l" items="${list }">    
 		<ul>
 			<li class="ann-list">
-	   			<a href="" class="ann-link">
+	   			<a href="detail.an?cPage=${l.annNum}" class="ann-link">
 		    		<div class="ann-link-num" style="text-decoration: none;">${l.annNum }</div>
 		    		<div class="ann-link-desc">
 			        	<div>

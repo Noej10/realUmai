@@ -8,46 +8,40 @@ public class MemberDao {
 
 	public int updateEmailMember(SqlSession sqlSession, Member m) {
 		
-		int result = sqlSession.update("memberMapper.updateEmailMember", m);
-		return result;
+		return sqlSession.update("memberMapper.updateEmailMember", m);
 	}
 	
 	public int updateNickMember(SqlSession sqlSession, Member m) {
 		
-		int result = sqlSession.update("memberMapper.updateNickMember", m);
-		return result;
+		return sqlSession.update("memberMapper.updateNickMember", m);
 	}
 	
 	public int updatePhoneMember(SqlSession sqlSession, Member m) {
 		
-		int result = sqlSession.update("memberMapper.updatePhoneMember", m);
-		return result;
+		return sqlSession.update("memberMapper.updatePhoneMember", m);
 	}
 	
 	public int updatePwdMember(SqlSession sqlSession, Member m) {
 		
-		int result = sqlSession.update("memberMapper.updatePwdMember", m);
-		return result;
+		return sqlSession.update("memberMapper.updatePwdMember", m);
 	}
 
-	public static Member loginMember(SqlSession sqlSession, Member m) {
+	public Member loginMember(SqlSession sqlSession, Member m) {
 		
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 
 	}
 
-	public static Member findId(SqlSession sqlSession, Member m) {
+	public Member findId(SqlSession sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.findId", m);
 	}
 	public int insertMember(SqlSession sqlSession, Member m) {
 		
-		int result = sqlSession.insert("memberMapper.insertMember", m);
-		
-		return result;
+		return sqlSession.insert("memberMapper.insertMember", m);
 	}
 
 
-	public static Member findPwd(SqlSession sqlSession, Member m) {
+	public Member findPwd(SqlSession sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.findPwd", m);
 	}
 
@@ -56,6 +50,12 @@ public class MemberDao {
 		int result = sqlSession.update("memberMapper.deleteMember", m);
 		
 		return result;
+	}
+	
+	public static int selectId(SqlSession sqlSession, Member m) {
+		
+		return sqlSession.selectOne("memberMapper.selectId", m);
+		
 	}
 
 	public Member checkPwdMember(SqlSession sqlSession, Member m) {

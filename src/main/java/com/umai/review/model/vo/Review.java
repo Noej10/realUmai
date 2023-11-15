@@ -21,7 +21,7 @@ public class Review {
 	private String status;
 	private String nickname;
 	
-	 public Review() {}
+	public Review() {}
 
 	public Review(int commentNum, String commentContents, Date revWrite, int revRestnum, int memberNum, int revTaste,
 			int revKind, int revFacility, int revPrice, int revMobility, int revWaiting, int revSpeed, int revClean,
@@ -43,14 +43,6 @@ public class Review {
 		this.revRevisit = revRevisit;
 		this.revAvgscore = revAvgscore;
 		this.status = status;
-		this.nickname = nickname;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
@@ -182,6 +174,14 @@ public class Review {
 		this.status = status;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	@Override
 	public String toString() {
 		return "Review [commentNum=" + commentNum + ", commentContents=" + commentContents + ", revWrite=" + revWrite
@@ -190,9 +190,7 @@ public class Review {
 				+ ", revWaiting=" + revWaiting + ", revSpeed=" + revSpeed + ", revClean=" + revClean + ", revRevisit="
 				+ revRevisit + ", revAvgscore=" + revAvgscore + ", status=" + status + ", nickname=" + nickname + "]";
 	}
-
-
-
 	
-	 
 }
+
+

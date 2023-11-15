@@ -1,5 +1,4 @@
 package com.umai.faq.model.dao;
-
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
@@ -35,5 +34,11 @@ public class FaqDao {
 	
 	public int deleteFaq(SqlSession sqlSession, Faq faq) {
 		return sqlSession.update("faqMapper.deleteFaq", faq);
+
+
+	public int faqList(SqlSession sqlSession) {
+		return sqlSession.selectOne("faqMapper.faqList");
+
 	}
+}
 }

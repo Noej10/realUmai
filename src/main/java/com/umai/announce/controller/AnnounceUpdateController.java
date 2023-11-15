@@ -1,7 +1,6 @@
-package com.umai.faq.controller;
+package com.umai.announce.controller;
 
 import java.io.IOException;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,23 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.umai.faq.model.service.FaqServiceImple;
-import com.umai.faq.model.vo.Faq;
-
+import com.umai.announce.model.service.AnnounceServiceImple;
+import com.umai.announce.model.vo.Announce;
 
 /**
- * Servlet implementation class FaqUpdateController
+ * Servlet implementation class AnnounceUpdateController
  */
-
-@WebServlet("/faqUpdate.faq")
-
-public class FaqUpdateController extends HttpServlet {
+@WebServlet("/update.an")
+public class AnnounceUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqUpdateController() {
+    public AnnounceUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,28 +31,27 @@ public class FaqUpdateController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-		request.setCharacterEncoding("UTF-8");
+	
+		int annNum = Integer.parseInt(request.getParameter("annNum"));
+		String annTitle = request.getParameter("title");
+		String annDetail = request.getParameter("detail");
 		
-		Faq faq = new Faq();
-		faq.setFaqNum(Integer.parseInt(request.getParameter("faqNum")));
-		faq.setFaqKind(request.getParameter("category"));
-		faq.setFaqTitle(request.getParameter("faqTitle"));
-		faq.setFaqContent(request.getParameter("faqContent"));
+		Announce ann = new Announce();
 		
-		int result = new FaqServiceImple().updateFaq(faq);
+		ann.setAnnNum(annNum);
+		ann.setTitle(annTitle);
+		ann.setDetail(annDetail);
+		
+		int result = new AnnounceServiceImple().updateAnnounce(ann);
 		
 		HttpSession session = request.getSession();
 		if(result>0) {
-			session.setAttribute("alertMsg", "FAQ 수정이 완료되었습니다.");
-			response.sendRedirect(request.getContextPath()+"/faqList.faq?cPage=1");
+			session.setAttribute("alertMsg", "공지사항 수정이 완료되었습니다.");
+			response.sendRedirect(request.getContextPath()+"/detail.an?cPage="+annNum);
 		}else {
-			session.setAttribute("alertMsg", "FAQ 수정에 실패하였습니다.");
-			response.sendRedirect(request.getContextPath()+"/faqList.faq?cPage=1");
+			session.setAttribute("alertMsg", "공지사항 수정에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath()+"/detail.an?cPage="+annNum);
 		}
-	
-
 	}
 
 	/**

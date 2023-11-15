@@ -1,4 +1,4 @@
-package com.umai.member.controller;
+package com.umai.restaurant.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberEnrollFormController
+ * Servlet implementation class NoSearchResultContorller
  */
-@WebServlet("/EnrollForm.me")
-public class MemberEnrollFormController extends HttpServlet {
+@WebServlet("/noresult.bo")
+public class NoSearchResultContorller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberEnrollFormController() {
+    public NoSearchResultContorller() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,9 +27,7 @@ public class MemberEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("WEB-INF/views/member/memberEnrollForm.jsp").forward(request, response);
-		
-		
+		request.getRequestDispatcher("WEB-INF/views/board/noSearchResultPage.jsp").forward(request, response);
 	}
 
 	/**

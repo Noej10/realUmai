@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.umai.common.model.vo.Attachment;
+import com.umai.common.model.vo.PageInfo;
 import com.umai.restaurant.model.vo.Restaurant;
 
 public class RestaurantDao {
@@ -36,6 +38,23 @@ public class RestaurantDao {
 		
 		return subList;
 		
+	}
+
+	public ArrayList<Restaurant> selectList(SqlSession sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("restaurantMapper.selectList", null, rBounds);
+	}
+	
+	public int selectListCount(SqlSession sqlSession) {
+		
+		int result = sqlSession.selectOne("restaurantMapper.selectListCount");
+		
+		return result;
 	}
 
 	public int updateLike(SqlSession sqlSession, int restNum, int userNum) {
@@ -78,5 +97,4 @@ public class RestaurantDao {
 		return result;
 	}
 	
-
 }

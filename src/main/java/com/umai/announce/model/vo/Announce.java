@@ -2,11 +2,6 @@ package com.umai.announce.model.vo;
 
 import java.sql.Date;
 
-	
-
-
-
-
 public class Announce {
 	private int annNum;
 	private String title;
@@ -29,9 +24,6 @@ public class Announce {
 		this.status = status;
 	}
 
-
-
-	
 	// 게터, 세터
 	public int getAnnNum() {
 		return annNum;
@@ -76,8 +68,6 @@ public class Announce {
 		this.status = status;
 	}
 
-
-	
 	// toString
 	@Override
 	public String toString() {
@@ -85,8 +75,6 @@ public class Announce {
 				+ ", status=" + status + "]";
 	}
 	
-	
-
 }
 
 
