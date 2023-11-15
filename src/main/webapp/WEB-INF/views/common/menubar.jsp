@@ -120,17 +120,25 @@
             <img id="logo" src="/Umai/resources/images/mainLogoWhiteFinal.png" onclick="tomain()" alt="umaiLogo">
 
         </div>
-        <div align="center" style="color: white;">
-            <form action="result.bo" method="get">
-            	<input type="hidden" name="cpage" value="1">
-                <input type="radio" name="searchType"  value="sRegion" checked>지역별
+        <div id="search-area" align="center" style="color: white;">
+            <form action="search.bo" method="get">
+            	<input type="hidden" name="cPage" value="1">
+                <input id="radRegion" type="radio" name="searchType"  value="sRegion" checked>지역별
                 &nbsp;&nbsp;&nbsp;
-                <input type="radio" name="searchType" value="sStore">식당별
+                <input id="radStore" type="radio" name="searchType" value="sStore">식당별
                 &nbsp;&nbsp;
-                <input type="text" name="searchInput" style="width: 30%;  height: 30px;" placeholder="식당 이름이나 지역명으로 검색해보세요.">
-                <input type="submit" class="btn btn-sm btn-primary" value="${keyword}">
+                <input type="text" name="searchInput" value="${searchInput}" style="width: 30%;  height: 30px;" placeholder="식당 이름이나 지역명으로 검색해보세요.">
+                <button type="submit" class="btn btn-sm btn-primary" >검색</button>
             </form>    
         </div>
+        <cif test="${ not empty searchType }">
+        <script>
+        	window.onload = function(){
+        		const inp = document.querySelector("#search-area input[value=${searchType}]");
+        		inp.setAttribute("selected", true);
+        	}
+        </script>
+        </cif>
         
         <div class="noticeFaq">
             <a href="announceList.an?cPage=1">공지사항</a>
@@ -144,7 +152,7 @@
 
         </div>
         <div id="memberMenu" class="memberMenu">
-            <button style="border:none; font-size:10px; background:none;" onclick="updateMember(1)">회원정보 수정</button>
+            <a href="update.me" style="border:none; font-size:10px; background:none;" onclick="updateMember(1)">회원정보 수정</a>
             
             <form action="" method="post" id="updateForm">
 	            <input type="hidden" name="userId" value="${m.userId}">

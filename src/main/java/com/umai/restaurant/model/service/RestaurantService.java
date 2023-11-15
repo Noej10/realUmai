@@ -15,12 +15,7 @@ public interface RestaurantService {
 	
 	public Restaurant selectRest(int restNo);
 	
-
-	ArrayList<Attachment> selectPhoto(int restNo);
-	
 	public int selectListCount();
-	
-	public ArrayList<Restaurant> selectList(PageInfo pi);
 
 	public ArrayList<Attachment> selectPhoto(int restNo);
 	
@@ -31,5 +26,16 @@ public interface RestaurantService {
 	public int updateUnlike(int restNum, int userNum);
 	
 	Restaurant selectlike(int restNum, int userNum);
+	
+	ArrayList<Restaurant> selectNoSearchList();
 
+	ArrayList<Restaurant> selectSearchList(PageInfo pi,String searchInput);
+	
+	ArrayList<Restaurant> selectReSearchList(PageInfo pi, String searchInput);
+	
+	public int searchSStore(String searchInput);
+	
+	public int searchSRegion(String searchInput);
 }
+
+

@@ -73,12 +73,16 @@
 		</div>
 		<div class="btn-area">
 
-			<button onclick="restaurantEnrollForm.jsp" class="insert-btn">식당 등록하기</button>
-
 			<button onclick="location.href='restaurantEnroll.re'" class="insert-btn">식당 등록하기</button>
 		</div>
 	</section>
-	
+	     <script>
+		      if(${searchType eq 'sRegion'}){
+		         document.getElementById("radRegion").setAttribute('checked','true');
+		      }else{
+		            document.getElementById("radStore").setAttribute('checked','true');
+		        }
+   </script>
 	
 </body>
 
