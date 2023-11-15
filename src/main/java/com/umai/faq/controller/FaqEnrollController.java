@@ -1,4 +1,4 @@
-package com.umai.restaurant;
+package com.umai.faq.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class BoardPageController
+ * Servlet implementation class FaqEnrollController
  */
-@WebServlet("/boardpage")
-public class BoardPageController extends HttpServlet {
+@WebServlet("/faqEnroll.faq")
+public class FaqEnrollController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardPageController() {
+    public FaqEnrollController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,8 +27,7 @@ public class BoardPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		request.getRequestDispatcher("/WEB-INF/views/board/boardPage.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/views/faq/faqEnrollForm.jsp").forward(request, response);
 	}
 
 	/**

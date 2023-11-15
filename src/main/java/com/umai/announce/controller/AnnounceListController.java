@@ -44,7 +44,7 @@ public class AnnounceListController extends HttpServlet {
 		
 		ArrayList<Announce> list = new AnnounceServiceImple().selectList(pi); 
 		
-		System.out.println(list);
+//		System.out.println(list);
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("WEB-INF/views/announce/announcePage.jsp").forward(request, response);

@@ -135,7 +135,7 @@
 </head>
 
 <body class="main">
-	<%if(alertMsg != null){ %>
+			<%if(alertMsg != null){ %>
 		<script>
 			alert("<%=alertMsg%>");
 		</script>

@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6cb0689f4fc5c9ee2e6c1f73a2fa5d1"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d6cb0689f4fc5c9ee2e6c1f73a2fa5d1&libraries=services"></script>
+
 <style>
     html body{
 		height: 100%;
@@ -27,51 +28,49 @@
         margin-left: 20px;
         overflow: auto;
         width: 100%;
-        padding-right: 130px;
+        max-width: 850px;
     }
     .res-name{
         font-size: 20px;
         font-weight: bold;
     }
-    .res-moreinfo{
-
+    .grade-area{
+		
     }
     .like{
-        position: absolute;
-        right: 0;
-        top: 13px;
-        margin-right: 10px;
+        margin-left: 30px;
     }
     .map-intro-subphoto{
         display: flex;
         position: relative;
         width: 100%;
         height: 200px;
+        margin-top: 10px;
     }
     .maparea{
-        /* height: 200px;
-        width: 300px; */
-        margin-top: 10px;
-        margin-left: 10px;
+        border: solid 1px; height: 200px; min-width: 300px; margin-left: 10px;
+      
+        
+       
     }
     .res-intro{
         margin-top: 10px;
         margin-left: 20px;
         overflow: auto;
-        width: auto;
         width: 100%;
+        max-width: 8500px;
+        padding-bottom: 30px;
     }
     .back{
-        position: absolute;
-        bottom: 0;
-        right: 580px;
+        position: relative;
+        top: 160px;
+        left: 300px;
     }
     .sub-photo{
         position: absolute;
         right: 0;
         overflow: hidden;
-        /* height: 200px;
-        width: 200px; */
+        min-width: 200px;
         margin-right: 30px;
     }
     .photo-container{
@@ -89,7 +88,7 @@
       top: 50%;
       width: auto;
       padding: 16px;
-      margin-top: -22px;
+      margin-top: -35px;
       color: white;
       font-weight: bold;
       font-size: 18px;
@@ -99,12 +98,17 @@
     }
     .prev {
       left: 0;
-      background-color: #222;
+      color: black;
+      font-size: 35px;
+      margin-right: 10px;
+      /* background-color: #222; */
     }
 
     .next {
       right: 0;
-      background-color: #222;
+      color: black;
+      font-size: 35px;
+      /* background-color: #222; */
     }
     .review-area{
         display: flex;
@@ -122,15 +126,25 @@
         height: 25px;
         background: url("/Umai/resources/images/icon-star-empty.png") left/25px repeat-x;
     }
-    .star i{
+    .star-detail{
+        position: relative;
+        bottom: 12px;
+        display: inline-block;
+        align-items: center;
+        width: 125px;
+        min-height: 25px;
+        background: url(/Umai/resources/images/icon-star-empty.png) left/25px repeat-x;
+    }
+    .star i, .star-detail i{
         position: absolute;
         top: 0;
         left: 0;
         width: 50%;
         height: 25px;
+        
         background:url("/Umai/resources/images/icon-star-full.png") left/25px repeat-x;
     }
-    .detail-button{
+    #detail-button{
         position: relative;
         font-size: 12px;
         width: 100%;
@@ -140,9 +154,15 @@
         margin-left: 30px;
     }
     .review-text{
+        position: relative;
         margin-left: 30px;
         background-color: white;
         width: 60%;
+    }
+    #delete-btn{
+        position: absolute;
+        bottom: 0;
+        right: 0;
     }
 </style>
 </head>
@@ -159,22 +179,70 @@
                     <span>주소: ${r.address }</span><br>
                     <span>지역: ${r.region }</span><br>
                     <span>영업시간: ${r.opening }</span><br>
-                    <span>평점: ${r.grade }</span><br>
                     <span>대표메뉴: ${r.menu }</span><br>
                 </div>
             </div>
-            <div class="like">
-                <img style="height: 100px; width: 100px;" src="/Umai/resources/images/icon-like.png" alt="">
+            <div class="grade-area" style="display: flex; align-items: center; margin-left: 5px;">
+                <span style="font-size: 60px; margin-right: 5px; color: red;">★</span>
+                <h1 style="font-size: 100px; font-weight: bold; color: #ff7400;">${r.grade}</h1>
+                <div class="like" id="likeContainer">
+                <c:choose>
+                <c:when test="${like.good == 'N'}">
+                    <img style="height: 60px; width: 60px; cursor: pointer;" src="/Umai/resources/images/icon-like.png" alt="" onclick="updateLike()">
+                </c:when>
+                <c:otherwise>
+                    <img style="height: 60px; width: 60px; cursor: pointer;" src="/Umai/resources/images/icon-like-clicked.png" alt="" onclick="updateUnlike()">
+                </c:otherwise>
+                </c:choose>
+                </div>
             </div>
+            <script>
+	            function updateLike(){
+	                $.ajax({
+	                    url: "updateLike",
+	                    data: {
+	                        restNum: '${r.restNum}',
+	                        userNum: '${loginUser.userNum}'                        
+	                    },
+	                    success: function(res){
+	                    	var likeContainer = document.getElementById('likeContainer');
+	                    	if(res != null){
+	                    		likeContainer.innerHTML = '<img style="height: 60px; width: 60px; cursor: pointer;" src="/Umai/resources/images/icon-like-clicked.png" alt="" onclick="updateUnlike()">';
+	                    	}
+	                    },
+	                    error: function(){
+	                        console.log("ajax통신실패")
+	                    }
+	                })
+	            }
+	            function updateUnlike(){
+	                $.ajax({
+	                    url: "updateUnlike",
+	                    data: {
+	                        restNum: '${r.restNum}',
+	                        userNum: '${loginUser.userNum}'                        
+	                    },
+	                    success: function(res){
+	                    	var likeContainer = document.getElementById('likeContainer');
+	                    	if(res != null){
+	                            likeContainer.innerHTML = '<img style="height: 60px; width: 60px; cursor: pointer;" src="/Umai/resources/images/icon-like.png" alt="" onclick="updateLike()">';
+	                    	}
+	                    },
+	                    error: function(){
+	                        console.log("ajax통신실패")
+	                    }
+	                })
+	            }
+            </script>
         </div>
         <div class="map-intro-subphoto">
-            <div class="maparea">
+            <div id="map" style="border: solid 1px; height: 200px; min-width: 300px; margin-left: 10px;">
+				
+            </div>
+            <div class="res-intro">${r.duction }
+                <button class="back" onclick="back()">목록으로</button>
+            </div>
 
-            </div>
-            <div class="res-intro">${r.duction }</div>
-            <div class="back">
-                <button onclick="back()">목록으로</button>
-            </div>
             <div class="sub-photo">
                 <c:forEach var="s" items="${subList}" varStatus="loop">
                     <div class="photo-container ${loop.first ? 'active' : ''}">
@@ -186,20 +254,124 @@
                 
             </div>
         </div>
-        <div class="review-area">
-            <div>리뷰 :</div>
-            <div class="star">
-                <i style="width: ${r.grade * 20}%;"></i>
-                <button class="detail-button">점수 자세히보기</button>
+        <c:forEach var="rev" items="${rev}" varStatus="loop">
+	        <div class="review-area review-${loop.index + 1}">
+	            <div>리뷰 :</div>
+	            <div class="star">
+	                <i style="width: ${rev.revRevisit*20}%;"></i>
+	                <button type="button" id="detail-button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        점수 자세히보기
+                      </button>
+	            </div>
+	            <div class="nickname">${rev.nickname }</div>
+	            <div class="review-text">
+	                <p>${rev.commentContents }</p>
+	                <c:if test="${loginUser.userNum == rev.memberNum}">
+	                <button type="button" id="delete-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="delrev()">
+					  삭제
+					</button>
+	                </c:if>
+	            </div>
+	        </div>
+	    </c:forEach>    
+	
+    </div>
+    <!-- 리뷰 삭제 모달 -->
+		 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		      
+		      <div class="modal-body">
+		        정말로 리뷰를 삭제하시겠습니까?
+		      </div>
+		      <div class="modal-footer" align="center">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary">삭제하기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+    <!--모달-->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">상세 정보</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <c:forEach var="rev" items="${rev}" varStatus="loop">
+                    <div class="modal-body" style="display: flex;width: 100%;flex-wrap: nowrap;flex-direction: column;align-items: center;">
+                        <p>
+                            음식의 맛은 어땠나요? 
+                        </p>
+                        <div class="star-detail">
+                            <i style="width: ${rev.revRevisit*20}%;"></i>
+                        </div>
+                        <p>
+                            점원은 친절했나요? 
+                        </p>
+                        <div class="star-detail">
+                            <i style="width: ${rev.revKind*20}%;"></i>
+                        </div>
+                        <p>
+                            내부시설은 어땠나요? 
+                        </p>
+                        <div class="star-detail">
+                            <i style="width: ${rev.revFacility*20}%;"></i>
+                        </div>
+                        <p>
+                            가격은 적당했나요? 
+                        </p>
+                        <div class="star-detail">
+                            <i style="width: ${rev.revPrice*20}%;"></i>
+                        </div>
+                        <p>
+                            접근성은 어땠나요? 
+                        </p>
+                        <div class="star-detail">
+                            <i style="width: ${rev.revMobility*20}%;"></i>
+                        </div>
+                        <p>
+                            웨이팅은 어땠나요? 
+                        </p>
+                        <div class="star-detail">
+                            <i style="width: ${rev.revWaiting*20}%;"></i>
+                        </div>
+                        <p>
+                            음식이 나오는 속도는 어땠나요? 
+                        </p>
+                        <div class="star-detail">
+                            <i style="width: ${rev.revSpeed*20}%;"></i>
+                        </div>
+                        <p>
+                            매장의 전체적인 위생은 어땠나요? 
+                        </p>
+                        <div class="star-detail">
+                            <i style="width: ${rev.revClean*20}%;"></i>
+                        </div>
+                        <p>
+                            매장에 다시 방문하고 싶은가요? 
+                        </p>
+                        <div class="star-detail">
+                            <i style="width: ${rev.revRevisit*20}%;"></i>
+                        </div>
+                       
+                    
+                    </div>
+                </c:forEach>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
             </div>
-            <div class="nickname">닉네임</div>
-            <div class="review-text">
-                <p>ddddd</p>
             </div>
         </div>
-
-    </div>
+    <!--모달-->
 	<script>
+	// <c:forEach var="rev" items="${rev}" varStatus="loop">
+    //     var gradeValue = ${rev.revRevisit};
+    //     var currentReview = document.querySelector('.review-area.review-${loop.index + 1} .star i');
+    //     starElement.style.width = gradeValue + '%';
+    // </c:forEach>
         function back(){
             window.history.back();
         }
@@ -223,13 +395,44 @@
     </script>
 	
 	<script>
-        var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-        var options = { //지도를 생성할 때 필요한 기본 옵션
-            center: new kakao.maps.LatLng(37.4990031937295, 127.03291995070748), //지도의 중심좌표.
-            level: 10 //지도의 레벨(확대, 축소 정도)
-        };
-        
-        var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('서울특별시 관악구 남부순환로247가길 18', function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+        	
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">${r.restName}</div>'
+            
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});  
         
     </script>
 </body>

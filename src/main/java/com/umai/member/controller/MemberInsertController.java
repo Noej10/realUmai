@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.umai.member.model.service.MemberServiceImple;
 import com.umai.member.model.vo.Member;
@@ -42,13 +43,15 @@ public class MemberInsertController extends HttpServlet {
 		
 		Member m = new Member(userId, passWord, nickName, name, email, phone);
 		int result = new MemberServiceImple().insertMember(m);
-		
+		HttpSession session = request.getSession();
 		if(result > 0) {
+			session.setAttribute("alertMsg", "회원가입이 완료되었습니다.");
 			response.sendRedirect(request.getContextPath());
 		} else {
-			request.setAttribute("errorMsg", "회원가입 실패하였습니다.");
-			request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp").forward(request, response);
+			session.setAttribute("alertMsg", "회원가입에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath());
 		}
+
 	}
 
 	/**

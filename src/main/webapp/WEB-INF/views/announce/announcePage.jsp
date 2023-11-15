@@ -142,7 +142,7 @@ button {
     <c:forEach var="l" items="${list }">    
 		<ul>
 			<li class="ann-list">
-	   			<a href="" class="ann-link">
+	   			<a href="detail.an?cPage=${l.annNum}" class="ann-link">
 		    		<div class="ann-link-num" style="text-decoration: none;">${l.annNum }</div>
 		    		<div class="ann-link-desc">
 			        	<div>
@@ -157,11 +157,11 @@ button {
 		</ul>
 	</c:forEach>
   
-        
+        <c:if test="${loginUser.manager eq 'Y' }">
          <div class="ann-enroll">
             <button type="submit" id="ann-btn">공지사항 등록</button>
         </div>
-         
+        </c:if> 
          <div class="page_wrap">
             <div class="page_nation">
             	<c:if test="${pi.currentPage ne 1 }">
@@ -181,6 +181,6 @@ button {
     </form>
 
     </div>
-    
+    <jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -130,7 +130,6 @@
 	}
 	.board-paging li.on > span{
 		background-color: #fc765d;
-		border: 1px solid #fc765d;
 		color: #fff;
 		font-size: 13px;
 		width: 20px;
@@ -172,7 +171,7 @@
 <body>
 	<%@ include file="../common/menubar.jsp" %>
 	<div class="page-title">
-			${loginUser.userId }최근 등록 식당
+			최근 등록 식당
 	</div>
 	<section class="main-section" id="restaurantContainer">
 		<c:forEach var="r" items="${resList}" varStatus="loop">
@@ -229,10 +228,17 @@
 	    let currentPage = 1;
 	    const restaurantsPerPage = 5;
 		
+	    var selectedNum = null;
     	function showPage(page) {
 	        const startIndex = (page - 1) * restaurantsPerPage;
 	        const endIndex = startIndex + restaurantsPerPage;
-	
+	        if (selectedNum !== null) {
+		        var selectedSpan = document.getElementById('button' + selectedNum);
+	            selectedSpan.style.background = '';
+	        }
+	        var selectedSpan = document.getElementById('button' + page);
+            selectedSpan.style.background = 'blue';
+            selectedNum = page;
 		        for (let i = 0; i < restaurants.length; i++) {
 		            if (i >= startIndex && i < endIndex) {
 		                restaurants[i].style.display = 'block';
@@ -240,18 +246,8 @@
 		                restaurants[i].style.display = 'none';
 		            }
 	        	}
-	        setActiveButton(page);
 	     }
-    	function setActiveButton(page) {
-    		buttons.forEach(button => {
-                button.classList.remove('on');
-                button.querySelector('span').style.backgroundColor = '#bbb'; // 초기 색상으로 설정
-            });
-
-            const clickedButton = document.getElementById(`button${page}`);
-            clickedButton.parentElement.classList.add('on'); // 부모인 li에 on 클래스 추가
-            clickedButton.style.backgroundColor = '#717171';
-        }
+    	
     	
     	showPage(1);
     	

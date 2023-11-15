@@ -39,4 +39,13 @@ public class AnnounceDao {
 	public Announce selectAnnounce(SqlSession sqlSession, int annNum) {
 		return sqlSession.selectOne("announceMapper.selectAnnounce", annNum);
 		}
+	
+	
+	public Announce selectDetail(SqlSession sqlSession, int annNum) {
+		return sqlSession.selectOne("announceMapper.selectDetail", annNum);
+	}
+	
+	public int updateAnnounce(SqlSession sqlSession, Announce ann) {
+		return sqlSession.update("announceMapper.updateAnnounce", ann);
+	}
 }

@@ -1,10 +1,14 @@
 package com.umai.restaurant.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.umai.common.model.vo.Attachment;
+import com.umai.common.model.vo.PageInfo;
 import com.umai.restaurant.model.vo.Restaurant;
 
 public class RestaurantDao {
@@ -24,7 +28,6 @@ public class RestaurantDao {
 	}
 
 	public Restaurant selectRest(SqlSession sqlSession, int restNo) {
-		System.out.println("daoresNo"+restNo);
 		Restaurant list = sqlSession.selectOne("restaurantMapper.selectRest", restNo);
 		
 		return list;
@@ -32,14 +35,66 @@ public class RestaurantDao {
 
 	public ArrayList<Attachment> selectPhoto(SqlSession sqlSession, int restNo) {
 		ArrayList<Attachment> subList =  (ArrayList)sqlSession.selectList("restaurantMapper.selectPhoto", restNo);
-		System.out.println("daoresNo"+restNo);
-		System.out.println("dao"+subList);
+		
 		return subList;
 		
 	}
 
+	public ArrayList<Restaurant> selectList(SqlSession sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("restaurantMapper.selectList", null, rBounds);
+	}
 	
-	
-	
+	public int selectListCount(SqlSession sqlSession) {
+		
+		int result = sqlSession.selectOne("restaurantMapper.selectListCount");
+		
+		return result;
+	}
 
+	public int updateLike(SqlSession sqlSession, int restNum, int userNum) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("restNum", restNum);
+	    params.put("userNum", userNum);
+	    int result = sqlSession.update("restaurantMapper.updateLike", params);
+	    return result;
+	}
+
+	public Restaurant selectLike(SqlSession sqlSession, int restNum, int userNum) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("restNum", restNum);
+	    params.put("userNum", userNum);
+	    Restaurant like = sqlSession.selectOne("restaurantMapper.selectLike", params);
+		return like;
+	}
+
+	public int updateUnlike(SqlSession sqlSession, int restNum, int userNum) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("restNum", restNum);
+	    params.put("userNum", userNum);
+	    int result = sqlSession.update("restaurantMapper.updateUnlike", params);
+	    return result;
+	}
+	
+	public int insertRestaurant(SqlSession sqlSession, Restaurant r) {
+		return sqlSession.insert("restaurantMapper.insertRestaurant",r);
+	}
+	
+	public int insertAttachment(SqlSession sqlSession, ArrayList<Attachment> list) {
+		
+		int result = 0;
+		
+		for(Attachment a : list) {
+			result = sqlSession.insert("restaurantMapper.insertAttachment",a);
+		}
+		 
+		
+		return result;
+	}
+	
 }

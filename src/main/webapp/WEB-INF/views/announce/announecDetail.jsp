@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,61 +43,30 @@
         <br>
         <h1 align="center" style="color: #fc765d;">공지사항</h1>
 		
-        <form action="retouch.an" method="post">
+        <form action="announceRetouch.an" method="post" id="retouch-enroll">
          <div align="center"> 
-            
-            <textarea input type="text" id="title" style=" resize:none; font-weight: bold; width: 500px; " value="${a.title}"></textarea><br>
-            <textarea input type="text" id="detail" style=" resize:none; font-weight: bold; width: 500px; height: 250px;" value="${a.detail}"></textarea>
+            <input type="hidden" value="${a.annNum}" name="annNum">
+            <textarea name="title" style=" resize:none; font-weight: bold; width: 500px;" readonly>${a.title}</textarea><br>
+            <div id="checkRetouch"></div>
+            <textarea name="detail" style=" resize:none; font-weight: bold; width: 500px; height: 250px;" readonly>${a.detail}</textarea>
             
             <br><br>
 
         </div>
         <div align="center">
 
-            <button type="button" onclick="announceListBtn()" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;" >목록으로</button>
-            
-            <button type="submit" onclick="annupdateBtn()" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;"> 수정하기</button>
-            
+            <button onclick="location.href=''"  style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;" >목록으로</button>
+            <c:if test="${loginUser.manager eq 'Y' }">
+            <button type="submit" id="retouchBtn" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;"> 수정하기</button>
+            </c:if>
         </div>
         
         <br><br>
         
-        <script>
-
-       	 $(document).ready(function() {
-        	  $('#retouchBtn').on('click', function() {
-        	    $.ajax({
-        	      url: '/retouch.an' + $(this).data('userId'),
-        	      data: {
-        	    	title: $('#title').val()
-        	        detail: $('#detail').val()
-        	      },
-        	      success: function(data) {
-        	    	$('#title').html(data);
-        	        $('#detail').html(data);
-        	      },
-        	      error: function() {
-        	        alert('ajax통신 실패');
-        	      }
-        	    });
-        	  });
-        	});
-        
-        	function announceListBtn() {
-        		location.href = "announceList.an";
-        	}
-        	
-        	function annupdateBtn() {
-        		if($("#userId").val() == "admin") {
-        			location.href = "announceList.an";
-        		} else {
-        			alert("관리자만 수정가능합니다.");
-        		}
-        		
-        	}
-        </script>
+       
        
     </form>
     </div>
+    <jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

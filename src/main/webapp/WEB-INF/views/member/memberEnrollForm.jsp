@@ -209,11 +209,12 @@ html,
 	 	function passwordInput1() {
 	        const password1 = document.getElementById("pwd1").value;
 	        console.log(password1)
-	        if(password1.length < 8 || password1.length > 16 && length || !/[a-zA-Z0-9~!@#$%^&*()_+-={}|]/.test(pwd1)) {
+
+	        if(password1.length < 8 || password1.length > 16 && length && /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,16}$/.test(pwd1)) {
 	            document.getElementById('pwdInput').innerHTML = "8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.";
 	            return false;
 	        } else {
-	            document.getElementById('pwdInput') = "";
+	            document.getElementById('pwdInput').innerHTML = "";
 	            return true;
 	        }
 	    }

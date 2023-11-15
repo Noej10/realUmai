@@ -34,27 +34,22 @@ public class memberUpdateNickController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String userId = request.getParameter("userId");
-		String nickname = request.getParameter("nickname");
+		String nick = request.getParameter("nick");
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		loginUser.setNickname(nick);
 		
-		Member m = new Member();
-		m.setUserId(request.getParameter(userId));
-		m.setNickname(request.getParameter(nickname));
-		int result = new MemberServiceImple().updateNickMember(m);
+		int result = new MemberServiceImple().updateNickMember(loginUser);
+		
+		Member m = new MemberServiceImple().loginMember(loginUser);
 		
 		if(result > 0) {
-
-			request.setAttribute("errorMsg", "닉네임 변경에 실패하였습니다.");
-			request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
-
-		} else {
-
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "성공적으로 수정 하였습니다.");
 			session.setAttribute("loginUser", m);
-
-			response.sendRedirect(request.getContextPath() + "/memberRetouchPage.jsp");
-
+			response.sendRedirect(request.getContextPath() + "/update.me");
+		} else {
+			request.setAttribute("errorMsg", "닉네임 변경에 실패하였습니다.");
+			request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
 		}
 
 	}
