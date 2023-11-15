@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.umai.announce.model.service.AnnounceService;
 import com.umai.announce.model.service.AnnounceServiceImple;
@@ -41,10 +42,13 @@ public class AnnounceInsertController extends HttpServlet {
 		
 		int result = new AnnounceServiceImple().insertAnnounce(ann);
 		
+		HttpSession session = request.getSession();
 		if(result>0) {
+			session.setAttribute("alertMsg", "공지사항 등록이 완료되었습니다.");
 			response.sendRedirect(request.getContextPath()+"/announceList.an?cPage=1");
 		}else {
-			
+			session.setAttribute("alertMsg", "공지사항 등록에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath()+"/announceList.an?cPage=1");
 		}
 		
 	}
