@@ -12,4 +12,6 @@ public interface FaqService {
 	public ArrayList<Faq> selectList(PageInfo pi);
 	
 	public int selectListCount();
+
+	public int faqList();
 }

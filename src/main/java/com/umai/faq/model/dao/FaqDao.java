@@ -1,5 +1,4 @@
 package com.umai.faq.model.dao;
-
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
@@ -27,5 +26,9 @@ public class FaqDao {
 	
 	public int selectListCount(SqlSession sqlSession) {
 		return sqlSession.selectOne("faqMapper.selectListCount");
+	}
+
+	public int faqList(SqlSession sqlSession) {
+		return sqlSession.selectOne("faqMapper.faqList");
 	}
 }

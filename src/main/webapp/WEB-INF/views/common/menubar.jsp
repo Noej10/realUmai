@@ -82,8 +82,6 @@
     margin-bottom: 6px;
 }
 
-
-
 </style>
 
     <!-- BootStrap CSS -->
@@ -99,13 +97,6 @@
 	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
 </head>
-
-
-
-
-
-
-
 
 <body style="margin: 0; padding: 0;">
 	<%if(alertMsg != null){ %>

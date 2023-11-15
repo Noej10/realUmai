@@ -66,5 +66,34 @@ public class AnnounceServiceImple implements AnnounceService{
 		return a;
 	}
 
+		@Override
+		public Announce selectDetail(int annNum) {
+			
+			SqlSession sqlSession = Template.getSqlSession();
+			Announce a = aDao.selectDetail(sqlSession, annNum);
+			
+			sqlSession.close();
+			
+			return a;
+		}
+
+		@Override
+		public int updateAnnounce(Announce ann) {
+			SqlSession sqlSession = Template.getSqlSession();
+			
+			int result = aDao.updateAnnounce(sqlSession,ann);
+			
+			
+			if(result>0) {
+				sqlSession.commit();
+			}else {
+				sqlSession.rollback();
+			}
+			
+			sqlSession.close();
+			
+			return result;
+		}
+
 
 }

@@ -54,6 +54,7 @@ public class SearchReseultPageContoroller extends HttpServlet {
 			
 			//지역이름으로 검색 sql
 		}
+	
 		
 //		HashMap<String, String> map = new HashMap<>();
 //		map.put("cpage", cpage);

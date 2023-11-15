@@ -27,7 +27,7 @@ public class RestaurantServiceImple implements RestaurantService{
 		
 		return list;
 		}
-	}
+	
 	@Override
 	public int increaseCount(int restNo) {
 		SqlSession sqlSession = Template.getSqlSession();
@@ -85,7 +85,7 @@ public class RestaurantServiceImple implements RestaurantService{
 		sqlSession.close();
 		
 		return list;
-
+	}
 	public int insertRestaurant(Restaurant r, ArrayList<Attachment> list) {
 		
 		SqlSession sqlSession = Template.getSqlSession();

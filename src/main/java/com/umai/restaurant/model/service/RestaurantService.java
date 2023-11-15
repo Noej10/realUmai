@@ -15,9 +15,6 @@ public interface RestaurantService {
 	
 	public Restaurant selectRest(int restNo);
 	
-
-	ArrayList<Attachment> selectPhoto(int restNo);
-	
 	public int selectListCount();
 	
 	public ArrayList<Restaurant> selectList(PageInfo pi);

@@ -7,6 +7,8 @@ import com.umai.member.model.vo.Member;
 
 public class MemberServiceImple implements MemberService{
 
+	MemberDao mDao = new MemberDao();
+	
 	@Override
 	public Member loginMember(Member m) {
 		
@@ -142,6 +144,17 @@ public class MemberServiceImple implements MemberService{
 	}
 
 	@Override
+	public int selectId(Member m) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int selectId = MemberDao.selectId(sqlSession,m);
+		
+		sqlSession.close();
+		
+		return selectId;
+	}
+
+	
 	public Member checkPwdMember(Member m) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
@@ -151,8 +164,6 @@ public class MemberServiceImple implements MemberService{
 
 		return delMember;
 	}
-
-
 
 
 }
