@@ -81,7 +81,7 @@ public class SearchReseultPageContoroller extends HttpServlet {
 				request.setAttribute("searchInput", searchInput);
 				
 				request.getRequestDispatcher("WEB-INF/views/board/searchResultPage.jsp").forward(request, response);
-			
+		
 				}	
 			}
 	}

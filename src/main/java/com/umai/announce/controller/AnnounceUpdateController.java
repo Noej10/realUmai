@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.umai.announce.model.service.AnnounceService;
 import com.umai.announce.model.service.AnnounceServiceImple;
 import com.umai.announce.model.vo.Announce;
 
 /**
- * Servlet implementation class AnnounceInsertController
+ * Servlet implementation class AnnounceUpdateController
  */
-@WebServlet("/announceInsert.an")
-public class AnnounceInsertController extends HttpServlet {
+@WebServlet("/update.an")
+public class AnnounceUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AnnounceInsertController() {
+    public AnnounceUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +31,27 @@ public class AnnounceInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
+	
+		int annNum = Integer.parseInt(request.getParameter("annNum"));
+		String annTitle = request.getParameter("title");
+		String annDetail = request.getParameter("detail");
 		
 		Announce ann = new Announce();
 		
-		ann.setTitle(request.getParameter("title"));
-		ann.setDetail(request.getParameter("detail"));
+		ann.setAnnNum(annNum);
+		ann.setTitle(annTitle);
+		ann.setDetail(annDetail);
 		
-		int result = new AnnounceServiceImple().insertAnnounce(ann);
+		int result = new AnnounceServiceImple().updateAnnounce(ann);
 		
 		HttpSession session = request.getSession();
 		if(result>0) {
-			session.setAttribute("alertMsg", "공지사항 등록이 완료되었습니다.");
-			response.sendRedirect(request.getContextPath()+"/announceList.an?cPage=1");
+			session.setAttribute("alertMsg", "공지사항 수정이 완료되었습니다.");
+			response.sendRedirect(request.getContextPath()+"/detail.an?cPage="+annNum);
 		}else {
-			session.setAttribute("alertMsg", "공지사항 등록에 실패하였습니다.");
-			response.sendRedirect(request.getContextPath()+"/announceList.an?cPage=1");
+			session.setAttribute("alertMsg", "공지사항 수정에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath()+"/detail.an?cPage="+annNum);
 		}
-		
 	}
 
 	/**

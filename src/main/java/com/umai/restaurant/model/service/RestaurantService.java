@@ -1,3 +1,4 @@
+
 package com.umai.restaurant.model.service;
 
 import java.util.ArrayList;
@@ -37,5 +38,4 @@ public interface RestaurantService {
 	
 	public int searchSRegion(String searchInput);
 }
-
 

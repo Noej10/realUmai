@@ -129,6 +129,9 @@
               <h2>자주 묻는 질문</h2>
           </div>
 		<c:forEach var="fList" items="${faqList}">
+				<form action="delete.faq" id="deleteForm${fList.faqNum}" method="post">
+					<input type="hidden" value="${fList.faqNum}" name="dFaqNum">
+				</form>
           <div class="slide">
 	              <div id="faqQuestion">
 	                <div id="faqName">
@@ -162,8 +165,14 @@
 	                  <!--관리자 로그인 시 보이는 곳-->
 	                  <c:if test="${loginUser.manager eq 'Y'}">
 	                  <div>
-	                    <button>수정</button>
-	                    <button>삭제</button>
+	                  	<form action="faqUpdateForm.faq" method="post">
+	                  		<input type="hidden" value="${fList.faqNum}" name="faqNum">
+	                  		<input type="hidden" value="${fList.faqKind}" name="faqKind">
+	                  		<input type="hidden" value="${fList.faqTitle}" name="faqTitle">
+	                  		<input type="hidden" value="${fList.faqContent}" name="faqContent">
+		                    <button type="submit">수정</button>
+		                    <button type="button" onclick="deleteFaq(${fList.faqNum});">삭제</button>
+	                    </form>
 	                  </div>
 	                  </c:if>
 	              </div>
@@ -187,6 +196,7 @@
 				<c:if test="${pi.maxPage ne pi.currentPage }">
 					<a class="arrow next" href="faqList.faq?cPage=${pi.currentPage+1}">&gt;</a>
 				</c:if>
+
             </div>
          </div>  
   </div>
@@ -205,6 +215,10 @@
             $(this).find("img")[0].classList.add("recruitRotate2");
         }
     });
+    
+    function deleteFaq(num) {
+    	$("#deleteForm"+num).submit();
+    }
 
 	</script>
 	<jsp:include page="../common/footer.jsp"></jsp:include>

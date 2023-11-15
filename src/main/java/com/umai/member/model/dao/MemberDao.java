@@ -51,6 +51,12 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	public static int selectId(SqlSession sqlSession, Member m) {
+		
+		return sqlSession.selectOne("memberMapper.selectId", m);
+		
+	}
 
 	public Member checkPwdMember(SqlSession sqlSession, Member m) {
 		

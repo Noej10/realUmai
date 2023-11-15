@@ -4,7 +4,6 @@ import java.sql.Date;
 
 public class Review {
 	private int commentNum;
-
 	private String commentContents;
 	private Date revWrite;
 	private int revRestnum;
@@ -22,7 +21,7 @@ public class Review {
 	private String status;
 	private String nickname;
 	
-	   public Review() {}
+	public Review() {}
 
 	public Review(int commentNum, String commentContents, Date revWrite, int revRestnum, int memberNum, int revTaste,
 			int revKind, int revFacility, int revPrice, int revMobility, int revWaiting, int revSpeed, int revClean,
@@ -45,17 +44,6 @@ public class Review {
 		this.revAvgscore = revAvgscore;
 		this.status = status;
 		this.nickname = nickname;
-
-
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-
 	}
 
 	public int getCommentNum() {
@@ -194,8 +182,8 @@ public class Review {
 				+ revKind + ", revFacility=" + revFacility + ", revPrice=" + revPrice + ", revMobility=" + revMobility
 				+ ", revWaiting=" + revWaiting + ", revSpeed=" + revSpeed + ", revClean=" + revClean + ", revRevisit="
 				+ revRevisit + ", revAvgscore=" + revAvgscore + ", status=" + status + ", nickname=" + nickname + "]";
-	} 
-
+	}
+	
 }
 
 

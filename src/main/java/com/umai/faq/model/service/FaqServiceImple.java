@@ -1,5 +1,4 @@
 package com.umai.faq.model.service;
-
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +9,8 @@ import com.umai.faq.model.dao.FaqDao;
 import com.umai.faq.model.vo.Faq;
 
 public class FaqServiceImple implements FaqService{
+
+	private FaqDao fDao = new FaqDao();
 
 	@Override
 	public int insertFaq(Faq faq) {
@@ -51,6 +52,51 @@ public class FaqServiceImple implements FaqService{
 		sqlSession.close();
 		
 		return listCount;
+	}
+
+	@Override
+	public int updateFaq(Faq faq) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result= new FaqDao().updateFaq(sqlSession,faq);
+		
+		if(result>0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public int deleteFaq(Faq faq) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = new FaqDao().deleteFaq(sqlSession,faq);
+		
+		if(result>0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+			
+			sqlSession.close();
+			
+		return result;
+	}
+
+	@Override
+	public int faqList() {
+		SqlSession sqlSession = Template.getSqlSession();
+		int list = fDao.faqList(sqlSession);
+		
+		sqlSession.close();
+		return list;
 	}
 
 }
