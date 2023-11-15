@@ -53,4 +53,40 @@ public class FaqServiceImple implements FaqService{
 		return listCount;
 	}
 
+	@Override
+	public int updateFaq(Faq faq) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result= new FaqDao().updateFaq(sqlSession,faq);
+		
+		if(result>0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public int deleteFaq(Faq faq) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = new FaqDao().deleteFaq(sqlSession,faq);
+		
+		if(result>0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+			
+			sqlSession.close();
+			
+		return result;
+	}
+
 }

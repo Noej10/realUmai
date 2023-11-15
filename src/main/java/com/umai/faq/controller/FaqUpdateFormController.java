@@ -1,7 +1,6 @@
 package com.umai.faq.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,23 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.umai.announce.model.service.AnnounceServiceImple;
-import com.umai.common.model.vo.PageInfo;
-import com.umai.common.template.Pagenation;
-import com.umai.faq.model.service.FaqServiceImple;
 import com.umai.faq.model.vo.Faq;
 
 /**
- * Servlet implementation class FaqListController
+ * Servlet implementation class FaqUpdateFormController
  */
-@WebServlet("/faqList.faq")
-public class FaqListController extends HttpServlet {
+@WebServlet("/faqUpdateForm.faq")
+public class FaqUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqListController() {
+    public FaqUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,17 +29,22 @@ public class FaqListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int currentPage = Integer.parseInt(request.getParameter("cPage"));
-		int listCount = new FaqServiceImple().selectListCount();
+
+		request.setCharacterEncoding("UTF-8");
 		
-		PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 6);
-		ArrayList<Faq> list = new FaqServiceImple().selectList(pi);
+		Faq faq = new Faq();
+		faq.setFaqNum(Integer.parseInt(request.getParameter("faqNum")));
+		faq.setFaqKind(request.getParameter("faqKind"));
+		faq.setFaqTitle(request.getParameter("faqTitle"));
+		faq.setFaqContent(request.getParameter("faqContent"));
 		
-		request.setAttribute("pi", pi);
-		request.setAttribute("faqList", list);
-		System.out.println(pi);
-		System.out.println(list);
-		request.getRequestDispatcher("WEB-INF/views/faq/faqPage.jsp").forward(request, response);
+//		System.out.println(faq);
+		request.setAttribute("faqInfo", faq);
+		
+		request.getRequestDispatcher("WEB-INF/views/faq/faqUpdateForm.jsp").forward(request, response);
+	
+	
+	
 	}
 
 	/**

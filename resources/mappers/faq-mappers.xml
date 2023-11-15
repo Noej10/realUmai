@@ -31,6 +31,17 @@
 		WHERE STATUS = 'Y'
 		ORDER BY FAQ_NUM DESC
   	</select>
-  
+  	
+  	<update id="updateFaq">
+  		UPDATE FAQ
+  		SET FAQ_KIND = #{faqKind}, FAQ_TITLE = #{faqTitle}, FAQ_CONTENT = #{faqContent}
+  		WHERE FAQ_NUM = #{faqNum}
+  	</update>
+  	
+  	<update id="deleteFaq">
+  		UPDATE FAQ
+  		SET STATUS = 'N'
+  		WHERE FAQ_NUM = #{faqNum}
+  	</update>
   
   </mapper>

@@ -1,4 +1,4 @@
-package com.umai.announce.controller;
+package com.umai.faq.controller;
 
 import java.io.IOException;
 
@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.umai.announce.model.service.AnnounceService;
-import com.umai.announce.model.service.AnnounceServiceImple;
-import com.umai.announce.model.vo.Announce;
+import com.umai.faq.model.service.FaqServiceImple;
+import com.umai.faq.model.vo.Faq;
 
 /**
- * Servlet implementation class AnnounceInsertController
+ * Servlet implementation class FaqDeleteController
  */
-@WebServlet("/announceInsert.an")
-public class AnnounceInsertController extends HttpServlet {
+@WebServlet("/delete.faq")
+public class FaqDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AnnounceInsertController() {
+    public FaqDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,22 +34,19 @@ public class AnnounceInsertController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		Announce ann = new Announce();
+		Faq faq = new Faq();
+		faq.setFaqNum(Integer.parseInt(request.getParameter("dFaqNum")));
 		
-		ann.setTitle(request.getParameter("title"));
-		ann.setDetail(request.getParameter("detail"));
-		
-		int result = new AnnounceServiceImple().insertAnnounce(ann);
+		int result = new FaqServiceImple().deleteFaq(faq);
 		
 		HttpSession session = request.getSession();
 		if(result>0) {
-			session.setAttribute("alertMsg", "공지사항 등록이 완료되었습니다.");
-			response.sendRedirect(request.getContextPath()+"/announceList.an?cPage=1");
+			session.setAttribute("alertMsg", "FAQ 삭제가 완료되었습니다.");
+			response.sendRedirect(request.getContextPath()+"/faqList.faq?cPage=1");
 		}else {
-			session.setAttribute("alertMsg", "공지사항 등록에 실패하였습니다.");
-			response.sendRedirect(request.getContextPath()+"/announceList.an?cPage=1");
+			session.setAttribute("alertMsg", "FAQ 삭제에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath()+"/faqList.faq?cPage=1");
 		}
-		
 	}
 
 	/**
