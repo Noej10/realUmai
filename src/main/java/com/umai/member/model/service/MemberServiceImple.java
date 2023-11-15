@@ -132,7 +132,7 @@ public class MemberServiceImple implements MemberService{
 	public int deleteMember(Member m) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
-		int result = mDao.deleteMember(sqlSession, m);
+		int result = new MemberDao().deleteMember(sqlSession, m);
 		
 		if(result > 0) {
 			sqlSession.commit();
@@ -158,7 +158,7 @@ public class MemberServiceImple implements MemberService{
 	public Member checkPwdMember(Member m) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
-		Member delMember = mDao.checkPwdMember(sqlSession, m);
+		Member delMember = new MemberDao().checkPwdMember(sqlSession, m);
 		
 		sqlSession.close();
 

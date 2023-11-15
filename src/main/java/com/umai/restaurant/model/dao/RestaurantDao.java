@@ -40,14 +40,24 @@ public class RestaurantDao {
 		
 	}
 
-	public ArrayList<Restaurant> selectList(SqlSession sqlSession, PageInfo pi){
+	public ArrayList<Restaurant> selectSearchList(SqlSession sqlSession, PageInfo pi, String searchInput){
 		
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
 		
 		RowBounds rBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("restaurantMapper.selectList", null, rBounds);
+		return (ArrayList)sqlSession.selectList("restaurantMapper.selectSearchList",searchInput,rBounds);
+	}
+	
+	public ArrayList<Restaurant> selectReSearchList(SqlSession sqlSession, PageInfo pi, String searchInput){
+		
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("restaurantMapper.selectReSearchList",searchInput,rBounds);
 	}
 	
 	public int selectListCount(SqlSession sqlSession) {
@@ -95,6 +105,14 @@ public class RestaurantDao {
 		 
 		
 		return result;
+	}
+	
+	public int searchSStore(SqlSession sqlSession, String searchInput) {
+		return sqlSession.selectOne("restaurantMapper.searchSStore", searchInput);
+	}
+	
+	public int searchSRegion(SqlSession sqlSession, String searchInput) {
+		return sqlSession.selectOne("restaurantMapper.searchSRegion", searchInput);
 	}
 	
 }

@@ -77,10 +77,10 @@ public class RestaurantServiceImple implements RestaurantService{
 	}
 
 	@Override
-	public ArrayList<Restaurant> selectList(PageInfo pi) {
+	public ArrayList<Restaurant> selectSearchList(PageInfo pi, String searchInput) {
 		SqlSession sqlSession = Template.getSqlSession();
 		
-		ArrayList<Restaurant> list = new RestaurantDao().selectList(sqlSession, pi);
+		ArrayList<Restaurant> list = new RestaurantDao().selectSearchList(sqlSession, pi , searchInput);
 		
 		sqlSession.close();
 		
@@ -145,6 +145,46 @@ public class RestaurantServiceImple implements RestaurantService{
 		
 		return result;
 
+	}
+
+	@Override
+	public int searchSStore(String searchInput) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = rDao.searchSStore(sqlSession, searchInput);
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public int searchSRegion(String searchInput) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = rDao.searchSRegion(sqlSession, searchInput);
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public ArrayList<Restaurant> selectNoSearchList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Restaurant> selectReSearchList(PageInfo pi, String searchInput) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		ArrayList<Restaurant> list = new RestaurantDao().selectReSearchList(sqlSession, pi , searchInput);
+		
+		sqlSession.close();
+		
+		return list;
 	}
 
 	
