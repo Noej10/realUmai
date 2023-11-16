@@ -55,7 +55,7 @@
         </div>
         <div align="center">
 
-            <button onclick="location.href=''"  style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;" >목록으로</button>
+            <button type="button" onclick="location.href='announceList.an?cPage=1'"  style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;" >목록으로</button>
             <c:if test="${loginUser.manager eq 'Y' }">
             <button type="submit" id="retouchBtn" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 90px; height: 35px;"> 수정하기</button>
             </c:if>
