@@ -34,6 +34,7 @@ public class FaqDao {
 	
 	public int deleteFaq(SqlSession sqlSession, Faq faq) {
 		return sqlSession.update("faqMapper.deleteFaq", faq);
+	}
 
 
 	public int faqList(SqlSession sqlSession) {
@@ -41,4 +42,4 @@ public class FaqDao {
 
 	}
 }
-}
+

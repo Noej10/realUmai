@@ -1,6 +1,7 @@
 <%@page import="com.umai.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%
     	String contextPath = request.getContextPath();
     
@@ -50,8 +51,7 @@
 }
 .memberInfo{
     position: absolute;
-    right: 35px;
-    top: 8px;
+    right: 25px;
 }
 
 .memberInfo img{
@@ -107,9 +107,8 @@
 	<%} %>
     <div class="header">
         <div>
-			
             <img id="logo" src="/Umai/resources/images/mainLogoWhiteFinal.png" onclick="tomain()" alt="umaiLogo">
-
+            
         </div>
         <div id="search-area" align="center" style="color: white;">
             <form action="search.bo" method="get">
@@ -137,9 +136,10 @@
             <a href="faqList.faq?cPage=1">FAQ</a>
         </div>
         <div class="memberInfo">
-
-            <img src="/Umai/resources/images/memberIcon.png" alt="userIcon" onclick="openMemberMenu()">
-
+			<c:if test="${loginUser.manager eq 'N' }">
+            <img style="margin-left: 20px" src="/Umai/resources/images/memberIcon.png" alt="userIcon" onclick="openMemberMenu()">
+			</c:if>
+			<h4><%=loginUser.getName()%></h4>
 
         </div>
         <div id="memberMenu" class="memberMenu">
@@ -227,7 +227,7 @@
         </div>
        </div>
         <script>
-        const withdrawalBtn = document.querySelector('#memberMenu a:nth-child(3)');
+        const withdrawalBtn = document.querySelector('#memberMenu a:nth-child(4)');
 
         withdrawalBtn.setAttribute("data-bs-toggle", "modal");
         withdrawalBtn.setAttribute("data-bs-target", "#findId");

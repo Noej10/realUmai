@@ -135,12 +135,13 @@
 </head>
 
 <body class="main">
-			<%if(alertMsg != null){ %>
+			
+		<%if(alertMsg != null){ %>
 		<script>
 			alert("<%=alertMsg%>");
 		</script>
 		<%session.removeAttribute("alertMsg"); %>
-	<%} %>
+		<%} %>
         <div class="plate1" align="center">
             <div class="plate2">
                 <img src="/Umai/resources/images/mainLogo.png" alt="logo">

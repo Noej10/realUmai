@@ -74,7 +74,6 @@
 			USER_ID,
 			NAME,
 			MANAGER,
-			SECESSION,
 			JOIN_DATE,
 			CORRECTION,
 			STATUS
@@ -84,7 +83,6 @@
 	AND STATUS = 'Y'
 	</select>
 
-	
 	<select id="findId" parameterType="Member" resultMap="memberResultSet">
 		SELECT USER_ID 
 		FROM MEMBER

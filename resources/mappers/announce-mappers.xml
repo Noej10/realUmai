@@ -10,7 +10,6 @@
   		<result column="ANN_NUM" property="annNum"/>
   		<result column="TITLE" property="title"/>
   		<result column="DETAIL" property="detail"/>
-  		<result column="ANN_WRITE" property="annWrite"/>
   	</resultMap>
   	
   	<select id="selectListCount" resultType="_int">
@@ -39,7 +38,7 @@
   	</select>
   	
   	<select id="selectDetail" resultMap="announceResult">
-		SELECT ANN_NUM, TITLE, DETAIL, TO_CHAR(ANN_WRITE,'YY-MM-DD') AS "ANN_WRITE"
+		SELECT ANN_NUM, TITLE, DETAIL
 		FROM ANNOUNCE
 		WHERE ANN_NUM = #{annNum}
   	</select>

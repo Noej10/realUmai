@@ -105,7 +105,7 @@
     }
     .prev {
       left: 0;
-      color: black;
+      color: red;
       font-size: 35px;
       margin-right: 10px;
       /* background-color: #222; */
@@ -113,7 +113,7 @@
 
     .next {
       right: 0;
-      color: black;
+      color: red;
       font-size: 35px;
       /* background-color: #222; */
     }
@@ -316,7 +316,7 @@
 	            <div class="nickname">${rev.nickname }</div>
 	            <div class="review-text">
 	                <p>${rev.commentContents }</p>
-	                <c:if test="${loginUser.userNum == rev.memberNum}">
+	                <c:if test="${mem.userNum == rev.memberNum}">
 	                <button type="button" id="delete-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteRview-${loop.index + 1}">
 					  삭제
 					</button>

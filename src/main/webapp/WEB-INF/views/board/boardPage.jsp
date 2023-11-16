@@ -237,7 +237,7 @@
 	            selectedSpan.style.background = '';
 	        }
 	        var selectedSpan = document.getElementById('button' + page);
-            selectedSpan.style.background = 'blue';
+            selectedSpan.style.background = 'gray';
             selectedNum = page;
 		        for (let i = 0; i < restaurants.length; i++) {
 		            if (i >= startIndex && i < endIndex) {

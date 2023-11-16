@@ -11,7 +11,7 @@
   		<result column="REV_WRITE" property="revWrite"/> <!-- 작성일 --> 
   		<result column="REV_RESTNUM" property="revRestnum"/> <!--식당번호  -->
   		<result column="STATUS" property="status"/> 
-  		<result column="MEMBER_NUM" property="memberNum"/> 
+  		<result column="REV_MEMBER_NUM" property="memberNum"/> 
   		<result column="REV_TASTE" property="revTaste"/> 
   		<result column="REV_KIND" property="revKind"/> 
   		<result column="REV_FACILITY" property="revFacility"/> 
@@ -31,7 +31,7 @@
         COMMENT_CONTENTS,
         REV_WRITE,
         REV_RESTNUM,
-        MEMBER_NUM,
+        REV_MEMBER_NUM,
         REV_TASTE,
         REV_KIND,
         REV_FACILITY,
@@ -44,7 +44,7 @@
         REV_AVGSCORE,
         NICKNAME
     FROM REVIEW
-    JOIN MEMBER ON(USER_NUM=MEMBER_NUM)
+    JOIN MEMBER ON(USER_NUM=REV_MEMBER_NUM)
     WHERE REV_RESTNUM = #{restNo}
     AND REVIEW.STATUS = 'Y'
   </select>
@@ -53,16 +53,15 @@
   	UPDATE REVIEW
 			SET STATUS = 'N'
 		WHERE REV_RESTNUM = #{revRestnum}
-  		AND MEMBER_NUM = #{memberNum}
+  		AND REV_MEMBER_NUM = #{memberNum}
   </update>
   <insert id="insertRview">
   	INSERT INTO REVIEW (
     COMMENT_NUM,
     COMMENT_CONTENTS,
     REV_WRITE,
-    REV_DELETE,
     REV_RESTNUM,
-    MEMBER_NUM,
+    REV_MEMBER_NUM,
     REV_TASTE,
     REV_KIND,
     REV_FACILITY,
@@ -78,7 +77,6 @@
     SEQ_CMNO.NEXTVAL,
     #{commentContents},
     SYSDATE,
-    'N',
     #{revRestnum},
     #{memberNum},
     #{revTaste},
@@ -100,7 +98,7 @@
   		SELECT *
   		FROM REVIEW
   		WHERE REV_RESTNUM = #{revRestnum}
-  		AND MEMBER_NUM = #{memberNum}
+  		AND REV_MEMBER_NUM = #{memberNum}
   		AND STATUS = 'Y'
   	</select>
   	<select id="selectFinalScore" resultType="_int">
