@@ -187,6 +187,55 @@ public class RestaurantServiceImple implements RestaurantService{
 		return list;
 	}
 
+	@Override
+	public int likeCount(int restNum) {
+		SqlSession sqlSession = Template.getSqlSession();
+				
+		int likeCount = rDao.likeCount(sqlSession, restNum);
+		
+		return likeCount;
+	}
+
+	@Override
+	public int createTable(int restNo, int memNum) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int createTable = rDao.createTable(sqlSession, restNo, memNum);
+		
+		if(createTable>0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		return createTable;
+	}
+
+	@Override
+	public Restaurant tableCheck(int restNo, int memNum) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		Restaurant tableCheck = rDao.tableCheck(sqlSession, restNo, memNum);
+		
+		return tableCheck;
+	}
+
+	@Override
+	public int updateFinalScore(Restaurant rev) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int updateFinalScore = rDao.updateFinalScore(sqlSession, rev);
+		
+		if(updateFinalScore>0) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		
+		return updateFinalScore;
+	}
+
 	
 
 }

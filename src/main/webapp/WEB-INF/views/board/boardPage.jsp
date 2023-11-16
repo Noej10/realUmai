@@ -179,7 +179,7 @@
 				<figure class="main-figure">
 					<a href="detail.res?rno=${r.restNum }" class="atag">  
 						<p class="thumbnail-area">
-						<img class="image" src="${r.filePath }${r.originName}" />
+						<img class="image" src="/Umai/${r.filePath }" />
 						</p>
 						<figcaption class="caption">
 						<p class="title">
@@ -255,7 +255,7 @@
     </script>
     
 
-	
+	<jsp:include page="../common/footer.jsp"></jsp:include>
 	
 </body>
 

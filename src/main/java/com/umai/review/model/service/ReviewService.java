@@ -5,8 +5,14 @@ import java.util.ArrayList;
 import com.umai.review.model.vo.Review;
 
 public interface ReviewService {
-	
-	int insertReview(Review re);
-	
+		
 	ArrayList<Review> selectReview(int restNo);
+	
+	int deleteReview(Review r);
+	
+	int insertRview(Review r);
+	
+	Review checkReview(Review r);
+	
+	int selectFinalScore(int restNum);
 }

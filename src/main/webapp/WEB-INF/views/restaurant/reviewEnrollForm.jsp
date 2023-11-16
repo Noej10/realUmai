@@ -61,16 +61,16 @@
         <div style="width: 28%;">
         
         </div>
-                <form action="insert." method="post">
+                <form action="insert.re" method="post">
                 <div class="rate-body">
                     <br>
                     <div class="img-name" width="500">
                         
                         <div>
-                        <img style="width: 100px; height: 100px; " src="/Umai/resources/images/sampleImg.jpg" alt="name">
+                        <img style="width: 100px; height: 100px; " src="/Umai/${res.filePath }" alt="name">
                         </div>
                         <div align="right" style="width: 400px;">
-                        [식당이름] 평가하기
+                        ${res.restName } 평가하기
                         </div>
                     </div>
                     <br>
@@ -165,9 +165,11 @@
                         </fieldset>
                     </div>
                     <div style="width: 100%;">
-                        <textarea style="width: 170%; display: inline-block;height: 180px;border: none;border-radius: 10px;resize: none;">${re.commentContents}</textarea>
+                        <textarea name="textarea" style="width: 170%; display: inline-block;height: 180px;border: none;border-radius: 10px;resize: none;"></textarea>
                     </div>
-                    <div align="right" style="width: 170%;">
+                    <div align="right" style="width: 170%; margin-bottom: 10px;">
+                    	<input type="hidden" value="${r.memberNum }" name="userNum">
+                		<input type="hidden" value="${r.revRestnum }" name="restNum">
                         <input type="submit" class="btn btn-primary" style="border: none; background: #fc765d;" value="등록하기">
                     </div>
                 </div>

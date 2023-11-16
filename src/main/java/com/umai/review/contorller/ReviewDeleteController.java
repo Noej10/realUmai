@@ -6,23 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.umai.restaurant.model.vo.Restaurant;
+import com.umai.member.model.vo.Member;
 import com.umai.review.model.service.ReviewServiceImple;
 import com.umai.review.model.vo.Review;
 
 /**
- * Servlet implementation class ReviewEnrollFormController
+ * Servlet implementation class ReviewDeleteController
  */
-@WebServlet("/reviewEnroll.re")
-public class ReviewEnrollFormController extends HttpServlet {
+@WebServlet("/deleteRev")
+public class ReviewDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewEnrollFormController() {
+    public ReviewDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,31 +32,24 @@ public class ReviewEnrollFormController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Review r =new Review();
-		r.setRevRestnum(Integer.parseInt(request.getParameter("rresNum")));
-		r.setMemberNum(Integer.parseInt(request.getParameter("rmemNum")));
+		r.setRevRestnum(Integer.parseInt(request.getParameter("revRestnum")));
+		r.setMemberNum(Integer.parseInt(request.getParameter("memberNum")));
+		System.out.println(r);
+		int result = new ReviewServiceImple().deleteReview(r);
 		
-		Restaurant res = new Restaurant();
-		res.setRestName(request.getParameter("rresName"));
-		res.setFilePath(request.getParameter("rresFile"));
+		int currentPage = (Integer.parseInt(request.getParameter("revRestnum")));
 		
-		Review re = new ReviewServiceImple().checkReview(r);
-		
-		int currentPage = Integer.parseInt(request.getParameter("rresNum"));
-		
-		HttpSession session = request.getSession();
-		if(re == null) {
-			request.setAttribute("r", r);
-			request.setAttribute("res", res);
-			request.getRequestDispatcher("/WEB-INF/views/restaurant/reviewEnrollForm.jsp").forward(request, response);
-		}else {
-			session.setAttribute("alertMsg", "댓글이 이미 존재합니다(식당 하나당 리뷰는 한개만 등록가능)");
+		if(result>0) {
+			request.setAttribute("alertMsg", "리뷰삭제 성공");
+//			request.getRequestDispatcher("/WEB-INF/views/board/boardDetailPage.jsp").forward(request, response);
 			response.sendRedirect("detail.res?rno="+currentPage);
+		}else {
+			request.setAttribute("errorMsg", "상세조회 실패");
+			request.getRequestDispatcher("/WEB-INF/views/board/boardDetailPage.jsp").forward(request, response);
+
 		}
 		
-		
 	}
-	
-		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

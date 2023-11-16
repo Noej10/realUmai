@@ -28,6 +28,13 @@ public interface RestaurantService {
 	
 	Restaurant selectlike(int restNum, int userNum);
 	
+	int likeCount(int restNum);
+	
+	Restaurant tableCheck(int restNo, int memNum);
+	
+	public int createTable(int restNo, int memNum);
+	
+	int updateFinalScore(Restaurant rev);
 	ArrayList<Restaurant> selectNoSearchList();
 
 	ArrayList<Restaurant> selectSearchList(PageInfo pi,String searchInput);
