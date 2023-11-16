@@ -11,7 +11,6 @@
   		<result column="SUGGESTION" property="suggestion"/> <!-- 추천수 -->
   		<result column="REST_CHECK" property="restCheck"/>	<!-- 조회수 -->
   		<result column="ORIGINAL" property="original"/>
-  		<result column="REST_DELETE" property="restDelete"/>
   		<result column="DUCTION" property="duction"/> <!-- 식당소개 -->
   		<result column="GRADE" property="grade"/>
   		<result column="MENU" property="menu"/>
@@ -59,7 +58,6 @@
   			SUGGESTION,
   			REST_CHECK,
   			ORIGINAL,
-  			REST_DELETE,
   			DUCTION,
   			GRADE,
   			MENU,
@@ -149,7 +147,6 @@
   			SUGGESTION,
   			REST_CHECK,
   			ORIGINAL,
-  			REST_DELETE,
   			DUCTION,
   			GRADE,
   			MENU,
@@ -170,7 +167,6 @@
   			SUGGESTION,
   			REST_CHECK,
   			ORIGINAL,
-  			REST_DELETE,
   			DUCTION,
   			GRADE,
   			MENU,

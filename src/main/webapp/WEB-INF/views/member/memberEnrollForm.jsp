@@ -94,16 +94,20 @@ html,
 	}
 
 .input-area{
+position: relative;
     color: #fc765d;
     font-weight: bold;
     font-size: 24px;
-    display: flex;
+    display: table;
     justify-content: center;
     margin-bottom: 10px;
     margin-top: 10px;
     outline: 0;
     padding: 4px;
     border-radius: 9px;
+    right: -500px;
+    
+    
 }
 
 .modal-title{
@@ -126,15 +130,16 @@ html,
 
 <body>
 
-    <jsp:include page="../common/menubar.jsp" />
+    
 
     <div class="outer"> <br>
         <h1 align="center" style="color: #fc765d;">회원가입</h1>
 		<br>
+		<form action="insert.me" method="post" id="enroll">
         <div class="input-area">
         
 
-        <form action="insert.me" method="post" id="enroll">
+        
         <table align="center">
             <div align="right">ID
                     <input type="text" id="userId" name="userId" required placeholder="아이디를 입력해주세요.">
@@ -173,10 +178,11 @@ html,
             </div>
         </table>
     </div>
-
+	
         <div align="center" >
             <button type="submit" id="id"  style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 450px; height: 55px;" >회원가입</button>
         </div>
+        </form>
     </div>
     <!-- ID 중복확인 모달 -->
 <div class="modal" id="myModal">

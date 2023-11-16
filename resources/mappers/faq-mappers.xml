@@ -11,7 +11,7 @@
 		<result column="FAQ_KIND" property="faqKind"/>
 		<result column="FAQ_TITLE" property="faqTitle"/>
 		<result column="FAQ_CONTENT" property="faqContent"/>
-		<result column="FAQ_DATE" property="faqDate"/>
+		
   	</resultMap>
   	
   
@@ -27,7 +27,7 @@
   	</select>
   	
   	<select id="selectList" resultMap="faqResult">
-	  	SELECT FAQ_NUM, FAQ_KIND, FAQ_TITLE, FAQ_CONTENT, TO_CHAR(FAQ_DATE,'YY-MM-DD') AS "FAQ_DATE"
+	  	SELECT FAQ_NUM, FAQ_KIND, FAQ_TITLE, FAQ_CONTENT
 		FROM FAQ
 		WHERE STATUS = 'Y'
 		ORDER BY FAQ_NUM DESC

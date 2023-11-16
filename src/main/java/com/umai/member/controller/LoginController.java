@@ -47,8 +47,11 @@ public class LoginController extends HttpServlet {
 		ArrayList<Restaurant> resList = new RestaurantServiceImple().selectListMain();
 //		System.out.println(resList);
 		if(loginUser == null) {
-			request.setAttribute("errorMsg", "로그인 실패");
-	    	request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
+	    	request.getSession().setAttribute("alertMsg", "로그인 실패");
+
+	    	response.sendRedirect(request.getContextPath());
+	    	
+
 
 	    }else {
 	    	request.getSession().setAttribute("resList", resList);

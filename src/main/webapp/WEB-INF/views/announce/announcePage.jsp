@@ -10,7 +10,6 @@
 
 #outer{
     background: rgb(255, 210, 210);
-    height: 920px;
     padding-top: 50px;
 }
 
@@ -31,7 +30,7 @@ li{
     font-weight: bold;
 }
 
-button {
+.buttonex {
     background: rgb(252, 118, 93);
     border-radius: 5px;
     border: none;
@@ -159,7 +158,7 @@ button {
   
         <c:if test="${loginUser.manager eq 'Y' }">
          <div class="ann-enroll">
-            <button type="submit" id="ann-btn">공지사항 등록</button>
+            <button type="submit" id="ann-btn" class="btn btn-primary" style="background: rgb(252, 118, 93); border: none;">공지사항 등록</button>
         </div>
         </c:if> 
          <div class="page_wrap">

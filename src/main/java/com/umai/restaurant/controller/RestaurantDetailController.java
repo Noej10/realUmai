@@ -57,7 +57,7 @@ public class RestaurantDetailController extends HttpServlet {
 			Restaurant r = new RestaurantServiceImple().selectRest(restNo);
 			ArrayList<Attachment> subList = new RestaurantServiceImple().selectPhoto(restNo);
 			ArrayList<Review> rev = new ReviewServiceImple().selectReview(restNo);
-			Restaurant like = new RestaurantServiceImple().selectlike(restNo, result);
+			Restaurant like = new RestaurantServiceImple().selectlike(restNo, memNum);
 			int likeCount = new RestaurantServiceImple().likeCount(restNo);
 			
 			
@@ -65,6 +65,7 @@ public class RestaurantDetailController extends HttpServlet {
 			request.setAttribute("r", r);
 			request.getSession().setAttribute("subList", subList);
 			request.getSession().setAttribute("rev", rev);
+			request.getSession().setAttribute("mem", mem);
 			request.getSession().setAttribute("like", like);
 			request.getSession().setAttribute("likeCount", likeCount);
 			

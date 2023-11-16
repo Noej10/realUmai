@@ -42,6 +42,7 @@ public class MemberInsertController extends HttpServlet {
 		String phone = request.getParameter("phone");
 		
 		Member m = new Member(userId, passWord, nickName, name, email, phone);
+		System.out.println(m);
 		int result = new MemberServiceImple().insertMember(m);
 		HttpSession session = request.getSession();
 		if(result > 0) {
