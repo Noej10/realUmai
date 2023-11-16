@@ -82,8 +82,6 @@
     margin-bottom: 6px;
 }
 
-
-
 </style>
 
     <!-- BootStrap CSS -->
@@ -100,13 +98,6 @@
 
 </head>
 
-
-
-
-
-
-
-
 <body style="margin: 0; padding: 0;">
 	<%if(alertMsg != null){ %>
 		<script>
@@ -120,16 +111,26 @@
             <img id="logo" src="/Umai/resources/images/mainLogoWhiteFinal.png" onclick="tomain()" alt="umaiLogo">
 
         </div>
-        <div align="center" style="color: white;">
-            <form action="">
-                <input type="radio" name="searchType" checked>지역별
+        <div id="search-area" align="center" style="color: white;">
+            <form action="search.bo" method="get">
+            	<input type="hidden" name="cPage" value="1">
+                <input id="radRegion" type="radio" name="searchType"  value="sRegion" checked>지역별
                 &nbsp;&nbsp;&nbsp;
-                <input type="radio" name="searchType">식당별
+                <input id="radStore" type="radio" name="searchType" value="sStore">식당별
                 &nbsp;&nbsp;
-                <input type="text" style="width: 30%; height: 30px;" placeholder="식당 이름이나 지역명으로 검색해보세요.">
-                <input type="submit" class="btn btn-sm btn-primary" value="검색">
+                <input type="text" name="searchInput" value="${searchInput}" style="width: 30%;  height: 30px;" placeholder="식당 이름이나 지역명으로 검색해보세요.">
+                <button type="submit" class="btn btn-sm btn-primary" >검색</button>
             </form>    
         </div>
+        <cif test="${ not empty searchType }">
+        <script>
+        	window.onload = function(){
+        		const inp = document.querySelector("#search-area input[value=${searchType}]");
+        		inp.setAttribute("selected", true);
+        	}
+        </script>
+        </cif>
+        
         <div class="noticeFaq">
             <a href="announceList.an?cPage=1">공지사항</a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -142,8 +143,15 @@
 
         </div>
         <div id="memberMenu" class="memberMenu">
-            <a href="update.me">회원정보 수정</a>
+            <a href="update.me" style="border:none; font-size:10px; background:none;" onclick="updateMember(1)">회원정보 수정</a>
+            
+            <form action="" method="post" id="updateForm">
+	            <input type="hidden" name="userId" value="${m.userId}">
+	            <input type="hidden" name="userName" value="${m.userName}">
+            </form>
+            
             <a href="logout.me">로그아웃</a>
+
             <a href="">회원탈퇴</a>
         </div>
     </div>
@@ -158,7 +166,15 @@
                 memberMenu.style.display = "flex";
             }
         }
-
+		
+        function updateMember(num){
+        	if(num === 1) {
+        		$("#updateForm").attr('action', 'update.me');
+        	} else {
+        		$("#updateForm").attr('action', 'update.me');
+        	}
+        	$('#updateForm').submit();
+        }
     </script>
 
         <div class="modal" id="findId">

@@ -140,6 +140,63 @@
   		SET GRADE = #{grade}
   		WHERE REST_NUM = #{restNum}
   	</update>
+  	
+  	
+  	
+  	<select id="selectSearchList" resultMap="restaurantResultSet">
+	SELECT REST_NUM,
+  			REST_NAME,
+  			SUGGESTION,
+  			REST_CHECK,
+  			ORIGINAL,
+  			REST_DELETE,
+  			DUCTION,
+  			GRADE,
+  			MENU,
+  			OPENING,
+  			ADDRESS,
+  			REGION,
+  			RESTAURANT.STATUS,
+  			ORIGIN_NAME,
+  			FILE_PATH
+  		FROM RESTAURANT
+  		JOIN ATTACHMENT ON(REST_NUM=REF_BNO)
+  		WHERE REST_NAME LIKE '%' || #{searchInput} || '%'
+  		AND FILE_LEVEL = 1
+  	</select>
+  	<select id="selectReSearchList" resultMap="restaurantResultSet">
+  	SELECT REST_NUM,
+  			REST_NAME,
+  			SUGGESTION,
+  			REST_CHECK,
+  			ORIGINAL,
+  			REST_DELETE,
+  			DUCTION,
+  			GRADE,
+  			MENU,
+  			OPENING,
+  			ADDRESS,
+  			REGION,
+  			RESTAURANT.STATUS,
+  			ORIGIN_NAME,
+  			FILE_PATH
+  		FROM RESTAURANT
+  		JOIN ATTACHMENT ON(REST_NUM=REF_BNO)
+  		WHERE REGION LIKE '%' || #{searchInput} || '%'
+  		AND FILE_LEVEL = 1
+  	</select>
+  	
+  	<select id="searchSStore" resultType="_int">
+  	SELECT COUNT(*)
+	FROM RESTAURANT
+	WHERE REST_NAME LIKE '%' || #{searchInput} || '%'
+  	</select>
+  	<select id="searchSRegion" resultType="_int">
+  	SELECT COUNT(*)
+  	FROM RESTAURANT
+  	WHERE REGION LIKE '%' || #{searchInput} || '%'
+  	</select>
+  	
   </mapper>
   
   

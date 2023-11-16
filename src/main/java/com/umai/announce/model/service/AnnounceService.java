@@ -13,5 +13,8 @@ public interface AnnounceService {
 	public int insertAnnounce(Announce ann);
 
 	public Announce selectAnnounce(int annNum);
-
+	
+	public Announce selectDetail(int annNum);
+	
+	public int updateAnnounce(Announce ann);
 }

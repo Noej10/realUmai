@@ -34,27 +34,28 @@ public class memberUpdateEmailController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		String userId = request.getParameter("userId");
+//		String userId = request.getParameter("userId");
 		String email = request.getParameter("email");
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
 		
-		Member m = new Member();
-		m.setUserId(request.getParameter(userId));
-		m.setEmail(request.getParameter(email));
+		loginUser.setEmail(email);
+//		System.out.println(userId);
+//		System.out.println(email);
 		
-		int result = new MemberServiceImple().updateEmailMember(m);
+		int result = new MemberServiceImple().updateEmailMember(loginUser);
+		
+		Member m = new MemberServiceImple().loginMember(loginUser);
 		
 		if(result > 0) {
-
-			request.setAttribute("errorMsg", "이메일 변경에 실패하였습니다.");
-			request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
-
-		} else {
 
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "성공적으로 수정 하였습니다.");
 			session.setAttribute("loginUser", m);
 
-			response.sendRedirect(request.getContextPath() + "/memberRetouchPage.jsp");
+			response.sendRedirect(request.getContextPath() + "/update.me");
+		} else {
+			request.setAttribute("errorMsg", "이메일 변경에 실패하였습니다.");
+			request.getRequestDispatcher("WEB-INF/views/main.jsp").forward(request, response);
 
 		}
 

@@ -31,11 +31,24 @@
   	VALUES(SEQ_ACNO.NEXTVAL, #{title}, #{detail})
   	</insert>
 
-	<select id="selectAnnounce">
+	<select id="selectAnnounce" resultMap="announceResult">
 		SELECT TITLE,
 			DETAIL
 		FROM ANNOUNCE
 		WHERE ANN_NUM = #{annNum}
   	</select>
+  	
+  	<select id="selectDetail" resultMap="announceResult">
+		SELECT ANN_NUM, TITLE, DETAIL, TO_CHAR(ANN_WRITE,'YY-MM-DD') AS "ANN_WRITE"
+		FROM ANNOUNCE
+		WHERE ANN_NUM = #{annNum}
+  	</select>
+  	
+  	<update id="updateAnnounce">
+  		UPDATE ANNOUNCE	
+  		SET TITLE=#{title}, DETAIL=#{detail}
+  		WHERE ANN_NUM = #{annNum}
+  	</update>
+  	
   </mapper>
 

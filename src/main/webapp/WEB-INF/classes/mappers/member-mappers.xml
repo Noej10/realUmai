@@ -23,24 +23,24 @@
 	
 	<insert id="insertMember">
 		INSERT INTO MEMBER(
-			USER_NUM,
-			USER_ID,
-			PASSWORD,
-			NICKNAME,
-			NAME,
-			PHONE,
-			EMAIL
-			)
+				USER_NUM,
+				USER_ID,
+				PASSWORD,
+				NICKNAME,
+				NAME,
+				EMAIL,
+				PHONE
+				)
 			VALUES
-			(
-			SEQ_UNO.NEXTVAL,
-			#{userId},
-			#{password},
-			#{nickname},
-			#{name},
-			#{phone},
-			#{email}
-			)
+				(
+				SEQ_UNO.NEXTVAL,
+				#{userId},
+				#{password},
+				#{nickname},
+				#{name},
+				#{email},
+				#{phone}
+				)
 	</insert>
 
 	
@@ -49,11 +49,11 @@
 			SET EMAIL = #{email}
 		WHERE USER_ID = #{userId}
 	</update>
-	<update id="updateNiceMember">
-		UPDATE MEMBER
-			SET NICKNAME = #{nickname}
-		WHERE USER_ID = {userId}
-	</update>
+	<update id="updateNickMember" parameterType="Member">
+      UPDATE MEMBER
+         SET NICKNAME = #{nickname}
+      WHERE USER_ID = #{userId}
+   </update>
 	<update id="updatePhoneMember">
 		UPDATE MEMBER
 			SET PHONE = #{phone}
@@ -67,6 +67,7 @@
 
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 	SELECT  USER_NUM,
+			PASSWORD,
 			EMAIL,
 			PHONE,
 			NICKNAME,
@@ -90,7 +91,11 @@
 		WHERE NAME = #{name} AND EMAIL = #{email}
 	</select>
 
-
+	<select id="selectId" resultType = "_int">
+		SELECT COUNT(*)
+		 FROM MEMBER
+		WHERE USER_ID = #{userId}
+	</select>
 	
 	<select id="findPwd" parameterType="Member" resultMap="memberResultSet">
 		SELECT PASSWORD 

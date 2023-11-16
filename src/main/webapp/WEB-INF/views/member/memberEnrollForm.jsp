@@ -104,9 +104,11 @@ html,
     outline: 0;
     padding: 4px;
     border-radius: 9px;
-    
 }
 
+.modal-title{
+	
+}
 
 </style>
 
@@ -131,22 +133,27 @@ html,
 		<br>
         <div class="input-area">
         
-        <form action="insert.me" method="post">
+
+        <form action="insert.me" method="post" id="enroll">
         <table align="center">
             <div align="right">ID
                     <input type="text" id="userId" name="userId" required placeholder="아이디를 입력해주세요.">
-                    <button type="button" style="font-size: 15px; border: none; height: 35px; background-color: #fc765d; color: white;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                    <button id="userIdCheck" onclick="idCheck()" type="submit" style="font-size: 15px; border: none; height: 35px; background-color: #fc765d; color: white;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
                     중복확인
                   </button>  
             </div> 
             <br>
             <div align="right">비밀번호                
-                <input type="text" name="userPwd" required placeholder="비밀번호를 입력해주세요.">                             
-                
+
+                <input type="text" onkeyup="passwordInput1()" name="password" id="pwd1" placeholder="비밀번호를 입력해주세요."> <br>                            
+          		<span id="pwdInput" style="font-size: 12px"></span>
+                 
             </div>  
             <br>   
             <div align="right" >비밀번호 확인
-                <input type="text" name="userPwdCheck" required placeholder="비밀번호를 확인해주세요">
+                <input type="text" onkeyup="passwordInput2()" id="pwd2" required placeholder="비밀번호를 확인해주세요"><br>
+            	 <span id="pwdInputCheck" style="font-size: 12px"></span>
+
             </div>
             <br>
             <div align="right" >이름
@@ -168,31 +175,26 @@ html,
     </div>
 
         <div align="center" >
-            <button type="submit" style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 450px; height: 55px;" >회원가입</button>
+            <button type="submit" id="id"  style="border-radius: 10px; border: none; background-color: #fc765d; color: white; width: 450px; height: 55px;" >회원가입</button>
         </div>
     </div>
-    <!-- The Modal -->
+    <!-- ID 중복확인 모달 -->
 <div class="modal" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
   
-        <!-- Modal Header -->
+        <!-- ID 중복확인 모달 헤더 -->
         <div class="modal-header" style="color: #fc765d;">
-          <h4 class="modal-title">사용 가능한/불가능한 아이디입니다.</h4>
+          <h4 class="modal-title">아이디 중복확인</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         
-        <script>
-	        $.ajax({
-	        	url: "enroll.me",
-	        	data: {
-	        		userId: $('')
-	        	}
-	        	
-	        })
-  		</script>
-        
-  
+       
+        <!-- ID 중복확인 모달 바디 -->
+        <input type="hidden" name="userId">
+         <div class="modal-body">
+            <div align="center"></div>
+            
         <!-- Modal footer -->
         <div class="modal-footer">
           <button style="color: white; background-color: #fc765d;" type="button" class="btn" data-bs-dismiss="modal">OK</button>
@@ -201,6 +203,70 @@ html,
       </div>
     </div>
   </div>
+ 	
+ 	<script>
+
+	 	function passwordInput1() {
+	        const password1 = document.getElementById("pwd1").value;
+	        console.log(password1)
+
+	        if(password1.length < 8 || password1.length > 16 && length && /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*?_]).{8,16}$/.test(pwd1)) {
+	            document.getElementById('pwdInput').innerHTML = "8~16자까지만 입력이 가능합니다.";
+	            return false;
+	        } else {
+	            document.getElementById('pwdInput').innerHTML = "";
+	            return true;
+	        }
+	    }
+                
+        function passwordInput2() {
+            const password1 = document.getElementById("pwd1").value;
+            const password2 = document.getElementById("pwd2").value;
+            console.log(password1)
+            console.log(password2)
+            
+            if(password1 != password2) {
+                document.getElementById('pwdInputCheck').innerHTML = "비밀번호가 일치하지 않습니다.";
+                return false;
+            } else {
+                document.getElementById('pwdInputCheck').innerHTML = "";
+                return true;
+            }
+            
+        }
+        
+        function idCheck(){
+            const loginIdCheck = document.getElementById("userId").value;
+        	console.log(loginIdCheck)
+    		if (document.querySelector("#myModal input[name='userId']")) {
+        		$.ajax({
+                url: "selectId.me",
+                type: "post",
+                data : {
+                	userId : loginIdCheck
+                },
+                success: function(result){ 
+                	document.querySelector("#myModal .modal-body").innerHTML = "<span style=''>"+result+"</span>"
+                },
+                error: function(){
+                	console.log("아이디 중복확인 ajax통신 실패")
+                }
+    		
+        		})
+        	
+    		}else{
+    			document.querySelector("#userId .modal-body").innerHTML = '<b align="center">아이디 중복확인</b>'
+    			+ '<div>&nbsp;&nbsp;&nbsp;아이디<input type="text" name="userId"></div>'
+    		}
+    	}
+        
+        
+        
+  </script>
+
+ 
+  
 </form>
+	
 </body>
 </html>

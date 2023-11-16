@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.umai.announce.model.dao.AnnounceDao;
+import com.umai.announce.model.vo.Announce;
 import com.umai.common.model.vo.Attachment;
 import com.umai.common.model.vo.PageInfo;
 import com.umai.common.template.Template;
@@ -25,7 +27,7 @@ public class RestaurantServiceImple implements RestaurantService{
 		
 		return list;
 		}
-
+	
 	@Override
 	public int increaseCount(int restNo) {
 		SqlSession sqlSession = Template.getSqlSession();
@@ -63,6 +65,27 @@ public class RestaurantServiceImple implements RestaurantService{
 	}
 
 	@Override
+
+	public int selectListCount() {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int listCount = new RestaurantDao().selectListCount(sqlSession);
+		
+		sqlSession.close();
+		
+		return listCount;
+	}
+
+	@Override
+	public ArrayList<Restaurant> selectSearchList(PageInfo pi, String searchInput) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		ArrayList<Restaurant> list = new RestaurantDao().selectSearchList(sqlSession, pi , searchInput);
+		
+		sqlSession.close();
+		
+		return list;
+	}
 	public int insertRestaurant(Restaurant r, ArrayList<Attachment> list) {
 		
 		SqlSession sqlSession = Template.getSqlSession();
@@ -121,6 +144,47 @@ public class RestaurantServiceImple implements RestaurantService{
 		sqlSession.close();
 		
 		return result;
+
+	}
+
+	@Override
+	public int searchSStore(String searchInput) {
+		
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = rDao.searchSStore(sqlSession, searchInput);
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public int searchSRegion(String searchInput) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = rDao.searchSRegion(sqlSession, searchInput);
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public ArrayList<Restaurant> selectNoSearchList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Restaurant> selectReSearchList(PageInfo pi, String searchInput) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		ArrayList<Restaurant> list = new RestaurantDao().selectReSearchList(sqlSession, pi , searchInput);
+		
+		sqlSession.close();
+		
+		return list;
 	}
 
 	@Override

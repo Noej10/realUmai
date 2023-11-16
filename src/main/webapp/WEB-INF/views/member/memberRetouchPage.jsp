@@ -61,36 +61,45 @@ td{
     border-radius: 5px;
 }
 
-
 </style>
 
 </head>
 <body style="margin: 0; padding: 0;">
+    
     <%@ include file="../common/menubar.jsp" %>
-  
+        
     <div align="center" id="outer">
-     
+        <h1 align="center" style="color: #fc765d;">공지사항</h1>
         <table>
             <tr>
                 <td>ID</td>
-                <td><input type="text" class="input"></td>
+                <td><input type="text" class="input" readonly value="${loginUser.userId}"></td>
             </tr>
             
             <tr>
                 <td>이름</td>
-                <td><input type="text" class="input"></td>
+                <td><input type="text" class="input" readonly value="${loginUser.name}"></td>
             </tr>
             <tr>
                 <td>닉네임</td>
-                <td><input type="text" class="input"><button id="btn" onclick="updateFormSubmit(1)">수정</button></td>
+                <td>
+	                <input id="nickname" type="text" class="input" value="${loginUser.nickname}">
+	                <button  class="btn btn-small btn-primary"  style="border: none; background:#fc765d; color: white; "onclick="updateFormSubmit(1)">수정</button>
+                </td>
             </tr>
             <tr>
                 <td>전화번호</td>
-                <td><input type="tel" class="input"><button id="btn" onclick="updateFormSubmit(2)">수정</button></td>
+                <td>
+                	<input id="phone" type="tel" class="input" value="${loginUser.phone}">
+                	<button class="btn btn-small btn-primary"  style="border: none; background:#fc765d; color: white; " onclick="updateFormSubmit(2)">수정</button>
+               	</td>
             </tr>
             <tr>
                 <td>이메일</td>
-                <td><input type="email" class="input"><button id="btn" onclick="updateFormSubmit(3)">수정</button></td>
+                <td>
+	                <input id="email"type="email" class="input" value="${loginUser.email}">
+	                <button class="btn btn-small btn-primary"  style="border: none; background:#fc765d; color: white; " onclick="updateFormSubmit(3)">수정</button>
+                </td>
             </tr>
         </table>
        
@@ -102,23 +111,30 @@ td{
         
        
         <!-- value안에 값이 로그인한 유저의 정보로 들어가야 함 -->
-        <form action="" method="post" id="updateForm">
-        	<input type="hidden" name="nick" value="${m.nickname}">
-        	<input type="hidden" name="phone" value="${m.phone}">
-        	<input type="hidden" name="email" value="${m.email}">
+        <form action="" method="post" id="retouchMember">
+        	<input id="upnickname" type="hidden" name="nick" value="${loginUser.nickname}">
+        	<input id="upphone" type="hidden" name="phone" value="${loginUser.phone}">
+        	<input id="upemail" type="hidden" name="email" value="${loginUser.email}">
+        	<input type="hidden" name="password" value="${loginUser.password}">
         </form>
         
         <script>
         	function updateFormSubmit(num){
         		if(num === 1) {
-        			$("#updateForm").attr('action', 'updateNick.me');
-        		} else if{
-        			$("#updateForm").attr('action', 'updatePho.me');
+        			document.querySelector("#retouchMember").action = "updateNick.me";
+        			document.querySelector('#upnickname').value = document.querySelector('#nickname').value;       			
+        		//	$("#retouchMember").attr('action', 'updateNick.me');
+        		} else if(num === 2){
+        			document.querySelector("#retouchMember").action = "updatePho.me";
+        			document.querySelector('#upphone').value = document.querySelector('#phone').value;
+        		//	$("#retouchMember").attr('action', 'updatePho.me');
         		} else {
-        			$("#updateForm").attr('action', 'updateEmail.me');
+        			document.querySelector("#retouchMember").action = "updateEmail.me";
+        			document.querySelector('#upemail').value = document.querySelector('#email').value;
+        		//	$("#retouchMember").attr('action', 'updateEmail.me');
         		}
         		
-        		$('#updateForm').submit();
+        		$('#retouchMember').submit();
         	}
         </script>
            
@@ -137,20 +153,20 @@ td{
         <div class="modal-body">
 
             <div>현재 비밀번호를 입력해주세요.</div>
-            <input type="password">
+            <input type="password" name="originPwd">
 
             <div>변경할 비밀번호를 입력해주세요.</div>
-            <input type="password">
+            <input type="password" name="changePwd">
             
             <div>변경할 비밀번호를 다시 입력해주세요.</div>
-            <input type="password">
+            <input type="password" name="checkPwd">
 
         </div>
   
         <!-- Modal footer -->
         <div class="modal-footer">
-          <div><button type="button" class="btn-cancel" data-bs-dismiss="modal">취소</button></div>
-          <div><button type="button" class="btn-change" data-bs-dismiss="modal">비밀번호 변경</button></div>
+          <div><button onclick="location.href='boardPage.jsp'" type="button" style="border: none; background-color: #fc765d; color: white;" class="btn btn-small btn-primary" data-bs-dismiss="modal">취소</button></div>
+          <div><button onclick="location.href='update.me'" type="submit" style="border: none; background-color: #fc765d; color: white;" class="btn btn-small btn-primary" data-bs-dismiss="modal">비밀번호 변경</button></div>
         </div>
   		</form>
       </div>

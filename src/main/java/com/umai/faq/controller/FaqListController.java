@@ -37,13 +37,13 @@ public class FaqListController extends HttpServlet {
 		int currentPage = Integer.parseInt(request.getParameter("cPage"));
 		int listCount = new FaqServiceImple().selectListCount();
 		
-		PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 5);
+		PageInfo pi = Pagenation.getPageInfo(listCount, currentPage, 10, 6);
 		ArrayList<Faq> list = new FaqServiceImple().selectList(pi);
 		
 		request.setAttribute("pi", pi);
 		request.setAttribute("faqList", list);
-//		System.out.println(pi);
-//		System.out.println(list);
+		System.out.println(pi);
+		System.out.println(list);
 		request.getRequestDispatcher("WEB-INF/views/faq/faqPage.jsp").forward(request, response);
 	}
 

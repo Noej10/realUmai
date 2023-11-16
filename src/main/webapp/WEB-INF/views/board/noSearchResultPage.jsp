@@ -72,10 +72,17 @@
 			찾는 식당이 없으신가요? 그렇다면 등록해 보세요!
 		</div>
 		<div class="btn-area">
+
 			<button onclick="location.href='restaurantEnroll.re'" class="insert-btn">식당 등록하기</button>
 		</div>
 	</section>
-	
+	     <script>
+		      if(${searchType eq 'sRegion'}){
+		         document.getElementById("radRegion").setAttribute('checked','true');
+		      }else{
+		            document.getElementById("radStore").setAttribute('checked','true');
+		        }
+   </script>
 	
 </body>
 

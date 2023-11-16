@@ -1,27 +1,28 @@
 package com.umai.faq.model.vo;
 
 public class Faq {
-	
 	private int faqNum;
 	private String faqKind;
 	private String faqTitle;
+	private String faqDetail;
 	private String faqContent;
 	private String faqDate;
 	private String status;
-	
-	public Faq() {
-		super();
-	}
 
-	public Faq(int faqNum, String faqKind, String faqTitle, String faqContent, String faqDate, String status) {
+	public Faq() {}
+	
+	public Faq(int faqNum, String faqKind, String faqTitle, String faqDetail, String faqContent, String faqDate,
+			String status) {
 		super();
 		this.faqNum = faqNum;
 		this.faqKind = faqKind;
 		this.faqTitle = faqTitle;
+		this.faqDetail = faqDetail;
 		this.faqContent = faqContent;
 		this.faqDate = faqDate;
 		this.status = status;
 	}
+
 
 	public int getFaqNum() {
 		return faqNum;
@@ -47,6 +48,15 @@ public class Faq {
 		this.faqTitle = faqTitle;
 	}
 
+
+	public String getFaqDetail() {
+		return faqDetail;
+	}
+
+	public void setFaqDetail(String faqDetail) {
+		this.faqDetail = faqDetail;
+	}
+	
 	public String getFaqContent() {
 		return faqContent;
 	}
@@ -77,6 +87,6 @@ public class Faq {
 				+ faqContent + ", faqDate=" + faqDate + ", status=" + status + "]";
 	}
 	
-	
-	
 }
+
+
