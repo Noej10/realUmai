@@ -11,16 +11,6 @@ import com.umai.review.model.vo.Review;
 
 public class ReviewServiceImple implements ReviewService{
 
-	@Override
-	public int insertReview(Review re) {
-		SqlSession sqlSession = Template.getSqlSession();
-		
-		int result = ReviewDao.insertreview(sqlSession, re);
-		
-		sqlSession.close();
-		
-		return result;
-	}
 
 	@Override
 	public ArrayList<Review> selectReview(int restNo) {
@@ -32,6 +22,53 @@ public class ReviewServiceImple implements ReviewService{
 		
 		return list;
 	
+	}
+
+	@Override
+	public int deleteReview(Review r) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = new ReviewDao().deleteReview(sqlSession, r);
+		
+		if(result>0) {
+			sqlSession.commit();
+		}
+		
+		sqlSession.close();
+		return result;
+	}
+
+	@Override
+	public int insertRview(Review r) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int result = new ReviewDao().insertRview(sqlSession, r);
+		
+		if(result>0) {
+			sqlSession.commit();
+		}
+		
+		sqlSession.close();
+		
+		return result;
+	}
+
+	@Override
+	public Review checkReview(Review r) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		Review re = new ReviewDao().checkReview(sqlSession, r);
+		
+		return re;
+	}
+
+	@Override
+	public int selectFinalScore(int restNum) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		int finalScore = new ReviewDao().selectFinalScore(sqlSession, restNum);
+		
+		return finalScore;
 	}
 
 }

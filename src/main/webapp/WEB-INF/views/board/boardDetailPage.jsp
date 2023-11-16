@@ -29,16 +29,21 @@
         overflow: auto;
         width: 100%;
         max-width: 850px;
+        border: 1px solid #fc765d;
+    	border-radius: 10px;
+    	padding-left: 10px;
+    	padding-top: 5px;
     }
     .res-name{
         font-size: 20px;
         font-weight: bold;
     }
-    .grade-area{
+    #like-count{
 		
     }
     .like{
         margin-left: 30px;
+        display: flex;
     }
     .map-intro-subphoto{
         display: flex;
@@ -49,8 +54,6 @@
     }
     .maparea{
         border: solid 1px; height: 200px; min-width: 300px; margin-left: 10px;
-      
-        
        
     }
     .res-intro{
@@ -58,20 +61,24 @@
         margin-left: 20px;
         overflow: auto;
         width: 100%;
-        max-width: 8500px;
+        max-width: 850px;
         padding-bottom: 30px;
+        border: 1px solid #fc765d;
+    	border-radius: 10px;
+    	padding-left: 10px;
+    	padding-top: 5px;
     }
     .back{
-        position: relative;
-        top: 160px;
-        left: 300px;
+        color: white;
+		background-color: #fc765d;
+		border-color: #fc765d;
+        border-radius: 10px;
     }
     .sub-photo{
-        position: absolute;
-        right: 0;
+        position: relative;
         overflow: hidden;
         min-width: 200px;
-        margin-right: 30px;
+        margin-left: 30px;
     }
     .photo-container{
         /* overflow: hidden;
@@ -149,20 +156,53 @@
         font-size: 12px;
         width: 100%;
         bottom: -25px;
+        color: white;
+		background-color: #fc765d;
+        border-color: #fc765d;
     }
     .nickname{
+        display: flex;
         margin-left: 30px;
+        max-width: 100px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
     }
     .review-text{
         position: relative;
         margin-left: 30px;
         background-color: white;
         width: 60%;
+        border-radius: 10px;
     }
     #delete-btn{
         position: absolute;
         bottom: 0;
         right: 0;
+        color: white;
+		background-color: #fc765d;
+        border-color: #fc765d;
+    }
+    .inputreview{
+        position: relative;
+        min-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 850px;
+        padding-left: 320px;
+        padding-right: 320px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .revinsert-btn{
+        color: white;
+		background-color: #fc765d;
+		border-color: #fc765d;
+        position: absolute;
+        right: 250px;
+        top: 0;
+        border-radius: 10px;
     }
 </style>
 </head>
@@ -171,7 +211,7 @@
 	<div class="main-info">
         <div class="photo-name-like">
             <div class="main-photo">
-                <img style="height: 200px; width: 300px;" src="${r.filePath }${r.originName}" alt="ddd">
+                <img style="height: 200px; width: 300px; cursor: pointer;" src="/Umai/${r.filePath }" alt="ddd" onclick="window.open(this.src)">
             </div>
             <div class="res-info">
                 <span class="res-name">${r.restName }</span>
@@ -189,9 +229,11 @@
                 <c:choose>
                 <c:when test="${like.good == 'N'}">
                     <img style="height: 60px; width: 60px; cursor: pointer;" src="/Umai/resources/images/icon-like.png" alt="" onclick="updateLike()">
+                    <h3>${likeCount }</h3>
                 </c:when>
                 <c:otherwise>
                     <img style="height: 60px; width: 60px; cursor: pointer;" src="/Umai/resources/images/icon-like-clicked.png" alt="" onclick="updateUnlike()">
+                    <h3>${likeCount }</h3>
                 </c:otherwise>
                 </c:choose>
                 </div>
@@ -207,13 +249,18 @@
 	                    success: function(res){
 	                    	var likeContainer = document.getElementById('likeContainer');
 	                    	if(res != null){
-	                    		likeContainer.innerHTML = '<img style="height: 60px; width: 60px; cursor: pointer;" src="/Umai/resources/images/icon-like-clicked.png" alt="" onclick="updateUnlike()">';
+	                    		likeContainer.innerHTML = ''+
+	                    		'<img style="height: 60px; width: 60px; cursor: pointer;" src="/Umai/resources/images/icon-like-clicked.png" alt="" onclick="updateUnlike()">'+
+	                    		'<h3>'+res+'</h3>';
+	                    		
+	                    		console.log(res);
 	                    	}
 	                    },
 	                    error: function(){
 	                        console.log("ajax통신실패")
 	                    }
 	                })
+	                
 	            }
 	            function updateUnlike(){
 	                $.ajax({
@@ -225,14 +272,18 @@
 	                    success: function(res){
 	                    	var likeContainer = document.getElementById('likeContainer');
 	                    	if(res != null){
-	                            likeContainer.innerHTML = '<img style="height: 60px; width: 60px; cursor: pointer;" src="/Umai/resources/images/icon-like.png" alt="" onclick="updateLike()">';
+	                            likeContainer.innerHTML = '<img style="height: 60px; width: 60px; cursor: pointer;" src="/Umai/resources/images/icon-like.png" alt="" onclick="updateLike()"><h3>'+res+'</h3>';
+	                            
+	                            console.log(res);
 	                    	}
 	                    },
 	                    error: function(){
 	                        console.log("ajax통신실패")
 	                    }
 	                })
+	                
 	            }
+	            
             </script>
         </div>
         <div class="map-intro-subphoto">
@@ -240,26 +291,25 @@
 				
             </div>
             <div class="res-intro">${r.duction }
-                <button class="back" onclick="back()">목록으로</button>
             </div>
 
             <div class="sub-photo">
                 <c:forEach var="s" items="${subList}" varStatus="loop">
                     <div class="photo-container ${loop.first ? 'active' : ''}">
-                        <img style="height: 200px; width: 200px;" src="${s.filePath }${s.originName}" alt="">
+                        <img style="height: 200px; width: 200px; cursor: pointer;" src="/Umai/${s.filePath }" alt="" onclick="window.open(this.src)">
                     </div>
                 </c:forEach>
                 <div class="prev" onclick="plusSlides(-1)">&#10094;</div>
                 <div class="next" onclick="plusSlides(1)">&#10095;</div>
-                
             </div>
+
         </div>
         <c:forEach var="rev" items="${rev}" varStatus="loop">
 	        <div class="review-area review-${loop.index + 1}">
 	            <div>리뷰 :</div>
 	            <div class="star">
 	                <i style="width: ${rev.revRevisit*20}%;"></i>
-	                <button type="button" id="detail-button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+	                <button type="button" id="detail-button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailscore-${loop.index + 1}">
                         점수 자세히보기
                       </button>
 	            </div>
@@ -267,43 +317,46 @@
 	            <div class="review-text">
 	                <p>${rev.commentContents }</p>
 	                <c:if test="${loginUser.userNum == rev.memberNum}">
-	                <button type="button" id="delete-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="delrev()">
+	                <button type="button" id="delete-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteRview-${loop.index + 1}">
 					  삭제
 					</button>
 	                </c:if>
 	            </div>
 	        </div>
-	    </c:forEach>    
-	<script>
-        function delrev(){
-        	location.href = '<%=contextPath %>/deleteRev';
-        }
-    </script>
-    </div>
-    <!-- 리뷰 삭제 모달 -->
-		 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-dialog-centered">
-		    <div class="modal-content">
-		      
-		      <div class="modal-body">
-		        정말로 리뷰를 삭제하시겠습니까?
-		      </div>
-		      <div class="modal-footer" align="center">
-		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-		        <button type="button" class="btn btn-primary">삭제하기</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
+	     
+		    <!-- 리뷰 삭제 모달 -->
+					 <div class="modal fade" id="deleteRview-${loop.index + 1}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered">
+					    <div class="modal-content">
+					      
+					      <div class="modal-body">
+					        정말로 리뷰를 삭제하시겠습니까?
+					      </div>
+                          <form action="deleteRev">
+                            <div class="modal-footer" align="center">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                <button type="submit" class="btn btn-primary">삭제하기</button>
+                                <input type="hidden" value="${rev.memberNum }" name="memberNum">
+                                <input type="hidden" value="${rev.revRestnum }" name="revRestnum">
+                            </div>
+                          </form>
+					    </div>
+					  </div>
+					</div>
+		 
+	
+		    
+		   
+		
     <!--모달-->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="detailscore-${loop.index + 1}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">상세 정보</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <c:forEach var="rev" items="${rev}" varStatus="loop">
+                
                     <div class="modal-body" style="display: flex;width: 100%;flex-wrap: nowrap;flex-direction: column;align-items: center;">
                         <p>
                             음식의 맛은 어땠나요? 
@@ -362,14 +415,29 @@
                        
                     
                     </div>
-                </c:forEach>
+                
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
             </div>
         </div>
+       </c:forEach>
+       <div class="inputreview">
+        <button class="back" onclick="back()">목록으로</button>
+	       <form action="reviewEnroll.re">
+	                <input type="hidden" value="${loginUser.userNum }" name="rmemNum">
+	                <input type="hidden" value="${r.restNum }" name="rresNum">
+	                <input type="hidden" value="${r.restName }" name="rresName">
+	                <input type="hidden" value="${r.filePath }" name="rresFile">
+	                <button class="revinsert-btn" type="submit">리뷰 작성하기</button>
+	       </form>
+	       
+	   </div>
+  			
+       </div>
     <!--모달-->
+ 
 	<script>
 	// <c:forEach var="rev" items="${rev}" varStatus="loop">
     //     var gradeValue = ${rev.revRevisit};
@@ -377,7 +445,7 @@
     //     starElement.style.width = gradeValue + '%';
     // </c:forEach>
         function back(){
-            window.history.back();
+            location.href="/Umai/boardpage"
         }
         function plusSlides(n) {
         var photos = document.querySelectorAll('.photo-container');
@@ -439,5 +507,6 @@ geocoder.addressSearch('서울특별시 관악구 남부순환로247가길 18', 
 });  
         
     </script>
+    <jsp:include page="../common/footer.jsp"></jsp:include>
 </body>
 </html>

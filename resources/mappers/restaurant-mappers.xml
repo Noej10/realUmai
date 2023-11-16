@@ -112,11 +112,33 @@
   		  AND GREAT_USERNUM = #{userNum}
   	</select>
   	
+  	<select id="likeCount" resultType="_int">
+  		SELECT COUNT(*)
+		FROM GREAT
+		WHERE GREAT_RESTNUM = #{restNum}
+		AND GOOD = 'Y'
+  	</select>
+  	
   	<update id="updateUnlike" parameterType="_int">
   		UPDATE GREAT
 		SET GOOD = 'N'
 		WHERE GREAT_RESTNUM IN (SELECT REST_NUM FROM RESTAURANT WHERE REST_NUM = #{restNum})
 		AND GREAT_USERNUM IN (SELECT USER_NUM FROM MEMBER WHERE USER_NUM = #{userNum})
+  	</update>
+  	<insert id="createTable">
+  		INSERT INTO GREAT (GOOD, GREAT_RESTNUM, GREAT_USERNUM, STATUS)
+		VALUES ('N', #{restNum}, #{userNum}, 'Y')
+  	</insert>
+  	<select id="tableCheck" resultMap="restaurantResultSet">
+  		SELECT GOOD
+		FROM GREAT
+		WHERE GREAT_RESTNUM = #{restNum}
+		AND GREAT_USERNUM = #{userNum}
+  	</select>
+  	<update id="updateFinalScore">
+  		UPDATE RESTAURANT
+  		SET GRADE = #{grade}
+  		WHERE REST_NUM = #{restNum}
   	</update>
   </mapper>
   

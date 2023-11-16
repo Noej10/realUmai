@@ -23,5 +23,13 @@ public interface RestaurantService {
 	public int updateUnlike(int restNum, int userNum);
 	
 	Restaurant selectlike(int restNum, int userNum);
+	
+	int likeCount(int restNum);
+	
+	Restaurant tableCheck(int restNo, int memNum);
+	
+	public int createTable(int restNo, int memNum);
+	
+	int updateFinalScore(Restaurant rev);
 
 }

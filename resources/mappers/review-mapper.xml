@@ -41,6 +41,7 @@
         REV_SPEED,
         REV_CLEAN,
         REV_REVISIT,
+        REV_AVGSCORE,
         NICKNAME
     FROM REVIEW
     JOIN MEMBER ON(USER_NUM=MEMBER_NUM)
@@ -48,5 +49,63 @@
     AND REVIEW.STATUS = 'Y'
   </select>
   
-  
+  <update id="deleteReview">
+  	UPDATE REVIEW
+			SET STATUS = 'N'
+		WHERE REV_RESTNUM = #{revRestnum}
+  		AND MEMBER_NUM = #{memberNum}
+  </update>
+  <insert id="insertRview">
+  	INSERT INTO REVIEW (
+    COMMENT_NUM,
+    COMMENT_CONTENTS,
+    REV_WRITE,
+    REV_DELETE,
+    REV_RESTNUM,
+    MEMBER_NUM,
+    REV_TASTE,
+    REV_KIND,
+    REV_FACILITY,
+    REV_PRICE,
+    REV_MOBILITY,
+    REV_WAITING,
+    REV_SPEED,
+    REV_CLEAN,
+    REV_REVISIT,
+    REV_AVGSCORE,
+    STATUS
+) VALUES (
+    SEQ_CMNO.NEXTVAL,
+    #{commentContents},
+    SYSDATE,
+    'N',
+    #{revRestnum},
+    #{memberNum},
+    #{revTaste},
+    #{revKind},
+    #{revFacility},
+    #{revPrice},
+    #{revMobility},
+    #{revWaiting},
+    #{revSpeed},
+    #{revClean},
+    #{revRevisit},
+    TO_NUMBER(ROUND((#{revTaste} + #{revKind} + #{revFacility} +
+           #{revPrice} + #{revMobility} + #{revWaiting} +
+           #{revSpeed} + #{revClean} + #{revRevisit}) / 9), 999999999),
+    'Y'
+)
+  </insert>
+  	<select id="checkReview" resultMap="reviewResultSet">
+  		SELECT *
+  		FROM REVIEW
+  		WHERE REV_RESTNUM = #{revRestnum}
+  		AND MEMBER_NUM = #{memberNum}
+  		AND STATUS = 'Y'
+  	</select>
+  	<select id="selectFinalScore" resultType="_int">
+  		SELECT ROUND(AVG(REV_AVGSCORE)) AS AVG_SCORE
+		FROM REVIEW
+		WHERE REV_RESTNUM = #{restNum}
+  	</select>
   </mapper>

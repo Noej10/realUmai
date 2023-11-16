@@ -82,6 +82,7 @@
 	AND PASSWORD = #{password}
 	AND STATUS = 'Y'
 	</select>
+
 	
 	<select id="findId" parameterType="Member" resultMap="memberResultSet">
 		SELECT USER_ID 

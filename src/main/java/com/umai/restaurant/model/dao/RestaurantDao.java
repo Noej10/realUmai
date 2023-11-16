@@ -77,6 +77,39 @@ public class RestaurantDao {
 		
 		return result;
 	}
+
+	public int likeCount(SqlSession sqlSession, int restNum) {
+		
+		int likeCount = sqlSession.selectOne("restaurantMapper.likeCount",restNum);
+		
+		return likeCount;
+	}
+
+	public int createTable(SqlSession sqlSession, int restNo, int memNum) {
+		Map<String, Object> params = new HashMap<>();
+	    params.put("restNum", restNo);
+	    params.put("userNum", memNum);
+		int createTable = sqlSession.insert("restaurantMapper.createTable", params);
+		
+		return createTable;
+	}
+
+	public Restaurant tableCheck(SqlSession sqlSession, int restNo, int memNum) {
+		
+		Map<String, Object> params = new HashMap<>();
+	    params.put("restNum", restNo);
+	    params.put("userNum", memNum);
+	    Restaurant tableCheck = sqlSession.selectOne("restaurantMapper.tableCheck", params);
+		
+		return tableCheck;
+	}
+
+	public int updateFinalScore(SqlSession sqlSession, Restaurant rev) {
+		
+		int updateFinalScore = sqlSession.update("restaurantMapper.updateFinalScore", rev);
+		
+		return updateFinalScore;
+	}
 	
 
 }

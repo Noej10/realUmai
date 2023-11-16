@@ -6,6 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.umai.restaurant.model.vo.Restaurant;
+import com.umai.review.model.service.ReviewServiceImple;
+import com.umai.review.model.vo.Review;
 
 /**
  * Servlet implementation class ReviewEnrollFormController
@@ -27,8 +32,32 @@ public class ReviewEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/WEB-INF/views/restaurant/reviewEnrollForm.jsp").forward(request, response);
+		Review r =new Review();
+		r.setRevRestnum(Integer.parseInt(request.getParameter("rresNum")));
+		r.setMemberNum(Integer.parseInt(request.getParameter("rmemNum")));
+		
+		Restaurant res = new Restaurant();
+		res.setRestName(request.getParameter("rresName"));
+		res.setFilePath(request.getParameter("rresFile"));
+		
+		Review re = new ReviewServiceImple().checkReview(r);
+		
+		int currentPage = Integer.parseInt(request.getParameter("rresNum"));
+		
+		HttpSession session = request.getSession();
+		if(re == null) {
+			request.setAttribute("r", r);
+			request.setAttribute("res", res);
+			request.getRequestDispatcher("/WEB-INF/views/restaurant/reviewEnrollForm.jsp").forward(request, response);
+		}else {
+			session.setAttribute("alertMsg", "댓글이 이미 존재합니다(식당 하나당 리뷰는 한개만 등록가능)");
+			response.sendRedirect("detail.res?rno="+currentPage);
+		}
+		
+		
 	}
+	
+		
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

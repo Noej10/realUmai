@@ -32,9 +32,12 @@ public class RestaurantLikeController extends HttpServlet {
 		int restNum = Integer.parseInt(request.getParameter("restNum"));
 		int userNum = Integer.parseInt(request.getParameter("userNum"));
 		
+		
 		int result = new RestaurantServiceImple().updateLike(restNum, userNum);
-        response.getWriter().print(result);
-        
+		int likeCount = new RestaurantServiceImple().likeCount(restNum);
+		
+//        response.getWriter().print(result);
+        response.getWriter().print(likeCount);
 	}
 
 	/**
