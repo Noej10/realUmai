@@ -67,6 +67,7 @@
 
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 	SELECT  USER_NUM,
+			PASSWORD,
 			EMAIL,
 			PHONE,
 			NICKNAME,

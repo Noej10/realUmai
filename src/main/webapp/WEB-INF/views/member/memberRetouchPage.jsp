@@ -84,21 +84,21 @@ td{
                 <td>닉네임</td>
                 <td>
 	                <input id="nickname" type="text" class="input" value="${loginUser.nickname}">
-	                <button  class="btn"  onclick="updateFormSubmit(1)">수정</button>
+	                <button  class="btn btn-small btn-primary"  style="border: none; background:#fc765d; color: white; "onclick="updateFormSubmit(1)">수정</button>
                 </td>
             </tr>
             <tr>
                 <td>전화번호</td>
                 <td>
                 	<input id="phone" type="tel" class="input" value="${loginUser.phone}">
-                	<button class="btn" onclick="updateFormSubmit(2)">수정</button>
+                	<button class="btn btn-small btn-primary"  style="border: none; background:#fc765d; color: white; " onclick="updateFormSubmit(2)">수정</button>
                	</td>
             </tr>
             <tr>
                 <td>이메일</td>
                 <td>
 	                <input id="email"type="email" class="input" value="${loginUser.email}">
-	                <button class="btn" onclick="updateFormSubmit(3)">수정</button>
+	                <button class="btn btn-small btn-primary"  style="border: none; background:#fc765d; color: white; " onclick="updateFormSubmit(3)">수정</button>
                 </td>
             </tr>
         </table>

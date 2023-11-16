@@ -40,9 +40,9 @@ public class memberUpdatePwdController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 //		System.out.println(password);
-//		System.out.println(changePwd);
-//		System.out.println(checkPwd);
-//		System.out.println(loginUser);
+		System.out.println(changePwd);
+		System.out.println(checkPwd);
+		System.out.println(loginUser);
 		
 		// loginUser안에 password랑 originPwd가 같은지 
 		// 같다면 수정한다. 틀리면 error
