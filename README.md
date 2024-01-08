@@ -34,10 +34,9 @@
 ## 주요 기능
 
 ### 🍜 마음 속에 있던 맛집을 다른 사람들과 공유할 수 있어요.  
-  <img src="" height="300">
-  <img src="" height="300">
-  <img src="" height="300">
-  <img src="" height="300">
+  <img src="src/main/webapp/resources/images/sample1.JPG" height="300">
+  <img src="src/main/webapp/resources/images/sample2.JPG" height="300">
+  <img src="src/main/webapp/resources/images/sample3.JPG" height="300">
 
 + 맛집 등록
   + 소개하고 싶은 맛집을 등록
