@@ -5,11 +5,7 @@
 
 ![로고](./front/public/mainlogo.png)
 
-- 개발 기간: 2023-00-00 ~ 2023-00-00
-- 서비스 링크: [https://www.naver.com](https://www.naver.com)
-- 본 프로젝트의 구조를 더 자세히 알고 싶다면?
-  - [백엔드 README](./BACK.md)
-  - [프론트엔드 README](./FRONT.md)
+- 개발 기간: 2023-10-23 ~ 2023-11-17
 
 ## 기술 스택
 `Front-End` 
@@ -36,31 +32,6 @@
 
 ## 사용 라이브러리및 API
 - 다음 카카오 주소, 지도 API
-
-## 실행 방법
-
-1. 프로젝트 레포지토리를 클론합니다.
-
-```sh
-$ git clone https://kdt-gitlab.elice.io/ai_track/class05/ai_project/team05/team05.git
-```
-
-2. 프로젝트 실행에 필요한 패키지를 설치합니다.
-
-```sh
-$ cd front
-$ npm i
-
-$ cd back
-$ npm i
-```
-
-3. development server을 실행합니다.
-```sh
-$ npm run dev
-# or
-$ yarn dev
-```
 
 ## 주요 기능
 
